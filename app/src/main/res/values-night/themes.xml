@@ -1,0 +1,25 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.MyAppBooking" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your dark theme here. -->
+        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="android:statusBarColor">@color/background_color</item>
+        <!-- Make status bar icons dark (for light backgrounds) -->
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+    <style name="NoRippleBottomNavigationStyle" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="itemBackground">@android:color/transparent</item>
+        <item name="itemRippleColor">@android:color/transparent</item>
+        <item name="itemTextAppearanceActive">@style/TextAppearance.BottomNavigation.Active</item>
+        <item name="itemTextAppearanceInactive">@style/TextAppearance.BottomNavigation.Inactive</item>
+    </style>
+
+    <style name="TextAppearance.BottomNavigation.Active" parent="TextAppearance.AppCompat.Small">
+        <item name="android:textColor">@color/primary_color</item>
+    </style>
+
+    <style name="TextAppearance.BottomNavigation.Inactive" parent="TextAppearance.AppCompat.Small">
+        <item name="android:textColor">@color/text_gray_color</item>
+    </style>
+</resources>

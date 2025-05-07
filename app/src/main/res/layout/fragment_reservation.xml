@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Facility Reservation"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <!-- Category Dropdown -->
+        <TextView
+            android:id="@+id/category_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Category"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/title_text"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Spinner
+            android:id="@+id/category_dropdown"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:spinnerMode="dropdown"
+            android:layout_marginTop="8dp"
+            android:popupBackground="@android:color/white"
+            app:layout_constraintTop_toBottomOf="@id/category_label"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Facility Dropdown -->
+        <TextView
+            android:id="@+id/facility_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Facility"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/category_dropdown"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Spinner
+            android:id="@+id/facility_dropdown"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:spinnerMode="dropdown"
+            android:layout_marginTop="8dp"
+            android:popupBackground="@android:color/white"
+            app:layout_constraintTop_toBottomOf="@id/facility_label"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Facility Items Dropdown -->
+        <TextView
+            android:id="@+id/facility_items_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Facility Items"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/facility_dropdown"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Spinner
+            android:id="@+id/facility_items_dropdown"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:spinnerMode="dropdown"
+            android:layout_marginTop="8dp"
+            android:popupBackground="@android:color/white"
+            app:layout_constraintTop_toBottomOf="@id/facility_items_label"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Start Date Time -->
+        <TextView
+            android:id="@+id/start_datetime_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Start Date Time"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/facility_items_dropdown"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/start_datetime_container"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/start_datetime_label"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <!-- Start Date Selector -->
+            <LinearLayout
+                android:id="@+id/start_date_layout"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_calendar"
+                    android:layout_marginEnd="8dp" />
+
+                <TextView
+                    android:id="@+id/start_date_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="DD.MM.YYYY"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <!-- Start Time Selector -->
+            <LinearLayout
+                android:id="@+id/start_time_layout"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_plus"
+                    android:layout_marginEnd="8dp" />
+
+                <TextView
+                    android:id="@+id/start_time_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="HH:MM"
+                    android:textSize="16sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- End Date Time -->
+        <TextView
+            android:id="@+id/end_datetime_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Finish Date Time"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/start_datetime_container"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/end_datetime_container"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/end_datetime_label"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <!-- End Date Selector -->
+            <LinearLayout
+                android:id="@+id/end_date_layout"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:background="@drawable/ic_search"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_calendar"
+                    android:layout_marginEnd="8dp" />
+
+                <TextView
+                    android:id="@+id/end_date_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="DD.MM.YYYY"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <!-- End Time Selector -->
+            <LinearLayout
+                android:id="@+id/end_time_layout"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/ic_search"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_plus"
+                    android:layout_marginEnd="8dp" />
+
+                <TextView
+                    android:id="@+id/end_time_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="HH:MM"
+                    android:textSize="16sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Purpose -->
+        <TextView
+            android:id="@+id/purpose_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Purpose"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/end_datetime_container"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/purpose_edit_text"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:background="@drawable/edit_text_background"
+            android:gravity="top"
+            android:hint="Enter purpose of booking"
+            android:inputType="textMultiLine"
+            android:padding="12dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/purpose_label"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Submit Button -->
+        <Button
+            android:id="@+id/request_button"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:text="Request"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@id/purpose_edit_text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/primary_dark_color" />
+
+        <!-- Progress Bar -->
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

@@ -1,0 +1,12 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.MyAppBooking" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:statusBarColor">@color/background_color</item>
+        <!-- Make status bar icons dark (for light backgrounds) -->
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+    <style name="Theme.MyAppBooking" parent="Base.Theme.MyAppBooking" />
+</resources>
