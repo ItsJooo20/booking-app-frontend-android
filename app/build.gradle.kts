@@ -59,6 +59,7 @@ dependencies {
     implementation("androidx.cardview:cardview:1.0.0")
     implementation("com.google.code.gson:gson:2.8.9")
     implementation("com.kizitonwose.calendar:view:2.6.0")
+    implementation("com.github.skydoves:powerspinner:1.2.7")
 //    implementation("com.kizitonwose.calendar:compose:<latest-version>")
 
     implementation(libs.androidx.core.ktx)

@@ -133,6 +133,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun showLoading(show: Boolean) {
+        binding.loadingOverlay.visibility = if (show) View.VISIBLE else View.GONE
         binding.progressBar.visibility = if (show) View.VISIBLE else View.GONE
         binding.btnLogin.isEnabled = !show
         binding.btnLogin.text = if (show) "Loading..." else "Login"
@@ -147,4 +148,6 @@ class LoginActivity : AppCompatActivity() {
     private fun navigateToMainActivity() {
         startActivity(Intent(this, MainActivity::class.java))
     }
+
+
 }

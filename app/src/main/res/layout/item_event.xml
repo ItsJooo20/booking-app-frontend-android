@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,89 +13,121 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingTop="8dp"
-        android:paddingRight="16dp"
-        android:paddingLeft="16dp"
-        android:paddingBottom="8dp">
+        android:orientation="horizontal"
+        android:padding="16dp">
 
-        <!-- Event Title and Room -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+        <!-- Image View on the left -->
+        <ImageView
+            android:id="@+id/ivRoomImage"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginEnd="16dp"
+            android:background="#F5F5F5"
+            android:src="@drawable/pic_check"
+            android:scaleType="centerCrop" />
 
-            <TextView
-                android:id="@+id/tvEventTitle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textColor="@color/text_color"
-                android:textSize="16sp"
-                android:fontFamily="@font/poppins_medium"
-                tools:text="Meeting Room-001" />
-
-        </LinearLayout>
-
-        <!-- Status -->
-        <TextView
-            android:id="@+id/tvStatus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#4CAF50"
-            android:textSize="12sp"
-            android:fontFamily="@font/poppins_regular"
-            tools:text="Approved" />
-
-        <!-- Start Date/Time -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Start Date/Time:"
-                android:textColor="@color/text_gray_color"
-                android:fontFamily="@font/poppins_light"
-                android:textSize="12sp" />
-
-            <TextView
-                android:id="@+id/tvStartDateTime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:textColor="@color/text_color"
-                android:fontFamily="@font/poppins_regular"
-                android:textSize="14sp"
-                tools:text="Friday, 30 May 2025 · 09:00 AM" />
-        </LinearLayout>
-
-        <!-- Finish Date/Time -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Finish Date/Time:"
-                android:textColor="@color/text_gray_color"
-                android:fontFamily="@font/poppins_light"
-                android:textSize="12sp" />
+            <!-- Top row with title and status -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/tvFinishDateTime"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/tvEventTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textColor="@color/text_color"
+                    android:textSize="16sp"
+                    android:text="Meeting Room-001" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/ic_change_phone"
+                    android:layout_width="75dp"
+                    android:layout_height="24dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="0dp"
+                    android:backgroundTint="@color/white">
+
+                    <TextView
+                        android:id="@+id/tvStatus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_alignParentEnd="true"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="Booked"
+                        android:textColor="#4CAF50"
+                        android:textSize="12sp" />
+                </androidx.cardview.widget.CardView>
+            </RelativeLayout>
+
+            <!-- Date/Time details -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:textColor="@color/text_color"
-                android:fontFamily="@font/poppins_regular"
-                android:textSize="14sp"
-                tools:text="Friday, 30 May 2025 · 13:00 PM" />
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <!-- Start Date/Time -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="Start-DateTime    :"
+                        android:textColor="@color/text_gray_color"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tvStartDateTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textColor="@color/text_color"
+                        android:textSize="12sp"
+                        android:text="30 May - 09:00 AM" />
+                </LinearLayout>
+
+                <!-- Finish Date/Time -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Finish-DateTime   :"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textColor="@color/text_gray_color"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tvFinishDateTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textColor="@color/text_color"
+                        android:textSize="12sp"
+                        android:text="30 May - 12:00 PM" />
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

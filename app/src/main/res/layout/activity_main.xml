@@ -29,6 +29,7 @@
         app:itemPaddingBottom="24dp"
         app:itemPaddingTop="24dp"
         android:background="@color/white"
+        app:labelVisibilityMode="labeled"
         app:itemTextColor="@drawable/change_nav_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

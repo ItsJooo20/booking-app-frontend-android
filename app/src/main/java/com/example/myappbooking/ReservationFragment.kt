@@ -7,12 +7,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.myappbooking.databinding.FragmentReservationBinding
+import com.skydoves.powerspinner.OnSpinnerItemSelectedListener
 import kotlinx.coroutines.launch
 import org.json.JSONObject
 import retrofit2.Response
@@ -33,10 +32,22 @@ class ReservationFragment : Fragment() {
     private var selectedFacilityId: Int? = null
     private var selectedFacilityItemId: Int? = null
 
+    // Save positions for UI restoration
+    private var selectedCategoryPosition: Int = -1
+    private var selectedFacilityPosition: Int = -1
+    private var selectedFacilityItemPosition: Int = -1
+
     private val calendar = Calendar.getInstance()
     private val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
     private val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
     private val apiDateTimeFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+
+    // Variables to save datetime selections
+    private var startDate: String? = null
+    private var startTime: String? = null
+    private var endDate: String? = null
+    private var endTime: String? = null
+    private var purpose: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -50,10 +61,72 @@ class ReservationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Restore saved instance state if available
+        if (savedInstanceState != null) {
+            restoreState(savedInstanceState)
+        }
+
         setupDateTimeSelectors()
-        setupDropdowns()
+        setupPowerSpinners()
         setupSubmitButton()
         fetchCategories()
+
+        // Restore purpose text if available
+        purpose?.let {
+            binding.purposeEditText.setText(it)
+        }
+
+        // Restore date/time selections if available
+        restoreDateTimeSelections()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+
+        // Save current selections
+        outState.putInt("selectedCategoryPosition", selectedCategoryPosition)
+        outState.putInt("selectedFacilityPosition", selectedFacilityPosition)
+        outState.putInt("selectedFacilityItemPosition", selectedFacilityItemPosition)
+
+        outState.putInt("selectedCategoryId", selectedCategoryId ?: -1)
+        outState.putInt("selectedFacilityId", selectedFacilityId ?: -1)
+        outState.putInt("selectedFacilityItemId", selectedFacilityItemId ?: -1)
+
+        // Save datetime selections
+        outState.putString("startDate", binding.startDateText.text?.toString())
+        outState.putString("startTime", binding.startTimeText.text?.toString())
+        outState.putString("endDate", binding.endDateText.text?.toString())
+        outState.putString("endTime", binding.endTimeText.text?.toString())
+        outState.putString("purpose", binding.purposeEditText.text?.toString())
+    }
+
+    private fun restoreState(savedInstanceState: Bundle) {
+        selectedCategoryPosition = savedInstanceState.getInt("selectedCategoryPosition", -1)
+        selectedFacilityPosition = savedInstanceState.getInt("selectedFacilityPosition", -1)
+        selectedFacilityItemPosition = savedInstanceState.getInt("selectedFacilityItemPosition", -1)
+
+        val categoryId = savedInstanceState.getInt("selectedCategoryId", -1)
+        selectedCategoryId = if (categoryId != -1) categoryId else null
+
+        val facilityId = savedInstanceState.getInt("selectedFacilityId", -1)
+        selectedFacilityId = if (facilityId != -1) facilityId else null
+
+        val facilityItemId = savedInstanceState.getInt("selectedFacilityItemId", -1)
+        selectedFacilityItemId = if (facilityItemId != -1) facilityItemId else null
+
+        // Restore datetime selections
+        startDate = savedInstanceState.getString("startDate")
+        startTime = savedInstanceState.getString("startTime")
+        endDate = savedInstanceState.getString("endDate")
+        endTime = savedInstanceState.getString("endTime")
+        purpose = savedInstanceState.getString("purpose")
+    }
+
+    private fun restoreDateTimeSelections() {
+        startDate?.let { binding.startDateText.text = it }
+        startTime?.let { binding.startTimeText.text = it }
+        endDate?.let { binding.endDateText.text = it }
+        endTime?.let { binding.endTimeText.text = it }
     }
 
     private fun setupDateTimeSelectors() {
@@ -64,6 +137,7 @@ class ReservationFragment : Fragment() {
                 calendar.set(Calendar.MONTH, month)
                 calendar.set(Calendar.DAY_OF_MONTH, day)
                 binding.startDateText.text = dateFormat.format(calendar.time)
+                startDate = binding.startDateText.text.toString()
             }
         }
 
@@ -73,6 +147,7 @@ class ReservationFragment : Fragment() {
                 calendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
                 calendar.set(Calendar.MINUTE, minute)
                 binding.startTimeText.text = timeFormat.format(calendar.time)
+                startTime = binding.startTimeText.text.toString()
             }
         }
 
@@ -83,6 +158,7 @@ class ReservationFragment : Fragment() {
                 calendar.set(Calendar.MONTH, month)
                 calendar.set(Calendar.DAY_OF_MONTH, day)
                 binding.endDateText.text = dateFormat.format(calendar.time)
+                endDate = binding.endDateText.text.toString()
             }
         }
 
@@ -92,6 +168,7 @@ class ReservationFragment : Fragment() {
                 calendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
                 calendar.set(Calendar.MINUTE, minute)
                 binding.endTimeText.text = timeFormat.format(calendar.time)
+                endTime = binding.endTimeText.text.toString()
             }
         }
     }
@@ -126,49 +203,62 @@ class ReservationFragment : Fragment() {
         ).show()
     }
 
-    private fun setupDropdowns() {
-        // Set up listeners for dropdown selection
-        binding.categoryDropdown.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                if (position >= 0 && position < categories.size) {
-                    selectedCategoryId = categories[position].id
-                    fetchFacilities(selectedCategoryId!!)
+    private fun setupPowerSpinners() {
+        // Set up PowerSpinnerView
+        with(binding.categoryDropdown) {
+            viewLifecycleOwner.lifecycleScope.launch {
+                setOnSpinnerItemSelectedListener<String> { oldIndex, oldItem, newIndex, newItem ->
+                    if (newIndex >= 0 && newIndex < categories.size) {
+                        selectedCategoryId = categories[newIndex].id
+                        selectedCategoryPosition = newIndex
+                        fetchFacilities(selectedCategoryId!!)
+                        // Clear other spinners
+                        binding.facilityDropdown.clearSelectedItem()
+                        binding.facilityItemsDropdown.clearSelectedItem()
+                        // Reset positions for other spinners
+                        selectedFacilityPosition = -1
+                        selectedFacilityItemPosition = -1
+                        selectedFacilityId = null
+                        selectedFacilityItemId = null
+                    }
                 }
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                selectedCategoryId = null
             }
         }
 
-        binding.facilityDropdown.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                if (position >= 0 && position < facilities.size) {
-                    selectedFacilityId = facilities[position].id
-                    fetchFacilityItems(selectedFacilityId!!)
+        with(binding.facilityDropdown) {
+            viewLifecycleOwner.lifecycleScope.launch {
+                setOnSpinnerItemSelectedListener<String> { oldIndex, oldItem, newIndex, newItem ->
+                    if (newIndex >= 0 && newIndex < facilities.size) {
+                        selectedFacilityId = facilities[newIndex].id
+                        selectedFacilityPosition = newIndex
+                        fetchFacilityItems(selectedFacilityId!!)
+                        // Clear facility items spinner
+                        binding.facilityItemsDropdown.clearSelectedItem()
+                        // Reset position for facility items spinner
+                        selectedFacilityItemPosition = -1
+                        selectedFacilityItemId = null
+                    }
                 }
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                selectedFacilityId = null
             }
         }
 
-        binding.facilityItemsDropdown.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                if (position >= 0 && position < facilityItems.size) {
-                    selectedFacilityItemId = facilityItems[position].id
+        with(binding.facilityItemsDropdown) {
+            viewLifecycleOwner.lifecycleScope.launch {
+                setOnSpinnerItemSelectedListener<String> { oldIndex, oldItem, newIndex, newItem ->
+                    if (newIndex >= 0 && newIndex < facilityItems.size) {
+                        selectedFacilityItemId = facilityItems[newIndex].id
+                        selectedFacilityItemPosition = newIndex
+                    }
                 }
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                selectedFacilityItemId = null
             }
         }
     }
 
     private fun setupSubmitButton() {
         binding.requestButton.setOnClickListener {
+            // Save purpose text before validation
+            purpose = binding.purposeEditText.text.toString()
+
             if (validateInputs()) {
                 createBooking()
             }
@@ -176,52 +266,51 @@ class ReservationFragment : Fragment() {
     }
 
     private fun validateInputs(): Boolean {
-        var isValid = true
-
         // Check if category is selected
         if (selectedCategoryId == null) {
             Toast.makeText(requireContext(), "Please select a category", Toast.LENGTH_SHORT).show()
-            isValid = false
+            return false
         }
 
         // Check if facility is selected
         if (selectedFacilityId == null) {
             Toast.makeText(requireContext(), "Please select a facility", Toast.LENGTH_SHORT).show()
-            isValid = false
+            return false
         }
 
         // Check if facility item is selected
         if (selectedFacilityItemId == null) {
             Toast.makeText(requireContext(), "Please select a facility item", Toast.LENGTH_SHORT).show()
-            isValid = false
+            return false
         }
 
         // Check if start date and time are selected
         if (binding.startDateText.text.isNullOrEmpty() || binding.startTimeText.text.isNullOrEmpty()) {
             Toast.makeText(requireContext(), "Please select start date and time", Toast.LENGTH_SHORT).show()
-            isValid = false
+            return false
         }
 
         // Check if end date and time are selected
         if (binding.endDateText.text.isNullOrEmpty() || binding.endTimeText.text.isNullOrEmpty()) {
             Toast.makeText(requireContext(), "Please select end date and time", Toast.LENGTH_SHORT).show()
-            isValid = false
+            return false
         }
 
         // Check if purpose is filled
         if (binding.purposeEditText.text.toString().trim().isEmpty()) {
-            Toast.makeText(requireContext(), "Please enter a purpose for booking", Toast.LENGTH_SHORT).show()
             binding.purposeEditText.error = "Purpose is required"
-            isValid = false
+            return false
         }
 
-        return isValid
+        return true
     }
+
+
 
     private fun fetchCategories() {
         viewLifecycleOwner.lifecycleScope.launch {
             try {
-                binding.progressBar.visibility = View.VISIBLE
+                showLoading(true)
 
                 val prefMan = SharedPreferencesManager.getInstance(requireContext())
                 val token = prefMan.getAuthToken()
@@ -234,21 +323,33 @@ class ReservationFragment : Fragment() {
                         categories.clear()
                         categories.addAll(response.body()!!.data)
 
-                        // Set up adapter for category dropdown
-                        val categoryAdapter = ArrayAdapter(
-                            requireContext(),
-                            android.R.layout.simple_dropdown_item_1line,
-                            categories.map { it.name }
-                        )
-                        binding.categoryDropdown.adapter = categoryAdapter
+                        // Set up PowerSpinnerView for category
+                        val categoryNames = categories.map { it.name }
+                        binding.categoryDropdown.setItems(categoryNames)
+
+                        // If we have a previously selected category, select it again
+                        if (selectedCategoryPosition >= 0 && selectedCategoryPosition < categoryNames.size) {
+                            binding.categoryDropdown.selectItemByIndex(selectedCategoryPosition)
+                            // The selection listener will handle fetching facilities
+                        } else if (selectedCategoryId != null) {
+                            // If we have the ID but not position, find the position
+                            val position = categories.indexOfFirst { it.id == selectedCategoryId }
+                            if (position >= 0) {
+                                binding.categoryDropdown.selectItemByIndex(position)
+                                selectedCategoryPosition = position
+                            } else {
+                                // If category with saved ID not found, fetch facilities manually
+                                fetchFacilities(selectedCategoryId!!)
+                            }
+                        }
                     } else {
-                        Toast.makeText(requireContext(), "Failed to fetch categories", Toast.LENGTH_SHORT).show()
+//                        Log.e("FETCH_ERROR", "Failed to fetch categories")
                     }
                 }
             } catch (e: Exception) {
-                Toast.makeText(requireContext(), "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+//                Log.e("FETCH_ERROR", "Error fetching categories: ${e.message}")
             } finally {
-                binding.progressBar.visibility = View.GONE
+                showLoading(false)
             }
         }
     }
@@ -256,7 +357,7 @@ class ReservationFragment : Fragment() {
     private fun fetchFacilities(categoryId: Int) {
         viewLifecycleOwner.lifecycleScope.launch {
             try {
-                binding.progressBar.visibility = View.VISIBLE
+                showLoading(true)
 
                 val prefMan = SharedPreferencesManager.getInstance(requireContext())
                 val token = prefMan.getAuthToken()
@@ -269,30 +370,37 @@ class ReservationFragment : Fragment() {
                         facilities.clear()
                         facilities.addAll(response.body()!!.data)
 
-                        // Set up adapter for facility dropdown
-                        val facilityAdapter = ArrayAdapter(
-                            requireContext(),
-                            android.R.layout.simple_dropdown_item_1line,
-                            facilities.map { it.name }
-                        )
-                        binding.facilityDropdown.adapter = facilityAdapter
+                        // Set up PowerSpinnerView for facility
+                        val facilityNames = facilities.map { it.name }
+                        binding.facilityDropdown.setItems(facilityNames)
 
-                        // Clear facility items since facility has changed
-                        facilityItems.clear()
-                        val emptyAdapter = ArrayAdapter(
-                            requireContext(),
-                            android.R.layout.simple_dropdown_item_1line,
-                            emptyList<String>()
-                        )
-                        binding.facilityItemsDropdown.adapter = emptyAdapter
+                        // If we have a previously selected facility, select it again
+                        if (selectedFacilityPosition >= 0 && selectedFacilityPosition < facilityNames.size) {
+                            binding.facilityDropdown.selectItemByIndex(selectedFacilityPosition)
+                            // The selection listener will handle fetching facility items
+                        } else if (selectedFacilityId != null) {
+                            // If we have the ID but not position, find the position
+                            val position = facilities.indexOfFirst { it.id == selectedFacilityId }
+                            if (position >= 0) {
+                                binding.facilityDropdown.selectItemByIndex(position)
+                                selectedFacilityPosition = position
+                            } else {
+                                // If facility with saved ID not found, fetch facility items manually
+                                fetchFacilityItems(selectedFacilityId!!)
+                            }
+                        } else {
+                            // Clear facility items spinner if no facility is selected
+                            binding.facilityItemsDropdown.clearSelectedItem()
+                            binding.facilityItemsDropdown.setItems(emptyList<String>())
+                        }
                     } else {
-                        Toast.makeText(requireContext(), "Failed to fetch facilities", Toast.LENGTH_SHORT).show()
+//                        Log.e("FETCH_ERROR", "Failed to fetch facilities")
                     }
                 }
             } catch (e: Exception) {
-                Toast.makeText(requireContext(), "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+//                Log.e("FETCH_ERROR", "Error fetching facilities: ${e.message}")
             } finally {
-                binding.progressBar.visibility = View.GONE
+                showLoading(false)
             }
         }
     }
@@ -300,7 +408,7 @@ class ReservationFragment : Fragment() {
     private fun fetchFacilityItems(facilityId: Int) {
         viewLifecycleOwner.lifecycleScope.launch {
             try {
-                binding.progressBar.visibility = View.VISIBLE
+                showLoading(true)
 
                 val prefMan = SharedPreferencesManager.getInstance(requireContext())
                 val token = prefMan.getAuthToken()
@@ -313,21 +421,29 @@ class ReservationFragment : Fragment() {
                         facilityItems.clear()
                         facilityItems.addAll(response.body()!!.data)
 
-                        // Set up adapter for facility items dropdown
-                        val facilityItemsAdapter = ArrayAdapter(
-                            requireContext(),
-                            android.R.layout.simple_dropdown_item_1line,
-                            facilityItems.map { it.item_code }
-                        )
-                        binding.facilityItemsDropdown.adapter = facilityItemsAdapter
+                        // Set up PowerSpinnerView for facility items
+                        val facilityItemCodes = facilityItems.map { it.item_code }
+                        binding.facilityItemsDropdown.setItems(facilityItemCodes)
+
+                        // If we have a previously selected facility item, select it again
+                        if (selectedFacilityItemPosition >= 0 && selectedFacilityItemPosition < facilityItemCodes.size) {
+                            binding.facilityItemsDropdown.selectItemByIndex(selectedFacilityItemPosition)
+                        } else if (selectedFacilityItemId != null) {
+                            // If we have the ID but not position, find the position
+                            val position = facilityItems.indexOfFirst { it.id == selectedFacilityItemId }
+                            if (position >= 0) {
+                                binding.facilityItemsDropdown.selectItemByIndex(position)
+                                selectedFacilityItemPosition = position
+                            }
+                        }
                     } else {
-                        Toast.makeText(requireContext(), "Failed to fetch facility items", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), "Failed to fetch data", Toast.LENGTH_SHORT).show()
                     }
                 }
             } catch (e: Exception) {
-                Toast.makeText(requireContext(), "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+//                Log.e("FETCH_ERROR", "Error fetching facility items: ${e.message}")
             } finally {
-                binding.progressBar.visibility = View.GONE
+                showLoading(false)
             }
         }
     }
@@ -335,7 +451,7 @@ class ReservationFragment : Fragment() {
     private fun createBooking() {
         viewLifecycleOwner.lifecycleScope.launch {
             try {
-                binding.progressBar.visibility = View.VISIBLE
+                showLoading(true)
                 binding.requestButton.isEnabled = false
 
                 val prefMan = SharedPreferencesManager.getInstance(requireContext())
@@ -367,15 +483,13 @@ class ReservationFragment : Fragment() {
                         bookingRequest
                     )
 
-//                    ApiClient.authService.createBooking(authHeader, bookingRequest)
                     handleBookingResponse(response)
-//                    Toast.makeText(requireContext(), "Success submit request", Toast.LENGTH_SHORT).show()
                 }
             } catch (e: Exception) {
-                    Log.e("BOOKING_ERROR", "Exception saat submit booking", e)
-                    Toast.makeText(requireContext(), "Kayaknya masuk sini deh coba yaa", Toast.LENGTH_SHORT).show()
+                Log.e("BOOKING_ERROR", "Exception during booking submission", e)
+                Toast.makeText(requireContext(), "Error: ${e.message}", Toast.LENGTH_SHORT).show()
             } finally {
-                binding.progressBar.visibility = View.GONE
+                showLoading(false)
                 binding.requestButton.isEnabled = true
             }
         }
@@ -406,7 +520,9 @@ class ReservationFragment : Fragment() {
     private fun handleBookingResponse(response: Response<BookingResponse>) {
         if (response.isSuccessful && response.body() != null) {
             Toast.makeText(requireContext(), "Booking request submitted successfully!", Toast.LENGTH_LONG).show()
-            // Clear fields or navigate back
+            // Clear all selections after successful submission
+            clearAllSelections()
+            // Pop back to previous fragment
             requireActivity().supportFragmentManager.popBackStack()
         } else {
             val errorBody = response.errorBody()?.string()
@@ -419,12 +535,72 @@ class ReservationFragment : Fragment() {
             } else {
                 "Failed to create booking"
             }
-            Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show()
+            Toast.makeText(requireContext(), "End date and time must be after start date and time!", Toast.LENGTH_LONG).show()
         }
     }
 
+    private fun clearAllSelections() {
+        // Clear selected IDs
+        selectedCategoryId = null
+        selectedFacilityId = null
+        selectedFacilityItemId = null
+
+        // Clear selected positions
+        selectedCategoryPosition = -1
+        selectedFacilityPosition = -1
+        selectedFacilityItemPosition = -1
+
+        // Clear UI selections
+        binding.categoryDropdown.clearSelectedItem()
+        binding.facilityDropdown.clearSelectedItem()
+        binding.facilityItemsDropdown.clearSelectedItem()
+
+        // Clear date/time selections
+        binding.startDateText.text = ""
+        binding.startTimeText.text = ""
+        binding.endDateText.text = ""
+        binding.endTimeText.text = ""
+
+        // Clear purpose
+        binding.purposeEditText.setText("")
+
+        // Clear saved values
+        startDate = null
+        startTime = null
+        endDate = null
+        endTime = null
+        purpose = null
+    }
+
+    private fun showLoading(show: Boolean) {
+        // Show/hide overlay and disable/enable UI
+        binding.loadingOverlay.visibility = if (show) View.VISIBLE else View.GONE
+        binding.requestButton.isEnabled = !show
+        binding.ScrollView.isEnabled = !show
+
+        // Disable bottom navigation in parent activity
+        (activity as? MainActivity)?.setBottomNavEnabled(!show)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        dismissAllSpinners()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        dismissAllSpinners()
+    }
+
     override fun onDestroyView() {
+        dismissAllSpinners()
+        _binding = null
         super.onDestroyView()
-        _binding = null // Avoid memory leaks
+    }
+
+    private fun dismissAllSpinners() {
+        binding.categoryDropdown.dismiss()
+        binding.facilityDropdown.dismiss()
+        binding.facilityItemsDropdown.dismiss()
     }
 }

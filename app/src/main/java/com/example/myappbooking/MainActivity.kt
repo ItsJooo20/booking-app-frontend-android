@@ -7,6 +7,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import com.example.myappbooking.databinding.ActivityMainBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
 
@@ -54,6 +55,10 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
+    }
+
+    fun setBottomNavEnabled(enabled: Boolean) {
+        findViewById<BottomNavigationView>(R.id.bottom_nav)?.isEnabled = enabled
     }
 
     private fun loadFragment(fragment: Fragment) {

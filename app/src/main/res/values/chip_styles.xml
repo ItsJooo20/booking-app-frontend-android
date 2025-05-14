@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Custom style for filter chips -->
+    <style name="CustomFilterChipStyle" parent="Widget.Material3.Chip.Filter">
+        <!-- Text color when unselected -->
+        <item name="android:textColor">@color/text_color</item>
+        <!-- Text color when selected -->
+<!--        <item name="checkedTextColor">@color/white</item>-->
+        <!-- Background color when selected -->
+        <item name="chipBackgroundColor">@color/white</item>
+        <item name="checkedTextViewStyle">@color/white</item>
+        <!-- Check icon that appears when selected -->
+        <item name="checkedIcon">@drawable/ic_check</item>
+        <!-- Customize checkedIcon size if needed -->
+        <item name="checkedIconSize">18dp</item>
+        <!-- Other customizations -->
+        <item name="chipCornerRadius">16dp</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="chipStrokeColor">@color/text_gray_color</item>
+        <item name="rippleColor">@color/text_gray_color</item>
+    </style>
+</resources>

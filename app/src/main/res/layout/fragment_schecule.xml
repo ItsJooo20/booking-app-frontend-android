@@ -1,218 +1,297 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/swipeRefreshLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_color">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <!-- Fixed Top Title Bar -->
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Scheduling"
+        android:textColor="@color/text_color"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Scrollable Content -->
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/background_color">
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle">
 
-        <!-- Top Title Bar -->
-        <TextView
-            android:id="@+id/tvTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Scheduling"
-            android:textColor="@color/text_color"
-            android:textSize="24sp"
-            android:fontFamily="@font/poppins_bold"
-            android:layout_marginTop="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <!-- Calendar Container with White Background -->
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/calendarContainer"
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:backgroundTint="@color/background_color"
-            style="?attr/materialCardViewElevatedStyle"
-            app:cardCornerRadius="12dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvTitle">
+            android:layout_height="match_parent"
+            android:fillViewport="true">
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="8dp">
+                android:background="@color/background_color">
 
-                <!-- Month/Year Header -->
-                <RelativeLayout
+                <!-- Calendar Container with White Background -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/calendarContainer"
+                    style="?attr/materialCardViewElevatedStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="8dp">
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:backgroundTint="@color/background_color"
+                    app:cardCornerRadius="12dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                    <!-- Previous Month Button -->
-                    <ImageButton
-                        android:id="@+id/btnPrevMonth"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:layout_alignParentStart="true"
-                        android:layout_centerVertical="true"
-                        android:background="?attr/selectableItemBackgroundBorderless"
-                        android:contentDescription="Previous Month"
-                        android:src="@drawable/chevron_left" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="8dp">
 
-                    <!-- Month and Year Text -->
+                        <!-- Month/Year Header -->
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="8dp">
+
+                            <!-- Previous Month Button -->
+                            <ImageButton
+                                android:id="@+id/btnPrevMonth"
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:layout_alignParentStart="true"
+                                android:layout_centerVertical="true"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:contentDescription="Previous Month"
+                                android:src="@drawable/chevron_left" />
+
+                            <!-- Month and Year Text -->
+                            <TextView
+                                android:id="@+id/tvMonthYear"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:fontFamily="@font/poppins_medium"
+                                android:textColor="@color/text_color"
+                                android:textSize="16sp"
+                                tools:text="July 2025" />
+
+                            <!-- Next Month Button -->
+                            <ImageButton
+                                android:id="@+id/btnNextMonth"
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:contentDescription="Next Month"
+                                android:src="@drawable/chevron_right" />
+                        </RelativeLayout>
+
+                        <!-- Days of Week Header -->
+                        <LinearLayout
+                            android:id="@+id/daysOfWeekContainer"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:paddingTop="8dp"
+                            android:paddingBottom="8dp">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/poppins_regular"
+                                android:gravity="center"
+                                android:text="MON"
+                                android:textColor="@color/text_gray_color"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/poppins_regular"
+                                android:gravity="center"
+                                android:text="TUE"
+                                android:textColor="@color/text_gray_color"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/poppins_regular"
+                                android:gravity="center"
+                                android:text="WED"
+                                android:textColor="@color/text_gray_color"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/poppins_regular"
+                                android:gravity="center"
+                                android:text="THU"
+                                android:textColor="@color/text_gray_color"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/poppins_regular"
+                                android:gravity="center"
+                                android:text="FRI"
+                                android:textColor="@color/text_gray_color"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/poppins_regular"
+                                android:gravity="center"
+                                android:text="SAT"
+                                android:textColor="@color/text_gray_color"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/poppins_regular"
+                                android:gravity="center"
+                                android:text="SUN"
+                                android:textColor="@color/text_gray_color"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+                        <!-- Calendar View -->
+                        <com.kizitonwose.calendar.view.CalendarView
+                            android:id="@+id/calendarView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:cv_dayViewResource="@layout/calendar_day_layout"
+                            app:cv_orientation="horizontal"
+                            app:cv_outDateStyle="endOfRow"
+                            app:cv_scrollPaged="true" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Upcoming Events Title with Sort Button -->
+                <RelativeLayout
+                    android:id="@+id/eventsHeaderContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/calendarContainer">
+
                     <TextView
-                        android:id="@+id/tvMonthYear"
+                        android:id="@+id/tvUpcomingEvents"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="Upcoming Event"
                         android:textColor="@color/text_color"
-                        android:textSize="16sp"
-                        android:fontFamily="@font/poppins_medium"
-                        tools:text="July 2025" />
+                        android:textSize="20sp" />
 
-                    <!-- Next Month Button -->
                     <ImageButton
-                        android:id="@+id/btnNextMonth"
+                        android:id="@+id/btnSortEvents"
                         android:layout_width="32dp"
                         android:layout_height="32dp"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
                         android:background="?attr/selectableItemBackgroundBorderless"
-                        android:contentDescription="Next Month"
-                        android:src="@drawable/chevron_right" />
+                        android:contentDescription="Sort Events"
+                        android:src="@drawable/ic_plus"
+                        android:visibility="gone" />
                 </RelativeLayout>
 
-                <!-- Days of Week Header -->
-                <LinearLayout
-                    android:id="@+id/daysOfWeekContainer"
+                <!-- Events RecyclerView -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvEvents"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingTop="8dp"
-                    android:paddingBottom="8dp">
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="MON" android:textColor="@color/text_gray_color" android:textSize="12sp" android:fontFamily="@font/poppins_regular" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="TUE" android:textColor="@color/text_gray_color" android:textSize="12sp" android:fontFamily="@font/poppins_regular"/>
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="WED" android:textColor="@color/text_gray_color" android:textSize="12sp" android:fontFamily="@font/poppins_regular"/>
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="THU" android:textColor="@color/text_gray_color" android:textSize="12sp" android:fontFamily="@font/poppins_regular"/>
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="FRI" android:textColor="@color/text_gray_color" android:textSize="12sp" android:fontFamily="@font/poppins_regular"/>
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="SAT" android:textColor="@color/text_gray_color" android:textSize="12sp" android:fontFamily="@font/poppins_regular"/>
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="SUN" android:textColor="@color/text_gray_color" android:textSize="12sp" android:fontFamily="@font/poppins_regular"/>
-                </LinearLayout>
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:nestedScrollingEnabled="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/eventsHeaderContainer"
+                    tools:listitem="@layout/item_event" />
 
-                <!-- Calendar View -->
-                <com.kizitonwose.calendar.view.CalendarView
-                    android:id="@+id/calendarView"
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/notFoundCard"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:cv_dayViewResource="@layout/calendar_day_layout"
-                    app:cv_orientation="horizontal"
-                    app:cv_outDateStyle="endOfRow"
-                    app:cv_scrollPaged="true" />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
+                    android:layout_marginHorizontal="16dp"
+                    android:visibility="invisible"
+                    app:cardBackgroundColor="@color/background_color"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/eventsHeaderContainer">
 
-        <!-- Upcoming Events Title with Sort Button -->
-        <RelativeLayout
-            android:id="@+id/eventsHeaderContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/calendarContainer">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tvUpcomingEvents"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Upcoming Event"
-                android:textColor="@color/text_color"
-                android:textSize="20sp"
-                android:fontFamily="@font/poppins_semibold"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true" />
+                        <ImageView
+                            android:layout_width="200dp"
+                            android:layout_height="150dp"
+                            android:contentDescription="Calendar"
+                            android:src="@drawable/il_calendar" />
 
-            <ImageButton
-                android:id="@+id/btnSortEvents"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:visibility="gone"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="Sort Events"
-                android:src="@drawable/ic_plus" />
-        </RelativeLayout>
+                        <TextView
+                            android:id="@+id/tvError"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:text="No Event Found"
+                            android:textColor="@color/text_color"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
 
-        <!-- Events RecyclerView -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvEvents"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/eventsHeaderContainer"
-            tools:listitem="@layout/item_event" />
+                        <TextView
+                            android:id="@+id/tvErrorLoad"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="0dp"
+                            android:fontFamily="@font/poppins_light"
+                            android:gravity="center"
+                            android:text="No events are scheduled for this date. You can reserve this slot for your event or activity!"
+                            android:textColor="@color/text_gray_color"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/notFoundCard"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:visibility="invisible"
-            app:cardBackgroundColor="@color/background_color"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="0dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/eventsHeaderContainer">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="200dp"
-                    android:layout_height="150dp"
-                    android:contentDescription="Calendar"
-                    android:src="@drawable/il_calendar" />
-
-                <TextView
-                    android:id="@+id/tvError"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:text="No Event Found"
-                    android:textColor="@color/text_color"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/tvErrorLoad"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="0dp"
-                    android:fontFamily="@font/poppins_light"
-                    android:gravity="center"
-                    android:text="No events are scheduled for this date. You can reserve this slot for your event or activity!"
-                    android:textColor="@color/text_gray_color"
-                    android:textSize="12sp" />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,5 +8,22 @@
         <item name="android:windowLightStatusBar">true</item>
     </style>
 
+    <style name="NoRippleBottomNavigationStyle" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="itemBackground">@android:color/transparent</item>
+        <item name="itemRippleColor">@android:color/transparent</item>
+        <item name="itemIconTint">@color/primary_dark_color</item>
+        <item name="itemTextColor">@color/primary_dark_color</item>
+        <!--        <item name="itemTextAppearanceActive">@style/TextAppearance.BottomNavigation.Active</item>-->
+        <!--        <item name="itemTextAppearanceInactive">@style/TextAppearance.BottomNavigation.Inactive</item>-->
+    </style>
+
+    <style name="TextAppearance.BottomNavigation.Active" parent="TextAppearance.AppCompat.Small">
+        <item name="android:textColor">@color/primary_color</item>
+    </style>
+
+    <style name="TextAppearance.BottomNavigation.Inactive" parent="TextAppearance.AppCompat.Small">
+        <item name="android:textColor">@color/text_gray_color</item>
+    </style>
+
     <style name="Theme.MyAppBooking" parent="Base.Theme.MyAppBooking" />
 </resources>

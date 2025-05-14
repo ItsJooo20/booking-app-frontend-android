@@ -49,7 +49,7 @@ class DashboardFragment : Fragment() {
 
     private fun setupGreetingSection() {
         val prefMan = SharedPreferencesManager.getInstance(requireContext()).getUserName()
-        binding.greetingText.text = "Hi, $prefMan"
+        binding.greetingText.text = "Hi, $prefMan!"
     }
 
     private fun setupCategoryRecyclerView() {
@@ -80,11 +80,17 @@ class DashboardFragment : Fragment() {
             .commit()
     }
 
-
+    private fun NavigateToReservationFragment() {
+        val reservationFragment = ReservationFragment()
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, reservationFragment)
+            .commit()
+    }
 
     private fun setupReserveButton() {
         binding.extendedFab.setOnClickListener {
-            Toast.makeText(context, "Navigate to reservation screen", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(context, "Navigate to reservation screen", Toast.LENGTH_SHORT).show()
+            NavigateToReservationFragment()
         }
     }
 

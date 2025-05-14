@@ -1,48 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView android:id="@+id/card"
+<com.google.android.material.card.MaterialCardView
+    android:id="@+id/card"
     android:layout_width="match_parent"
     android:layout_height="100dp"
-    android:layout_margin="8dp"
-    android:backgroundTint="@color/background_color"
-    style="?attr/materialCardViewElevatedStyle"
+    android:layout_margin="4dp"
+    style="@style/Widget.MaterialComponents.CardView"
+    app:cardElevation="4dp"
+    app:cardCornerRadius="8dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
-
-    <!-- Media -->
-    <ImageView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="75dp"
-        app:srcCompat="@drawable/pic_check"
-        android:scaleType="centerCrop"
-        android:contentDescription="imgPath"
-        />
+        android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="right">
+        <!-- Full-width background image -->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/pic_check"
+            android:scaleType="centerCrop"
+            android:contentDescription="Category image"/>
 
-        <!-- Title, secondary and supporting text -->
+        <!-- Dark overlay for better text visibility -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/dark_overlay"/>
+
+        <!-- Centered text -->
         <TextView
             android:id="@+id/category_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_medium"
+            android:layout_centerInParent="true"
             android:text="Category"
-            android:textColor="@color/text_color"
-            android:textSize="14sp"
-            android:layout_marginRight="16dp"
-            android:textAppearance="?attr/textAppearanceTitleMedium"
-            />
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:fontFamily="@font/poppins_medium"
+            android:textAppearance="?attr/textAppearanceTitleMedium"/>
 
-    </LinearLayout>
-
-</LinearLayout>
-
+    </RelativeLayout>
 </com.google.android.material.card.MaterialCardView>
