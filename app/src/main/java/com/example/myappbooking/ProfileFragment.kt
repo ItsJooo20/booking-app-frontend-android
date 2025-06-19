@@ -34,7 +34,18 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupGreetingSection()
+        setup()
         logout()
+    }
+
+    private fun setup() {
+        binding.cardChangePass.setOnClickListener {
+            startActivity(Intent(requireContext(), ChangePasswordActivity::class.java))
+        }
+
+        binding.cardChangePhone.setOnClickListener {
+            startActivity(Intent(requireContext(), ChangePhoneNumberActivity::class.java))
+        }
     }
 
     private fun logout() {
@@ -46,7 +57,7 @@ class ProfileFragment : Fragment() {
     private fun showLoading(show: Boolean) {
         // Show/hide overlay and disable/enable UI
         binding.loadingOverlay.visibility = if (show) View.VISIBLE else View.GONE
-        binding.scrollView.isEnabled = !show
+//        binding.scrollView.isEnabled = !show
         binding.outlinedButton.isEnabled = !show
 
         // Disable bottom navigation in parent activity

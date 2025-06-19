@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    tools:context=".ChangePhoneNumberActivity">
+
+    <!-- Header with Back Button -->
+    <LinearLayout
+        android:id="@+id/headerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:gravity="center_vertical"
+        android:background="@color/white"
+        android:elevation="2dp">
+
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_arrow_back"
+            android:layout_marginEnd="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:padding="4dp"
+            app:tint="@color/text_color" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Change Phone Number"
+            android:textSize="18sp"
+            android:textColor="@color/text_color"
+            android:fontFamily="@font/poppins_semibold" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/headerLayout"
+        android:background="@color/background_color"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <!-- Current Phone Section -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/form_background"
+                android:padding="24dp"
+                android:elevation="2dp"
+                android:layout_marginBottom="24dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Current Phone Number"
+                    android:textSize="14sp"
+                    android:textColor="@color/text_gray_color"
+                    android:fontFamily="@font/poppins_regular"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:id="@+id/tvCurrentPhone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="+62 812-3456-7890"
+                    android:textSize="16sp"
+                    android:textColor="@color/text_color"
+                    android:fontFamily="@font/poppins_semibold" />
+
+            </LinearLayout>
+
+            <!-- New Phone Number Form -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/form_background"
+                android:padding="24dp"
+                android:elevation="2dp"
+                android:layout_marginBottom="32dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Enter New Phone Number"
+                    android:textSize="16sp"
+                    android:textColor="@color/text_color"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:layout_marginBottom="16dp" />
+
+                <!-- Phone Number Input -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilNewPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    app:boxStrokeColor="@color/primary_color"
+                    app:hintTextColor="@color/text_gray_color"
+                    android:hint="Phone Number"
+                    app:boxCornerRadiusTopStart="12dp"
+                    app:boxCornerRadiusTopEnd="12dp"
+                    app:boxCornerRadiusBottomStart="12dp"
+                    app:boxCornerRadiusBottomEnd="12dp"
+                    app:startIconDrawable="@drawable/ic_phone"
+                    app:startIconTint="@color/text_gray_color">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etNewPhone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="phone"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textColor="@color/text_color" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Password Confirmation -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    app:boxStrokeColor="@color/primary_color"
+                    app:hintTextColor="@color/text_gray_color"
+                    android:hint="Current Password"
+                    app:boxCornerRadiusTopStart="12dp"
+                    app:boxCornerRadiusTopEnd="12dp"
+                    app:boxCornerRadiusBottomStart="12dp"
+                    app:boxCornerRadiusBottomEnd="12dp"
+                    app:startIconDrawable="@drawable/ic_lock"
+                    app:startIconTint="@color/text_gray_color"
+                    app:endIconMode="password_toggle"
+                    app:endIconTint="@color/text_gray_color">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textColor="@color/text_color" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Please enter your current password to confirm this change. A verification code will be sent to your new phone number."
+                    android:textSize="12sp"
+                    android:textColor="@color/text_gray_color"
+                    android:fontFamily="@font/poppins_regular"
+                    android:lineSpacingExtra="2dp" />
+
+            </LinearLayout>
+
+            <!-- Action Buttons -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Update Phone Button -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnUpdatePhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:text="Update Phone Number"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    app:backgroundTint="@color/primary_color"
+                    android:fontFamily="@font/poppins_semibold"
+                    app:cornerRadius="12dp"
+                    android:elevation="4dp"
+                    app:rippleColor="@color/primary_dark_color"
+                    android:layout_marginBottom="12dp" />
+
+                <!-- Cancel Button -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnCancel"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:text="Cancel"
+                    android:textColor="@color/text_gray_color"
+                    android:textSize="16sp"
+                    app:backgroundTint="@color/white"
+                    app:strokeColor="@color/text_gray_color"
+                    android:fontFamily="@font/poppins_semibold"
+                    app:strokeWidth="1dp"
+                    app:cornerRadius="12dp"
+                    android:elevation="2dp"
+                    app:rippleColor="@color/accent_color" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

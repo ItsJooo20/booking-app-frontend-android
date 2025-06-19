@@ -1,189 +1,308 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_color">
 
-    <!-- Fixed Title that doesn't scroll -->
-    <TextView
-        android:id="@+id/title_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_bold"
-        android:text="History"
-        android:textColor="@color/text_color"
-        android:textSize="24sp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <!-- Scrollable Content -->
+<!--    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout-->
+<!--        android:id="@+id/swipeRefreshLayout"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent">-->
 
-    <!-- Filter section -->
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/filter_section"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginHorizontal="16dp"
-        app:layout_constraintTop_toBottomOf="@id/title_text">
-
-        <!-- Filter label with icon -->
-        <LinearLayout
-            android:id="@+id/filter_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:src="@drawable/ic_search"
-                app:tint="@color/primary_color" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Filter"
-                android:textSize="20sp"
-                android:fontFamily="@font/poppins_medium"
-                android:textColor="@color/text_color"
-                android:layout_marginStart="8dp" />
-        </LinearLayout>
-
-        <!-- Chip groups in two rows -->
-        <HorizontalScrollView
-            android:id="@+id/filter_scroll_row1"
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:scrollbars="none"
-            app:layout_constraintTop_toBottomOf="@id/filter_label">
+            android:layout_height="match_parent"
+            android:fillViewport="true">
 
-            <com.google.android.material.chip.ChipGroup
-                android:id="@+id/filter_chip_group"
-                style="@style/Widget.Material3.Chip.Filter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:singleLine="false"
-                app:chipSpacingHorizontal="8dp">
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_pending"
-                    style="@style/Widget.Material3.Chip.Filter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:text="Pending" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_approved"
-                    style="@style/Widget.Material3.Chip.Filter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Approved" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_rejected"
-                    style="@style/Widget.Material3.Chip.Filter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Rejected" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_completed"
-                    style="@style/Widget.Material3.Chip.Filter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Completed" />
-
-            </com.google.android.material.chip.ChipGroup>
-        </HorizontalScrollView>
-
-        <HorizontalScrollView
-            android:id="@+id/filter_scroll_row2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scrollbars="none"
-            app:layout_constraintTop_toBottomOf="@id/filter_scroll_row1">
-
-            <com.google.android.material.chip.ChipGroup
-                android:id="@+id/filter_chip_group2"
-                style="@style/Widget.Material3.Chip.Filter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:singleLine="false"
-                app:chipSpacingHorizontal="8dp">
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_cancelled"
-                    style="@style/Widget.Material3.Chip.Filter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Cancelled" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_pending2"
-                    style="@style/Widget.Material3.Chip.Filter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:text="Pending" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_approved2"
-                    style="@style/Widget.Material3.Chip.Filter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Approved" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_rejected2"
-                    style="@style/Widget.Material3.Chip.Filter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Rejected" />
-
-            </com.google.android.material.chip.ChipGroup>
-        </HorizontalScrollView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <!-- Scrollable content with history items -->
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/ScrollView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        android:fillViewport="true"
-        app:layout_constraintTop_toBottomOf="@id/filter_section"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingHorizontal="16dp"
-            android:paddingBottom="16dp">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvEvents"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
-                android:nestedScrollingEnabled="false"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/eventsHeaderContainer"
-                tools:listitem="@layout/item_event" />
+                android:orientation="vertical"
+                android:padding="24dp">
 
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+                <!-- Header Section -->
+                <LinearLayout
+                    android:id="@+id/header_section"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="32dp"
+                    android:gravity="center_vertical">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/title_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="History"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:textColor="@color/text_color"
+                            android:textSize="24sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="View past events and activities"
+                            android:fontFamily="@font/poppins_regular"
+                            android:textColor="@color/text_gray_color"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/history_icon_card"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:backgroundTint="@color/white"
+                        app:cardCornerRadius="24dp"
+                        app:cardElevation="2dp">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_search"
+                            app:tint="@color/primary_color" />
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
+
+                <!-- Filter Container -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/filterContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:backgroundTint="@color/white"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="2dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="12dp">
+
+                        <!-- Compact Filter Header -->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Filter"
+                            android:textSize="16sp"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:textColor="@color/text_color"
+                            android:layout_marginBottom="8dp" />
+
+                        <!-- Status Chips -->
+                        <HorizontalScrollView
+                            android:id="@+id/filter_scroll_row1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8dp"
+                            android:scrollbars="none">
+
+                            <com.google.android.material.chip.ChipGroup
+                                android:id="@+id/filter_chip_group"
+                                style="@style/Widget.Material3.Chip.Filter"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:singleLine="true"
+                                app:chipSpacingHorizontal="6dp">
+
+                                <com.google.android.material.chip.Chip
+                                    android:id="@+id/chip_pending"
+                                    style="@style/Widget.Material3.Chip.Filter"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:checked="false"
+                                    android:text="Pending" />
+
+                                <com.google.android.material.chip.Chip
+                                    android:id="@+id/chip_approved"
+                                    style="@style/Widget.Material3.Chip.Filter"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Approved" />
+
+                                <com.google.android.material.chip.Chip
+                                    android:id="@+id/chip_rejected"
+                                    style="@style/Widget.Material3.Chip.Filter"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Rejected" />
+
+                                <com.google.android.material.chip.Chip
+                                    android:id="@+id/chip_completed"
+                                    style="@style/Widget.Material3.Chip.Filter"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Completed" />
+
+                                <com.google.android.material.chip.Chip
+                                    android:id="@+id/chip_cancelled"
+                                    style="@style/Widget.Material3.Chip.Filter"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Cancelled" />
+
+                            </com.google.android.material.chip.ChipGroup>
+                        </HorizontalScrollView>
+
+                        <!-- Time Range Chips -->
+                        <HorizontalScrollView
+                            android:id="@+id/filter_scroll_row2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:scrollbars="none">
+
+                            <com.google.android.material.chip.ChipGroup
+                                android:id="@+id/filter_chip_group2"
+                                style="@style/Widget.Material3.Chip.Filter"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:singleLine="true"
+                                app:chipSpacingHorizontal="6dp">
+
+                                <com.google.android.material.chip.Chip
+                                    android:id="@+id/chip_today"
+                                    style="@style/Widget.Material3.Chip.Filter"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Today" />
+
+                                <com.google.android.material.chip.Chip
+                                    android:id="@+id/chip_week"
+                                    style="@style/Widget.Material3.Chip.Filter"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:checked="false"
+                                    android:text="Week" />
+
+                                <com.google.android.material.chip.Chip
+                                    android:id="@+id/chip_month"
+                                    style="@style/Widget.Material3.Chip.Filter"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Month" />
+
+                            </com.google.android.material.chip.ChipGroup>
+                        </HorizontalScrollView>
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- History Events Section -->
+                <LinearLayout
+                    android:id="@+id/eventsHeaderContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvHistoryEvents"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:text="History Events"
+                            android:textColor="@color/text_color"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_regular"
+                            android:text="All past activities and bookings"
+                            android:textColor="@color/text_gray_color"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/btnSortEvents"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:backgroundTint="@color/white"
+                        android:visibility="gone"
+                        app:cardCornerRadius="20dp"
+                        app:cardElevation="2dp">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center"
+                            android:contentDescription="Sort Events"
+                            android:src="@drawable/ic_plus"
+                            app:tint="@color/primary_color" />
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
+
+                <!-- Events RecyclerView -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvEvents"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="24dp"
+                    android:nestedScrollingEnabled="false"
+                    tools:listitem="@layout/item_event" />
+
+                <!-- Empty State -->
+                <LinearLayout
+                    android:id="@+id/notFoundCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:layout_marginTop="32dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="150dp"
+                        android:layout_height="75dp"
+                        android:layout_marginBottom="24dp"
+                        android:contentDescription="History"
+                        android:src="@drawable/il_calendar" />
+
+                    <TextView
+                        android:id="@+id/tvError"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="No History Found"
+                        android:textColor="@color/text_color"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/tvErrorLoad"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:gravity="center"
+                        android:lineSpacingExtra="2dp"
+                        android:text="No past events match your current filter criteria. Try adjusting your filters to see more results."
+                        android:textColor="@color/text_gray_color"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+<!--    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>-->
+
 </androidx.constraintlayout.widget.ConstraintLayout>

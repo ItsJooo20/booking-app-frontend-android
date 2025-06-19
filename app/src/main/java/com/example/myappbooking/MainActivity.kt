@@ -57,6 +57,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finishAffinity()
+    }
+
     fun setBottomNavEnabled(enabled: Boolean) {
         findViewById<BottomNavigationView>(R.id.bottom_nav)?.isEnabled = enabled
     }

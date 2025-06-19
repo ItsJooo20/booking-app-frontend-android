@@ -4,55 +4,100 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="16dp"
-    android:layout_marginTop="8dp"
-    android:layout_marginEnd="16dp"
-    android:backgroundTint="@color/background_color">
+    android:backgroundTint="@color/white"
+    android:layout_marginBottom="8dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="1dp"
+    app:rippleColor="@color/primary_color">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp">
+        android:layout_height="wrap_content">
 
-        <!-- Facility Name -->
-        <TextView
-            android:id="@+id/tv_facility_name"
+        <!-- Facility Image -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/image_container"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="12dp"
+            android:backgroundTint="@color/background_color"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/iv_facility_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="Facility image"
+                android:scaleType="centerCrop"
+                android:src="@drawable/pic_check"
+                tools:src="@drawable/pic_check" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Content Container -->
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:textStyle="bold"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="12dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Meeting Room" />
+            app:layout_constraintStart_toEndOf="@id/image_container"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <!-- Category indicator -->
-        <TextView
-            android:id="@+id/tv_facility_category"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:textColor="@color/text_gray_color"
-            android:textSize="14sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_facility_name"
-            tools:text="Rooms" />
+            <!-- Facility Name -->
+            <TextView
+                android:id="@+id/tv_facility_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semibold"
+                android:textColor="@color/text_color"
+                android:textSize="16sp"
+                android:layout_marginBottom="3dp"
+                tools:text="Meeting Room A" />
 
-        <!-- Description -->
-        <TextView
-            android:id="@+id/tv_facility_description"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:ellipsize="end"
-            android:maxLines="2"
-            android:textColor="@color/text_gray_color"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_facility_category"
-            tools:text="Good for meetings and conferences" />
+            <!-- Category Badge -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:backgroundTint="@color/accent_color"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="0dp">
+
+                <TextView
+                    android:id="@+id/tv_facility_category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="3dp"
+                    android:textColor="@color/white"
+                    android:textSize="11sp"
+                    tools:text="Rooms" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Description -->
+            <TextView
+                android:id="@+id/tv_facility_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:fontFamily="@font/poppins_regular"
+                android:lineSpacingExtra="1dp"
+                android:maxLines="2"
+                android:textColor="@color/text_gray_color"
+                android:textSize="13sp"
+                tools:text="Perfect for meetings and conferences with modern amenities" />
+
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

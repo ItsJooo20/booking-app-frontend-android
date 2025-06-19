@@ -3,9 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
 
     <application
@@ -14,12 +16,42 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@drawable/ic_door"
         android:label="BookingApp by Joo"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@drawable/ic_door"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyAppBooking"
         android:usesCleartextTraffic="true"
-        android:requestLegacyExternalStorage="true"
         tools:targetApi="31">
+        <activity
+            android:name=".SuccessSentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BookingDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ChangePhoneNumberActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ChangePasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ReservationByItemActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ItemDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EmailVerificationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ItemListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FacilityListActivity"
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="false" />

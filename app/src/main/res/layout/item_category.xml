@@ -1,44 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card"
     android:layout_width="match_parent"
     android:layout_height="100dp"
     android:layout_margin="4dp"
-    style="@style/Widget.MaterialComponents.CardView"
-    app:cardElevation="4dp"
-    app:cardCornerRadius="8dp"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:backgroundTint="@color/white"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="2dp"
+    app:rippleColor="@color/primary_color">
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <!-- Full-width background image -->
         <ImageView
+            android:id="@+id/category_image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/pic_check"
             android:scaleType="centerCrop"
-            android:contentDescription="Category image"/>
+            android:contentDescription="Category image"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
         <!-- Dark overlay for better text visibility -->
         <View
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/dark_overlay"/>
+            android:background="@color/dark_overlay"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
         <!-- Centered text -->
         <TextView
             android:id="@+id/category_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
             android:text="Category"
-            android:textColor="@android:color/white"
+            android:textColor="@color/white"
             android:textSize="16sp"
-            android:fontFamily="@font/poppins_medium"
-            android:textAppearance="?attr/textAppearanceTitleMedium"/>
+            android:fontFamily="@font/poppins_semibold"
+            android:elevation="4dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:text="Meeting Rooms" />
 
-    </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </com.google.android.material.card.MaterialCardView>

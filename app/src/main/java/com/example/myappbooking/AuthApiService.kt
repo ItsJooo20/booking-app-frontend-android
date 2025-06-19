@@ -9,13 +9,19 @@ import retrofit2.http.POST
 import retrofit2.http.Query
 
 interface AuthApiService {
+    @POST("register")
+    suspend fun register(@Body request: RegisterRequest): Response<RegisterResponse>
+
+    @POST("email/resend")
+    suspend fun resendVerifEmail(@Body request: EmailRequest): Response<VerificationResponse>
+
     @POST("login")
     suspend fun login(@Body loginRequest: LoginRequest): Response<LoginResponse>
 
     @POST("logout")
     suspend fun logout(@Header("Authorization") token: String): Response<LogoutResponse>
 
-    @GET("facility-categories")
+    @GET("facilities/categories")
     suspend fun getCategories(@Header("Authorization") token: String): Response<CategoryResponse>
 
     @GET("approved-events")
@@ -27,7 +33,7 @@ interface AuthApiService {
         @Query("category_id") categoryId: Int
     ): Response<FacilityResponse>
 
-    @GET("facility-items")
+    @GET("facilities/items")
     suspend fun getFacilityItems(
         @Header("Authorization") authHeader: String,
         @Query("facility_id") facilityId: Int
@@ -39,4 +45,10 @@ interface AuthApiService {
         @Body request: BookingRequest
     ): Response<BookingResponse>
 
+    @GET("bookings/history")
+    suspend fun getBookingHistory(
+        @Header("Authorization") token: String,
+        @Query("status") status: String? = null,
+        @Query("time_filter") timeFilter: String? = null
+    ): Response<BookingHistoryResponse>
 }

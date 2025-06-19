@@ -6,100 +6,148 @@
     android:layout_height="match_parent"
     android:background="@color/background_color">
 
-    <!-- Fixed Top Title Bar -->
-    <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/poppins_bold"
-        android:text="Scheduling"
-        android:textColor="@color/text_color"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <!-- Scrollable Content -->
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitle">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fillViewport="true">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/background_color">
+                android:orientation="vertical"
+                android:padding="24dp">
 
-                <!-- Calendar Container with White Background -->
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/calendarContainer"
-                    style="?attr/materialCardViewElevatedStyle"
+                <!-- Header Section -->
+                <LinearLayout
+                    android:id="@+id/header_section"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:backgroundTint="@color/background_color"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="32dp"
+                    android:gravity="center_vertical">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Scheduling"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:textColor="@color/text_color"
+                            android:textSize="24sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="View and manage bookings"
+                            android:fontFamily="@font/poppins_regular"
+                            android:textColor="@color/text_gray_color"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/calendar_icon_card"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:backgroundTint="@color/white"
+                        app:cardCornerRadius="24dp"
+                        app:cardElevation="2dp">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_calendar"
+                            app:tint="@color/primary_color" />
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
+
+                <!-- Calendar Container -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/calendarContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="32dp"
+                    android:backgroundTint="@color/white"
                     app:cardCornerRadius="12dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:cardElevation="2dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:padding="8dp">
+                        android:padding="16dp">
 
                         <!-- Month/Year Header -->
-                        <RelativeLayout
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="8dp">
+                            android:layout_marginBottom="16dp"
+                            android:gravity="center_vertical">
 
                             <!-- Previous Month Button -->
-                            <ImageButton
-                                android:id="@+id/btnPrevMonth"
-                                android:layout_width="32dp"
-                                android:layout_height="32dp"
-                                android:layout_alignParentStart="true"
-                                android:layout_centerVertical="true"
-                                android:background="?attr/selectableItemBackgroundBorderless"
-                                android:contentDescription="Previous Month"
-                                android:src="@drawable/chevron_left" />
+                            <com.google.android.material.card.MaterialCardView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:backgroundTint="@color/background_color"
+                                app:cardCornerRadius="20dp"
+                                app:cardElevation="0dp">
+
+                                <ImageButton
+                                    android:id="@+id/btnPrevMonth"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="?attr/selectableItemBackgroundBorderless"
+                                    android:contentDescription="Previous Month"
+                                    android:src="@drawable/chevron_left"
+                                    android:paddingLeft="7dp"
+                                    app:tint="@color/text_gray_color" />
+                            </com.google.android.material.card.MaterialCardView>
 
                             <!-- Month and Year Text -->
                             <TextView
                                 android:id="@+id/tvMonthYear"
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_centerInParent="true"
-                                android:fontFamily="@font/poppins_medium"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:gravity="center"
                                 android:textColor="@color/text_color"
-                                android:textSize="16sp"
+                                android:textSize="18sp"
                                 tools:text="July 2025" />
 
                             <!-- Next Month Button -->
-                            <ImageButton
-                                android:id="@+id/btnNextMonth"
-                                android:layout_width="32dp"
-                                android:layout_height="32dp"
-                                android:layout_alignParentEnd="true"
-                                android:layout_centerVertical="true"
-                                android:background="?attr/selectableItemBackgroundBorderless"
-                                android:contentDescription="Next Month"
-                                android:src="@drawable/chevron_right" />
-                        </RelativeLayout>
+                            <com.google.android.material.card.MaterialCardView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:backgroundTint="@color/background_color"
+                                app:cardCornerRadius="20dp"
+                                app:cardElevation="0dp">
+
+                                <ImageButton
+                                    android:id="@+id/btnNextMonth"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="?attr/selectableItemBackgroundBorderless"
+                                    android:contentDescription="Next Month"
+                                    android:src="@drawable/chevron_right"
+                                    app:tint="@color/text_gray_color" />
+                            </com.google.android.material.card.MaterialCardView>
+                        </LinearLayout>
 
                         <!-- Days of Week Header -->
                         <LinearLayout
@@ -107,14 +155,13 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
-                            android:paddingTop="8dp"
-                            android:paddingBottom="8dp">
+                            android:paddingBottom="12dp">
 
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:fontFamily="@font/poppins_regular"
+                                android:fontFamily="@font/poppins_medium"
                                 android:gravity="center"
                                 android:text="MON"
                                 android:textColor="@color/text_gray_color"
@@ -124,7 +171,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:fontFamily="@font/poppins_regular"
+                                android:fontFamily="@font/poppins_medium"
                                 android:gravity="center"
                                 android:text="TUE"
                                 android:textColor="@color/text_gray_color"
@@ -134,7 +181,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:fontFamily="@font/poppins_regular"
+                                android:fontFamily="@font/poppins_medium"
                                 android:gravity="center"
                                 android:text="WED"
                                 android:textColor="@color/text_gray_color"
@@ -144,7 +191,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:fontFamily="@font/poppins_regular"
+                                android:fontFamily="@font/poppins_medium"
                                 android:gravity="center"
                                 android:text="THU"
                                 android:textColor="@color/text_gray_color"
@@ -154,7 +201,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:fontFamily="@font/poppins_regular"
+                                android:fontFamily="@font/poppins_medium"
                                 android:gravity="center"
                                 android:text="FRI"
                                 android:textColor="@color/text_gray_color"
@@ -164,7 +211,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:fontFamily="@font/poppins_regular"
+                                android:fontFamily="@font/poppins_medium"
                                 android:gravity="center"
                                 android:text="SAT"
                                 android:textColor="@color/text_gray_color"
@@ -174,7 +221,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:fontFamily="@font/poppins_regular"
+                                android:fontFamily="@font/poppins_medium"
                                 android:gravity="center"
                                 android:text="SUN"
                                 android:textColor="@color/text_gray_color"
@@ -193,78 +240,79 @@
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- Upcoming Events Title with Sort Button -->
-                <RelativeLayout
+                <!-- Upcoming Events Section -->
+                <LinearLayout
                     android:id="@+id/eventsHeaderContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/calendarContainer">
+                    android:layout_marginBottom="16dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/tvUpcomingEvents"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_centerVertical="true"
-                        android:fontFamily="@font/poppins_semibold"
-                        android:text="Upcoming Event"
-                        android:textColor="@color/text_color"
-                        android:textSize="20sp" />
+                        android:layout_weight="1"
+                        android:orientation="vertical">
 
-                    <ImageButton
+                        <TextView
+                            android:id="@+id/tvUpcomingEvents"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:text="Upcoming Events"
+                            android:textColor="@color/text_color"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_regular"
+                            android:text="All scheduled activities"
+                            android:textColor="@color/text_gray_color"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <com.google.android.material.card.MaterialCardView
                         android:id="@+id/btnSortEvents"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:background="?attr/selectableItemBackgroundBorderless"
-                        android:contentDescription="Sort Events"
-                        android:src="@drawable/ic_plus"
-                        android:visibility="gone" />
-                </RelativeLayout>
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:backgroundTint="@color/white"
+                        android:visibility="gone"
+                        app:cardCornerRadius="20dp"
+                        app:cardElevation="2dp">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center"
+                            android:contentDescription="Sort Events"
+                            android:src="@drawable/ic_plus"
+                            app:tint="@color/primary_color" />
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
 
                 <!-- Events RecyclerView -->
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvEvents"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="16dp"
+                    android:layout_marginBottom="24dp"
                     android:nestedScrollingEnabled="false"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/eventsHeaderContainer"
                     tools:listitem="@layout/item_event" />
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/notFoundCard"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="16dp"
-                    android:visibility="invisible"
-                    app:cardBackgroundColor="@color/background_color"
-                    app:cardCornerRadius="12dp"
-                    app:cardElevation="0dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/eventsHeaderContainer">
-
                     <LinearLayout
+                        android:id="@+id/notFoundCard"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:visibility="gone"
                         android:gravity="center"
                         android:orientation="vertical">
 
                         <ImageView
-                            android:layout_width="200dp"
-                            android:layout_height="150dp"
+                            android:layout_width="150dp"
+                            android:layout_height="75dp"
+                            android:layout_marginBottom="24dp"
                             android:contentDescription="Calendar"
                             android:src="@drawable/il_calendar" />
 
@@ -272,26 +320,26 @@
                             android:id="@+id/tvError"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginBottom="8dp"
                             android:fontFamily="@font/poppins_semibold"
-                            android:text="No Event Found"
+                            android:text="No Events Found"
                             android:textColor="@color/text_color"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
+                            android:textSize="18sp" />
 
                         <TextView
                             android:id="@+id/tvErrorLoad"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="0dp"
-                            android:fontFamily="@font/poppins_light"
+                            android:fontFamily="@font/poppins_regular"
                             android:gravity="center"
+                            android:lineSpacingExtra="2dp"
                             android:text="No events are scheduled for this date. You can reserve this slot for your event or activity!"
                             android:textColor="@color/text_gray_color"
-                            android:textSize="12sp" />
+                            android:textSize="14sp" />
                     </LinearLayout>
-                </androidx.cardview.widget.CardView>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

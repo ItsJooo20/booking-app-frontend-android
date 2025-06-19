@@ -7,7 +7,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myappbooking.databinding.ItemFacilityBinding
 
-
 class FacilityAdapter(
     facilityList: List<Facility>,
     private val onItemClick: (Facility) -> Unit

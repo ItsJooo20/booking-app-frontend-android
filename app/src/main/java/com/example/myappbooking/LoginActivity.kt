@@ -2,7 +2,6 @@ package com.example.myappbooking
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -13,7 +12,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
 import retrofit2.Response
-import kotlin.math.log
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -35,6 +33,21 @@ class LoginActivity : AppCompatActivity() {
 //        }
 
         setupLogin()
+        signUp()
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        // This will close all activities and exit the app
+
+        finishAffinity()
+    }
+
+
+    private fun signUp() {
+        binding.tvSignUp.setOnClickListener{
+            startActivity(Intent(this, RegisterActivity::class.java))
+        }
     }
 
     private fun setupLogin() {
@@ -91,7 +104,7 @@ class LoginActivity : AppCompatActivity() {
 
         loginResponse.data?.let { data ->
             // Save token and user data
-            prefMan.saveAuthToken(data.remember_token ?: "")
+            prefMan.saveAuthToken(data.access_token ?: "")
             prefMan.saveUserData(
                 data.user.name ?: "",
                 data.user.email ?: "",
@@ -142,7 +155,17 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun showError(message: String) {
+        val email = binding.etEmail.text.toString()
+        val txt = "Email Verification!"
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+
+        if (message == "Email not verified") {
+            val intent = Intent(this, EmailVerificationActivity::class.java)
+            intent.putExtra("user_email", email)
+            intent.putExtra("tv_top", txt)
+            startActivity(intent)
+            finish()
+        }
     }
 
     private fun navigateToMainActivity() {

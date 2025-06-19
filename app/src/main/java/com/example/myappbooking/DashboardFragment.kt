@@ -1,5 +1,6 @@
 package com.example.myappbooking
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -41,10 +42,39 @@ class DashboardFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupGreetingSection()
-        setupCategoryRecyclerView()
+        setupCategoryAdapter()
+//        setupCategoryRecyclerView()
         setupSearchView()
         setupReserveButton()
         fetchCategories()
+    }
+
+    private fun setupCategoryAdapter() {
+        categoryAdapter = CategoryAdapter(categoryList) { selectedCategory ->
+            // Navigate to FacilityListActivity instead of Fragment
+            val intent = Intent(requireContext(), FacilityListActivity::class.java)
+            intent.putExtra("CATEGORY_ID", selectedCategory.id)
+            intent.putExtra("CATEGORY_NAME", selectedCategory.name)
+            startActivity(intent)
+//            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+        }
+
+        // Set adapter to RecyclerView
+//        binding.categoriesRecyclerview?.adapter = categoryAdapter
+        binding.categoriesRecyclerview.apply {
+            layoutManager = GridLayoutManager(requireContext(), 2)
+            adapter = categoryAdapter
+        }
+    }
+
+    private fun navigateToFacilityList(category: FacilityCategory) {
+        val intent = Intent(requireContext(), FacilityListActivity::class.java).apply {
+            putExtra("CATEGORY_ID", category.id)
+            putExtra("CATEGORY_NAME", category.name)
+            // Add more extras if needed
+            // putExtra("CATEGORY_DESCRIPTION", category.description)
+        }
+        startActivity(intent)
     }
 
     private fun setupGreetingSection() {
@@ -52,33 +82,34 @@ class DashboardFragment : Fragment() {
         binding.greetingText.text = "Hi, $prefMan!"
     }
 
-    private fun setupCategoryRecyclerView() {
-        categoryAdapter = CategoryAdapter(categoryList) { selectedCategory ->
-            // Panggil fungsi untuk navigasi
-            openFacilityListFragment(selectedCategory)
-        }
+//    private fun setupCategoryRecyclerView() {
+//        categoryAdapter = CategoryAdapter(categoryList) { selectedCategory ->
+//            // Panggil fungsi untuk navigasi
+//            openFacilityListFragment(selectedCategory)
+//
+//        }
+//
+//        binding.categoriesRecyclerview.apply {
+//            layoutManager = GridLayoutManager(requireContext(), 2)
+//            adapter = categoryAdapter
+//        }
+//    }
 
-        binding.categoriesRecyclerview.apply {
-            layoutManager = GridLayoutManager(requireContext(), 2)
-            adapter = categoryAdapter
-        }
-    }
-
-    private fun openFacilityListFragment(category: FacilityCategory) {
-        val bundle = Bundle().apply {
-            putInt("category_id", category.id)
-            putString("category_name", category.name)
-        }
-
-        val facilityListFragment = FacilityListFragment().apply {
-            arguments = bundle
-        }
-
-        requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, facilityListFragment)
-            .addToBackStack(null)
-            .commit()
-    }
+//    private fun openFacilityListFragment(category: FacilityCategory) {
+//        val bundle = Bundle().apply {
+//            putInt("category_id", category.id)
+//            putString("category_name", category.name)
+//        }
+//
+//        val facilityListFragment = FacilityListFragment().apply {
+//            arguments = bundle
+//        }
+//
+//        requireActivity().supportFragmentManager.beginTransaction()
+//            .replace(R.id.fragment_container, facilityListFragment)
+//            .addToBackStack(null)
+//            .commit()
+//    }
 
     private fun NavigateToReservationFragment() {
         val reservationFragment = ReservationFragment()

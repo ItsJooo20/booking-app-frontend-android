@@ -2,6 +2,7 @@ package com.example.myappbooking
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,7 +12,10 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.myappbooking.databinding.FragmentReservationBinding
-import com.skydoves.powerspinner.OnSpinnerItemSelectedListener
+import com.google.android.material.datepicker.CalendarConstraints
+import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.android.material.timepicker.MaterialTimePicker
+import com.google.android.material.timepicker.TimeFormat
 import kotlinx.coroutines.launch
 import org.json.JSONObject
 import retrofit2.Response
@@ -132,10 +136,8 @@ class ReservationFragment : Fragment() {
     private fun setupDateTimeSelectors() {
         // Start Date
         binding.startDateLayout.setOnClickListener {
-            showDatePicker { year, month, day ->
-                calendar.set(Calendar.YEAR, year)
-                calendar.set(Calendar.MONTH, month)
-                calendar.set(Calendar.DAY_OF_MONTH, day)
+            showMaterialDatePicker { selectedDate ->
+                calendar.timeInMillis = selectedDate
                 binding.startDateText.text = dateFormat.format(calendar.time)
                 startDate = binding.startDateText.text.toString()
             }
@@ -143,8 +145,8 @@ class ReservationFragment : Fragment() {
 
         // Start Time
         binding.startTimeLayout.setOnClickListener {
-            showTimePicker { hourOfDay, minute ->
-                calendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
+            showMaterialTimePicker { hour, minute ->
+                calendar.set(Calendar.HOUR_OF_DAY, hour)
                 calendar.set(Calendar.MINUTE, minute)
                 binding.startTimeText.text = timeFormat.format(calendar.time)
                 startTime = binding.startTimeText.text.toString()
@@ -153,10 +155,8 @@ class ReservationFragment : Fragment() {
 
         // End Date
         binding.endDateLayout.setOnClickListener {
-            showDatePicker { year, month, day ->
-                calendar.set(Calendar.YEAR, year)
-                calendar.set(Calendar.MONTH, month)
-                calendar.set(Calendar.DAY_OF_MONTH, day)
+            showMaterialDatePicker { selectedDate ->
+                calendar.timeInMillis = selectedDate
                 binding.endDateText.text = dateFormat.format(calendar.time)
                 endDate = binding.endDateText.text.toString()
             }
@@ -164,8 +164,8 @@ class ReservationFragment : Fragment() {
 
         // End Time
         binding.endTimeLayout.setOnClickListener {
-            showTimePicker { hourOfDay, minute ->
-                calendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
+            showMaterialTimePicker { hour, minute ->
+                calendar.set(Calendar.HOUR_OF_DAY, hour)
                 calendar.set(Calendar.MINUTE, minute)
                 binding.endTimeText.text = timeFormat.format(calendar.time)
                 endTime = binding.endTimeText.text.toString()
@@ -173,34 +173,40 @@ class ReservationFragment : Fragment() {
         }
     }
 
-    private fun showDatePicker(onDateSet: (year: Int, month: Int, day: Int) -> Unit) {
-        val year = calendar.get(Calendar.YEAR)
-        val month = calendar.get(Calendar.MONTH)
-        val day = calendar.get(Calendar.DAY_OF_MONTH)
+    private fun showMaterialDatePicker(onDateSelected: (selectedDate: Long) -> Unit) {
+        val datePicker = MaterialDatePicker.Builder.datePicker()
+            .setTitleText("Select date")
+            .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
+            .setCalendarConstraints(
+                CalendarConstraints.Builder()
+                    .setStart(System.currentTimeMillis())
+                    .build()
+            )
+            .build()
 
-        DatePickerDialog(
-            requireContext(),
-            { _, selectedYear, selectedMonth, selectedDay ->
-                onDateSet(selectedYear, selectedMonth, selectedDay)
-            },
-            year, month, day
-        ).apply {
-            datePicker.minDate = System.currentTimeMillis() - 1000
-            show()
+        datePicker.addOnPositiveButtonClickListener { selection ->
+            onDateSelected(selection)
         }
+
+        datePicker.show(parentFragmentManager, "DATE_PICKER")
     }
 
-    private fun showTimePicker(onTimeSet: (hourOfDay: Int, minute: Int) -> Unit) {
-        val hour = calendar.get(Calendar.HOUR_OF_DAY)
-        val minute = calendar.get(Calendar.MINUTE)
+    private fun showMaterialTimePicker(onTimeSelected: (hour: Int, minute: Int) -> Unit) {
+        val currentHour = calendar.get(Calendar.HOUR_OF_DAY)
+        val currentMinute = calendar.get(Calendar.MINUTE)
 
-        TimePickerDialog(
-            requireContext(),
-            { _, hourOfDay, selectedMinute ->
-                onTimeSet(hourOfDay, selectedMinute)
-            },
-            hour, minute, true
-        ).show()
+        val timePicker = MaterialTimePicker.Builder()
+            .setTimeFormat(TimeFormat.CLOCK_24H)
+            .setHour(currentHour)
+            .setMinute(currentMinute)
+            .setTitleText("Select time")
+            .build()
+
+        timePicker.addOnPositiveButtonClickListener {
+            onTimeSelected(timePicker.hour, timePicker.minute)
+        }
+
+        timePicker.show(parentFragmentManager, "TIME_PICKER")
     }
 
     private fun setupPowerSpinners() {
@@ -523,7 +529,8 @@ class ReservationFragment : Fragment() {
             // Clear all selections after successful submission
             clearAllSelections()
             // Pop back to previous fragment
-            requireActivity().supportFragmentManager.popBackStack()
+            navigateToSuccessActivity()
+//            requireActivity().supportFragmentManager.popBackStack()
         } else {
             val errorBody = response.errorBody()?.string()
             val errorMessage = if (!errorBody.isNullOrEmpty()) {
@@ -536,6 +543,15 @@ class ReservationFragment : Fragment() {
                 "Failed to create booking"
             }
             Toast.makeText(requireContext(), "End date and time must be after start date and time!", Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun navigateToSuccessActivity() {
+        if (isAdded && activity != null) {
+            startActivity(Intent(requireContext(), SuccessSentActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            })
+            requireActivity().finish()
         }
     }
 
