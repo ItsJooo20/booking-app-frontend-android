@@ -4,7 +4,7 @@ data class FacilityCategory(
     val id: Int,
     val name: String,
 //    val path_img: String?, // Added path_img field for icon image
-    val facilities_count: Int
+//    val facilities_count: Int
 )
 
 data class CategoryResponse(
@@ -16,7 +16,7 @@ data class Facility(
     val name: String,
     val description: String?,
     val category_id: Int,
-    val items_count: Int,
+//    val items_count: Int,
     val category: FacilityCategory?
 )
 

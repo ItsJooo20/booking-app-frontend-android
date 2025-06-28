@@ -45,10 +45,11 @@ data class BookingHistoryResponse(
 )
 
 data class BookingHistoryItem(
-    val id: Int,
+//    val id: Int,
+    val booking_id: Int,
 //    val facility_name: String,
     val item_code: String,
-    val item_notes: String?,
+//    val item_notes: String?,
     val start_datetime: String,
     val end_datetime: String,
     val purpose: String,
@@ -74,4 +75,19 @@ data class BookingHistoryItem(
     }
 }
 
-// Nested model for facility item
+data class EquipmentReturnResponse(
+    val message: String,
+    val data: EquipmentReturn?
+)
+
+data class EquipmentReturn(
+    val id: Int,
+    val booking_id: Int,
+    val return_date: String,
+    val return_photo_path: String,
+    val user_condition: String,
+    val condition_status: String,
+    val notes: String?,
+    val created_at: String,
+    val updated_at: String
+)

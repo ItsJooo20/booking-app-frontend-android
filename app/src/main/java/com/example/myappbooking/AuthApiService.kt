@@ -1,11 +1,16 @@
 package com.example.myappbooking
 
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
+import retrofit2.http.Multipart
 import retrofit2.http.POST
+import retrofit2.http.Part
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface AuthApiService {
@@ -51,4 +56,14 @@ interface AuthApiService {
         @Query("status") status: String? = null,
         @Query("time_filter") timeFilter: String? = null
     ): Response<BookingHistoryResponse>
+
+    @Multipart
+    @POST("bookings/{booking}/return")
+    suspend fun submitReturn(
+        @Header("Authorization") token: String,
+        @Path("booking") bookingId: Int,
+        @Part returnPhoto: MultipartBody.Part,
+        @Part("user_condition") userCondition: RequestBody,
+        @Part("notes") notes: RequestBody
+    ): Response<EquipmentReturnResponse>
 }

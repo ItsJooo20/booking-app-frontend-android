@@ -7,17 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 object ApiClient {
-    // Define a fallback URL in case BuildConfig can't be accessed
-    private val BASE_URL = "http://192.168.33.17:8000/api/v1/"
-//        try {
-//        // Try to access BuildConfig first
-//        Class.forName("com.example.myappbooking.BuildConfig")
-//            .getField("BASE_URL")
-//            .get(null) as String
-//    } catch (e: Exception) {
-//        // Fallback if BuildConfig isn't available
-//        "https://dc8b-103-178-23-252.ngrok-free.app/api/"  // Default to dev URL as fallback
-//    }
+    private val BASE_URL = "http://192.168.33.44:8000/api/v1/"
 
     private val loggingInterceptor = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY

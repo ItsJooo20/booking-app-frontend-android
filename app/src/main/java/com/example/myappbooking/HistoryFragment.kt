@@ -1,5 +1,7 @@
 package com.example.myappbooking
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -22,6 +24,10 @@ class HistoryFragment : Fragment() {
     private var currentStatusFilter: String? = null
     private var currentTimeFilter: String? = null
 
+    companion object {
+        private const val RETURN_REQUEST_CODE = 1001
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -41,16 +47,33 @@ class HistoryFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        adapter = BookingHistoryAdapter { filteredCount ->
-            // Callback from adapter to update empty state
-            updateEmptyState(filteredCount)
-        }
+        adapter = BookingHistoryAdapter(
+            onFilteredCountChanged = { filteredCount ->
+                // Callback from adapter to update empty state
+                updateEmptyState(filteredCount)
+            },
+            onReturnClicked = { booking ->
+                // Handle return button click
+                openReturnActivity(booking)
+            }
+        )
         binding.rvEvents.adapter = adapter
         binding.rvEvents.layoutManager = LinearLayoutManager(requireContext())
     }
 
     private fun setupChips() {
-        // Status chips
+
+        binding.chipReturnsubmiited.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                currentStatusFilter = "return submitted"
+                clearOtherStatusChips(binding.chipReturnsubmiited)
+                applyFilters()
+            } else if (currentStatusFilter == "return submitted") {
+                currentStatusFilter = null
+                applyFilters()
+            }
+        }
+
         binding.chipPending.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 currentStatusFilter = "pending"
@@ -106,6 +129,18 @@ class HistoryFragment : Fragment() {
             }
         }
 
+        // Add needs return chip
+        binding.chipNeedsreturn.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                currentStatusFilter = "needs return"
+                clearOtherStatusChips(binding.chipNeedsreturn)
+                applyFilters()
+            } else if (currentStatusFilter == "needs return") {
+                currentStatusFilter = null
+                applyFilters()
+            }
+        }
+
         // Time filter chips
         binding.chipToday.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
@@ -147,7 +182,9 @@ class HistoryFragment : Fragment() {
             binding.chipApproved,
             binding.chipRejected,
             binding.chipCompleted,
-            binding.chipCancelled
+            binding.chipCancelled,
+            binding.chipNeedsreturn,
+            binding.chipReturnsubmiited,
         ).forEach { chip ->
             if (chip != selectedChip) {
                 chip.isChecked = false
@@ -170,6 +207,28 @@ class HistoryFragment : Fragment() {
     private fun applyFilters() {
         // Apply both filters together to ensure they work in combination
         adapter.applyBothFilters(currentStatusFilter, currentTimeFilter)
+    }
+
+    private fun openReturnActivity(booking: BookingHistoryItem) {
+        val intent = Intent(requireContext(), ReturnItemActivity::class.java).apply {
+            putExtra(ReturnItemActivity.EXTRA_BOOKING_ID, booking.booking_id)
+            putExtra(ReturnItemActivity.EXTRA_ITEM_CODE, booking.item_code)
+//            putExtra(ReturnItemActivity.EXTRA_ITEM_NAME, booking.facility_name ?: "Equipment")
+            putExtra(ReturnItemActivity.EXTRA_START_DATE, booking.start_datetime)
+            putExtra(ReturnItemActivity.EXTRA_END_DATE, booking.end_datetime)
+            // Add item photo if available in your booking model
+            // putExtra(ReturnItemActivity.EXTRA_ITEM_PHOTO, booking.item_photo)
+        }
+        startActivityForResult(intent, RETURN_REQUEST_CODE)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == RETURN_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            // Refresh the booking history after successful return
+            loadBookingHistory()
+            showSuccess("Return submitted successfully!")
+        }
     }
 
     private fun loadBookingHistory() {
@@ -231,6 +290,10 @@ class HistoryFragment : Fragment() {
     }
 
     private fun showError(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun showSuccess(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 }

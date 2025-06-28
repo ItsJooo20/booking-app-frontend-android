@@ -120,6 +120,22 @@
                                 app:chipSpacingHorizontal="6dp">
 
                                 <com.google.android.material.chip.Chip
+                                    android:id="@+id/chip_returnsubmiited"
+                                    style="@style/Widget.Material3.Chip.Filter"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:checked="false"
+                                    android:text="Return Submitted" />
+
+                                <com.google.android.material.chip.Chip
+                                    android:id="@+id/chip_needsreturn"
+                                    style="@style/Widget.Material3.Chip.Filter"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:checked="false"
+                                    android:text="Needs Return" />
+
+                                <com.google.android.material.chip.Chip
                                     android:id="@+id/chip_pending"
                                     style="@style/Widget.Material3.Chip.Filter"
                                     android:layout_width="wrap_content"
