@@ -15,7 +15,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!-- Full-width background image -->
         <ImageView
             android:id="@+id/category_image"
             android:layout_width="match_parent"
@@ -28,7 +27,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
 
-        <!-- Dark overlay for better text visibility -->
         <View
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -38,7 +36,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
 
-        <!-- Centered text -->
         <TextView
             android:id="@+id/category_title"
             android:layout_width="wrap_content"

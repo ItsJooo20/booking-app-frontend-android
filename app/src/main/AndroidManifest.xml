@@ -19,6 +19,7 @@
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
+        android:enableOnBackInvokedCallback="true"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@drawable/ic_door"
         android:label="BookingApp by Joo"
@@ -27,45 +28,59 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyAppBooking"
         android:usesCleartextTraffic="true"
-        tools:targetApi="31">
+        tools:targetApi="tiramisu">
         <activity
-            android:name=".ReturnItemActivity"
+            android:name=".ui.activity.ProfileImageActivity"
+            android:exported="false" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <activity
+            android:name=".ui.activity.ReturnItemActivity"
             android:exported="false" />
         <activity
-            android:name=".SuccessSentActivity"
+            android:name=".ui.activity.SuccessSentActivity"
             android:exported="false" />
         <activity
-            android:name=".BookingDetailActivity"
+            android:name=".ui.activity.BookingDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".ChangePhoneNumberActivity"
+            android:name=".ui.activity.ChangePhoneNumberActivity"
             android:exported="false" />
         <activity
-            android:name=".ChangePasswordActivity"
+            android:name=".ui.activity.ChangePasswordActivity"
             android:exported="false" />
         <activity
-            android:name=".ReservationByItemActivity"
+            android:name=".ui.activity.ReservationByItemActivity"
             android:exported="false" />
         <activity
-            android:name=".ItemDetailActivity"
+            android:name=".ui.activity.ItemDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".EmailVerificationActivity"
+            android:name=".ui.activity.EmailVerificationActivity"
             android:exported="false" />
         <activity
-            android:name=".RegisterActivity"
+            android:name=".ui.activity.RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".ItemListActivity"
+            android:name=".ui.activity.ItemListActivity"
             android:exported="false" />
         <activity
-            android:name=".FacilityListActivity"
+            android:name=".ui.activity.FacilityListActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.activity.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".ui.activity.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <!-- Internal app storage -->
+    <files-path name="my_images" path="returns/" />
+    <cache-path name="my_cache_images" path="/" />
+
+    <!-- External storage (optional) -->
+    <external-files-path name="external_files" path="Pictures/" />
+    <external-cache-path name="external_cache" path="." />
+
+    <!-- For API 29+ scoped storage -->
+    <external-path name="external" path="." />
+</paths>

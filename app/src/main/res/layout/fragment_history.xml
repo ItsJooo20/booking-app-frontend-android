@@ -6,15 +6,14 @@
     android:layout_height="match_parent"
     android:background="@color/background_color">
 
-    <!-- Scrollable Content -->
-<!--    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout-->
-<!--        android:id="@+id/swipeRefreshLayout"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent">-->
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -60,21 +59,21 @@
                             android:textSize="14sp" />
                     </LinearLayout>
 
-                    <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/history_icon_card"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:backgroundTint="@color/white"
-                        app:cardCornerRadius="24dp"
-                        app:cardElevation="2dp">
+<!--                    <com.google.android.material.card.MaterialCardView-->
+<!--                        android:id="@+id/history_icon_card"-->
+<!--                        android:layout_width="48dp"-->
+<!--                        android:layout_height="48dp"-->
+<!--                        android:backgroundTint="@color/white"-->
+<!--                        app:cardCornerRadius="24dp"-->
+<!--                        app:cardElevation="2dp">-->
 
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/ic_search"
-                            app:tint="@color/primary_color" />
-                    </com.google.android.material.card.MaterialCardView>
+<!--                        <ImageView-->
+<!--                            android:layout_width="24dp"-->
+<!--                            android:layout_height="24dp"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:src="@drawable/ic_search"-->
+<!--                            app:tint="@color/primary_color" />-->
+<!--                    </com.google.android.material.card.MaterialCardView>-->
                 </LinearLayout>
 
                 <!-- Filter Container -->
@@ -319,6 +318,7 @@
 
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
-<!--    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>-->
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

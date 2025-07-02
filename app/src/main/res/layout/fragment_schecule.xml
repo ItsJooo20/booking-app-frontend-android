@@ -59,21 +59,21 @@
                             android:textSize="14sp" />
                     </LinearLayout>
 
-                    <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/calendar_icon_card"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:backgroundTint="@color/white"
-                        app:cardCornerRadius="24dp"
-                        app:cardElevation="2dp">
+<!--                    <com.google.android.material.card.MaterialCardView-->
+<!--                        android:id="@+id/calendar_icon_card"-->
+<!--                        android:layout_width="48dp"-->
+<!--                        android:layout_height="48dp"-->
+<!--                        android:backgroundTint="@color/white"-->
+<!--                        app:cardCornerRadius="24dp"-->
+<!--                        app:cardElevation="2dp">-->
 
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/ic_calendar"
-                            app:tint="@color/primary_color" />
-                    </com.google.android.material.card.MaterialCardView>
+<!--                        <ImageView-->
+<!--                            android:layout_width="24dp"-->
+<!--                            android:layout_height="24dp"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:src="@drawable/ic_calendar"-->
+<!--                            app:tint="@color/primary_color" />-->
+<!--                    </com.google.android.material.card.MaterialCardView>-->
                 </LinearLayout>
 
                 <!-- Calendar Container -->
