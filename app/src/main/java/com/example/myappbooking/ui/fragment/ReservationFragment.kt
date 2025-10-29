@@ -72,7 +72,15 @@ class ReservationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+//        NetworkUtils.attach(requireActivity())
+//        NetworkUtils.init(requireActivity())
+//        MyApp.networkMonitor.observe(viewLifecycleOwner) { connected ->
+//            if (!connected) {
+//                NetworkUtils.showNoInternetDialog()
+//            } else {
+//                NetworkUtils.dismissDialog()
+//            }
+//        }
         // Restore saved instance state if available
         if (savedInstanceState != null) {
             restoreState(savedInstanceState)

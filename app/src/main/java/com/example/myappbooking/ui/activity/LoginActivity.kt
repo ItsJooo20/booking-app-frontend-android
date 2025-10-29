@@ -11,6 +11,7 @@ import com.example.myappbooking.api.ApiClient
 import com.example.myappbooking.data.LoginRequest
 import com.example.myappbooking.data.LoginResponse
 import com.example.myappbooking.databinding.ActivityLoginBinding
+import com.example.myappbooking.utility.NetworkUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -25,6 +26,8 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        NetworkUtils.init(this)
+
         // Check if user is already logged in
         if (SharedPreferencesManager.getInstance(this).isLoggedIn()) {
             redirectBasedOnRole()
@@ -38,6 +41,11 @@ class LoginActivity : AppCompatActivity() {
 
         setupLogin()
         signUp()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        NetworkUtils.cleanup()
     }
 
     override fun onBackPressed() {
@@ -110,6 +118,7 @@ class LoginActivity : AppCompatActivity() {
             // Save token and user data
             prefMan.saveAuthToken(data.access_token ?: "")
             prefMan.saveUserData(
+                data.user.id ?: 0,
                 data.user.name ?: "",
                 data.user.email ?: "",
                 data.user.role ?: "",
@@ -143,7 +152,7 @@ class LoginActivity : AppCompatActivity() {
     private fun redirectBasedOnRole() {
         val role = SharedPreferencesManager.getInstance(this).getUserRole()
         when (role) {
-            "user", "admin" -> navigateToMainActivity()
+            "user", "admin", "superadmin" -> navigateToMainActivity()
             else -> {
                 Toast.makeText(this, "Unknown user role", Toast.LENGTH_SHORT).show()
                 navigateToMainActivity()

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myappbooking.databinding.ActivitySuccessSentBinding
+import com.example.myappbooking.utility.NetworkUtils
 
 class SuccessSentActivity : AppCompatActivity() {
 
@@ -16,8 +17,15 @@ class SuccessSentActivity : AppCompatActivity() {
         binding = ActivitySuccessSentBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        NetworkUtils.init(this)
+
         setup()
         navigateToDetail()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        NetworkUtils.cleanup()
     }
 
     private fun navigateToDetail() {

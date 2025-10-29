@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Main Content -->
+    <!-- Konten Utama -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="#F5F5F5">
 
-        <!-- Toolbar Header -->
+        <!-- Toolbar -->
         <LinearLayout
             android:id="@+id/headerLayout"
             android:layout_width="match_parent"
@@ -40,14 +39,13 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Return Item"
+                android:text="Pengembalian Barang"
                 android:textSize="18sp"
                 android:textColor="@color/text_color"
                 android:fontFamily="@font/poppins_semibold" />
-
         </LinearLayout>
 
-        <!-- ScrollView Content -->
+        <!-- Scroll -->
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -59,14 +57,13 @@
                 android:orientation="vertical"
                 android:padding="24dp">
 
-                <!-- Photo Section -->
+                <!-- Foto Pengembalian -->
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     app:cardCornerRadius="12dp"
-                    app:cardElevation="4dp"
-                    app:strokeWidth="0dp">
+                    app:cardElevation="4dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -78,7 +75,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="12dp"
-                            android:text="Return Photo *"
+                            android:text="Foto Pengembalian *"
                             android:textColor="@android:color/black"
                             android:textSize="16sp"
                             android:textStyle="bold" />
@@ -87,11 +84,11 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="16dp"
-                            android:text="Please take a clear photo of the item being returned"
+                            android:text="Silakan ambil foto jelas barang yang dikembalikan"
                             android:textColor="@android:color/darker_gray"
                             android:textSize="14sp" />
 
-                        <!-- Take Photo Card -->
+                        <!-- Ambil Foto -->
                         <com.google.android.material.card.MaterialCardView
                             android:id="@+id/cardTakePhoto"
                             android:layout_width="match_parent"
@@ -124,7 +121,7 @@
                                         android:id="@+id/btnTakePhoto"
                                         android:layout_width="wrap_content"
                                         android:layout_height="50dp"
-                                        android:text="Camera"
+                                        android:text="Kamera"
                                         android:textColor="@color/text_color"
                                         android:textSize="14sp"
                                         app:backgroundTint="@color/white"
@@ -140,7 +137,7 @@
                                         android:id="@+id/btnGallery"
                                         android:layout_width="wrap_content"
                                         android:layout_height="50dp"
-                                        android:text="Gallery"
+                                        android:text="Galeri"
                                         android:textColor="@color/text_color"
                                         android:textSize="14sp"
                                         app:backgroundTint="@color/white"
@@ -150,14 +147,11 @@
                                         app:cornerRadius="12dp"
                                         android:elevation="2dp"
                                         app:rippleColor="@color/accent_color" />
-
                                 </LinearLayout>
-
                             </LinearLayout>
-
                         </com.google.android.material.card.MaterialCardView>
 
-                        <!-- Photo Preview Card -->
+                        <!-- Preview Foto -->
                         <com.google.android.material.card.MaterialCardView
                             android:id="@+id/cardPhotoPreview"
                             android:layout_width="match_parent"
@@ -194,25 +188,19 @@
                                         android:background="@color/white"
                                         android:src="@drawable/ic_delete"
                                         app:tint="@color/text_color" />
-
                                 </com.google.android.material.card.MaterialCardView>
-
                             </FrameLayout>
-
                         </com.google.android.material.card.MaterialCardView>
-
                     </LinearLayout>
-
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- Condition Section -->
+                <!-- Kondisi -->
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     app:cardCornerRadius="12dp"
-                    app:cardElevation="4dp"
-                    app:strokeWidth="0dp">
+                    app:cardElevation="4dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -224,7 +212,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="12dp"
-                            android:text="Item Condition *"
+                            android:text="Kondisi Barang *"
                             android:textColor="@android:color/black"
                             android:textSize="16sp"
                             android:textStyle="bold" />
@@ -241,7 +229,7 @@
                             android:id="@+id/tilNotes"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Additional Notes"
+                            android:hint="Catatan Tambahan"
                             app:counterEnabled="true"
                             app:counterMaxLength="1000"
                             app:boxStrokeColor="@color/primary_color"
@@ -256,19 +244,16 @@
                                 android:maxLength="1000"
                                 android:minLines="3"
                                 android:maxLines="5" />
-
                         </com.google.android.material.textfield.TextInputLayout>
-
                     </LinearLayout>
-
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- Submit Button -->
+                <!-- Tombol Submit -->
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnSubmitReturn"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
-                    android:text="Submit Return"
+                    android:text="Kirim Pengembalian"
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     app:backgroundTint="@color/primary_color"
@@ -282,7 +267,7 @@
         </ScrollView>
     </LinearLayout>
 
-    <!-- Loading Overlay - This will be in front -->
+    <!-- Loading -->
     <FrameLayout
         android:id="@+id/loadingOverlay"
         android:layout_width="match_parent"

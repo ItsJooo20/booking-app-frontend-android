@@ -1,5 +1,6 @@
 package com.example.myappbooking.api
 
+import com.example.myappbooking.data.ApiResponse
 import com.example.myappbooking.data.BaseResponse
 import com.example.myappbooking.data.BookingDetailResponse
 import com.example.myappbooking.data.BookingHistoryResponse
@@ -19,6 +20,7 @@ import com.example.myappbooking.data.LoginResponse
 import com.example.myappbooking.data.LogoutResponse
 import com.example.myappbooking.data.RegisterRequest
 import com.example.myappbooking.data.RegisterResponse
+import com.example.myappbooking.data.TokenRequest
 import com.example.myappbooking.data.VerificationResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -34,6 +36,11 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface AuthApiService {
+    @POST("notifications/register-token")
+    suspend fun registerToken(
+        @Body request: TokenRequest
+    ): Response<ApiResponse>
+
     @POST("register")
     suspend fun register(@Body request: RegisterRequest): Response<RegisterResponse>
 

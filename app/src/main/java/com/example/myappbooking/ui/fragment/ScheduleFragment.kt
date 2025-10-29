@@ -18,6 +18,7 @@ import com.example.myappbooking.adapter.EventsAdapter
 import com.example.myappbooking.api.ApiClient
 import com.example.myappbooking.data.BookingData
 import com.example.myappbooking.databinding.FragmentScheculeBinding
+import com.example.myappbooking.utility.NetworkUtils
 import com.kizitonwose.calendar.core.*
 import com.kizitonwose.calendar.view.MonthDayBinder
 import com.kizitonwose.calendar.view.ViewContainer

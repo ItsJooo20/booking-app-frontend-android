@@ -8,6 +8,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.myappbooking.api.ApiClient
 import com.example.myappbooking.data.ChangePhoneRequest
 import com.example.myappbooking.databinding.ActivityChangePhoneNumberBinding
+import com.example.myappbooking.utility.NetworkUtils
 import com.example.myappbooking.utility.SharedPreferencesManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.launch
@@ -23,8 +24,15 @@ class ChangePhoneNumberActivity : AppCompatActivity() {
         binding = ActivityChangePhoneNumberBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        NetworkUtils.init(this)
+
         setupClickListeners()
         loadCurrentPhoneNumber()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        NetworkUtils.cleanup()
     }
 
     private fun setupClickListeners() {
@@ -51,7 +59,7 @@ class ChangePhoneNumberActivity : AppCompatActivity() {
         val phone = prefman.getUserPhone()
 
         if (phone.isNullOrEmpty()) {
-            binding.tvCurrentPhone.text = "Add your phone number"
+            binding.tvCurrentPhone.text = "Masukkan nomor whatsapp Anda"
         } else {
             binding.tvCurrentPhone.text = phone
         }
@@ -67,19 +75,19 @@ class ChangePhoneNumberActivity : AppCompatActivity() {
 
         // Check if new phone is empty
         if (newPhone.isEmpty()) {
-            binding.tilNewPhone.error = "Please enter a phone number"
+            binding.tilNewPhone.error = "Masukkan Nomor Whatsapp"
             return false
         }
 
         // Validate phone number format (basic validation)
         if (!isValidPhoneNumber(newPhone)) {
-            binding.tilNewPhone.error = "Please enter a valid phone number"
+            binding.tilNewPhone.error = "Mohon masukkan nomor valid"
             return false
         }
 
         // Check if current password is empty
         if (password.isEmpty()) {
-            binding.tilPassword.error = "Please enter your current password"
+            binding.tilPassword.error = "Mohon masukkan password Anda"
             return false
         }
 
@@ -94,12 +102,12 @@ class ChangePhoneNumberActivity : AppCompatActivity() {
 
     private fun showConfirmationDialog() {
         MaterialAlertDialogBuilder(this)
-            .setTitle("Update Phone Number")
-            .setMessage("Are you sure you want to change your phone number?")
-            .setPositiveButton("Confirm") { _, _ ->
+            .setTitle("Update Nomor Whatsapp")
+            .setMessage("Apakah Anda yakin ingin mengubah nomor Whatsapp Anda?")
+            .setPositiveButton("Ya") { _, _ ->
                 updatePhoneNumber()
             }
-            .setNegativeButton("Cancel", null)
+            .setNegativeButton("Batal", null)
             .setCancelable(false)
             .show()
     }
@@ -117,7 +125,7 @@ class ChangePhoneNumberActivity : AppCompatActivity() {
 
                 if (token.isNullOrEmpty()) {
                     showLoading(false)
-                    showError("Authentication token not found. Please login again.")
+                    showError("Token tidak ditemukan. Dimohon Login kembali.")
                     return@launch
                 }
 
@@ -132,7 +140,7 @@ class ChangePhoneNumberActivity : AppCompatActivity() {
                 showLoading(false)
 
                 if (response.isSuccessful) {
-                    showSuccessDialog("Your phone number has been updated successfully.")
+                    showSuccessDialog("Nomor Whatsapp Anda berhasil di update.")
                     prefMan.saveUpdatedPhone(newPhone)
                     loadCurrentPhoneNumber()
                 } else {
@@ -141,13 +149,13 @@ class ChangePhoneNumberActivity : AppCompatActivity() {
                         try {
                             JSONObject(errorBody).getString("message")
                         } catch (e: Exception) {
-                            "Failed to update phone number"
+                            "Gagal memperbarui nomor Whatsapp"
                         }
                     } else {
                         when (response.code()) {
-                            401 -> "Current password is incorrect"
-                            422 -> "This phone number is already in use by another account"
-                            else -> "Failed to update phone number"
+                            401 -> "Password yang Anda masukkan salah!"
+                            422 -> "Nomor ini sudah digunakan oleh orang dengan akun yg lain"
+                            else -> "Gagal memperbarui nomor Whatsapp"
                         }
                     }
                     showError(errorMessage)
@@ -161,7 +169,7 @@ class ChangePhoneNumberActivity : AppCompatActivity() {
 
     private fun showSuccessDialog(message: String) {
         MaterialAlertDialogBuilder(this)
-            .setTitle("Success")
+            .setTitle("Sukses!")
             .setMessage(message)
             .setPositiveButton("OK") { _, _ ->
                 setResult(Activity.RESULT_OK)

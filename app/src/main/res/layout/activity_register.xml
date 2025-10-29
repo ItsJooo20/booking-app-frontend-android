@@ -1,305 +1,283 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_color"
-    tools:context=".ui.activity.RegisterActivity">
+    android:background="@color/background_color">
 
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/background_color"
-    android:fillViewport="true">
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="24dp">
+        android:layout_height="match_parent"
+        android:background="@color/background_color"
+        android:fillViewport="true">
 
-        <!-- Header Section -->
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="32dp"
-            android:layout_marginBottom="48dp"
-            android:gravity="center"
-            android:layout_gravity="center">
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_door"
-                app:tint="@color/primary_color"
-                android:layout_marginRight="8dp"/>
-
-            <TextView
-                android:id="@+id/tvAppName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="BookingApp"
-                android:textColor="@color/primary_color"
-                android:textSize="18sp"
-                android:fontFamily="@font/poppins_semibold" />
-
-        </LinearLayout>
-
-        <!-- Registration Form -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@drawable/form_background"
-            android:padding="24dp"
-            android:elevation="2dp">
+            android:padding="24dp">
 
-            <TextView
+            <!-- Header -->
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Register"
-                android:textColor="@color/text_color"
-                android:textSize="28sp"
-                android:fontFamily="@font/poppins_bold"
-                android:layout_gravity="center"/>
+                android:orientation="horizontal"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="48dp"
+                android:gravity="center"
+                android:layout_gravity="center">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Create an account to continue!"
-                android:textColor="@color/text_gray_color"
-                android:textSize="14sp"
-                android:fontFamily="@font/poppins_regular"
-                android:layout_marginBottom="32dp"
-                android:layout_gravity="center"/>
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_door"
+                    app:tint="@color/primary_color"
+                    android:layout_marginRight="8dp"/>
 
-            <!-- Name Input -->
-            <com.google.android.material.textfield.TextInputLayout
+                <TextView
+                    android:id="@+id/tvAppName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="BookingApp"
+                    android:textColor="@color/primary_color"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/poppins_semibold" />
+            </LinearLayout>
+
+            <!-- Form Registrasi -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:hint="Full Name"
-                app:boxStrokeColor="@color/primary_color"
-                app:hintTextColor="@color/text_gray_color"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                android:orientation="vertical"
+                android:background="@drawable/form_background"
+                android:padding="24dp"
+                android:elevation="2dp">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etName"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Daftar"
+                    android:textColor="@color/text_color"
+                    android:textSize="28sp"
+                    android:fontFamily="@font/poppins_bold"
+                    android:layout_gravity="center"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Buat akun untuk melanjutkan!"
+                    android:textColor="@color/text_gray_color"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:layout_marginBottom="32dp"
+                    android:layout_gravity="center"/>
+
+                <!-- Nama Lengkap -->
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
-                    android:textColor="@color/text_color"
-                    android:fontFamily="@font/poppins_regular"
-                    android:textSize="16sp"
-                    android:padding="16dp" />
+                    android:layout_marginBottom="16dp"
+                    android:hint="Nama Lengkap"
+                    app:boxStrokeColor="@color/primary_color"
+                    app:hintTextColor="@color/text_gray_color">
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName"
+                        android:textColor="@color/text_color"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textSize="16sp"
+                        android:padding="16dp" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Email Input -->
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:hint="Email Address"
-                app:boxStrokeColor="@color/primary_color"
-                app:hintTextColor="@color/text_gray_color"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etEmail"
+                <!-- Email -->
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress"
-                    android:textColor="@color/text_color"
-                    android:fontFamily="@font/poppins_regular"
-                    android:textSize="16sp"
-                    android:padding="16dp" />
+                    android:layout_marginBottom="16dp"
+                    android:hint="Alamat Email"
+                    app:boxStrokeColor="@color/primary_color"
+                    app:hintTextColor="@color/text_gray_color">
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textEmailAddress"
+                        android:textColor="@color/text_color"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textSize="16sp"
+                        android:padding="16dp" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Phone Input -->
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:hint="Phone Number"
-                app:boxStrokeColor="@color/primary_color"
-                app:hintTextColor="@color/text_gray_color"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etPhone"
+                <!-- Nomor Telepon -->
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="phone"
-                    android:textColor="@color/text_color"
-                    android:fontFamily="@font/poppins_regular"
-                    android:textSize="16sp"
-                    android:padding="16dp" />
+                    android:layout_marginBottom="16dp"
+                    android:hint="Nomor Telepon"
+                    app:boxStrokeColor="@color/primary_color"
+                    app:hintTextColor="@color/text_gray_color">
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etPhone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="phone"
+                        android:textColor="@color/text_color"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textSize="16sp"
+                        android:padding="16dp" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Password Input -->
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:hint="Password"
-                app:boxStrokeColor="@color/primary_color"
-                app:hintTextColor="@color/text_gray_color"
-                app:passwordToggleEnabled="true"
-                app:passwordToggleTint="@color/primary_color"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etPassword"
+                <!-- Kata Sandi -->
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPassword"
-                    android:textColor="@color/text_color"
-                    android:fontFamily="@font/poppins_regular"
-                    android:textSize="16sp"
-                    android:padding="16dp" />
+                    android:layout_marginBottom="16dp"
+                    android:hint="Kata Sandi"
+                    app:boxStrokeColor="@color/primary_color"
+                    app:hintTextColor="@color/text_gray_color"
+                    app:passwordToggleEnabled="true"
+                    app:passwordToggleTint="@color/primary_color">
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword"
+                        android:textColor="@color/text_color"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textSize="16sp"
+                        android:padding="16dp" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Confirm Password Input -->
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="24dp"
-                android:hint="Confirm Password"
-                app:boxStrokeColor="@color/primary_color"
-                app:hintTextColor="@color/text_gray_color"
-                app:passwordToggleEnabled="true"
-                app:passwordToggleTint="@color/primary_color"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etPasswordConfirm"
+                <!-- Konfirmasi Kata Sandi -->
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPassword"
-                    android:textColor="@color/text_color"
-                    android:fontFamily="@font/poppins_regular"
+                    android:layout_marginBottom="24dp"
+                    android:hint="Konfirmasi Kata Sandi"
+                    app:boxStrokeColor="@color/primary_color"
+                    app:hintTextColor="@color/text_gray_color"
+                    app:passwordToggleEnabled="true"
+                    app:passwordToggleTint="@color/primary_color">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etPasswordConfirm"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword"
+                        android:textColor="@color/text_color"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textSize="16sp"
+                        android:padding="16dp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Syarat & Ketentuan -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="24dp"
+                    android:gravity="center_vertical">
+
+                    <CheckBox
+                        android:id="@+id/cbTerms"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:buttonTint="@color/primary_color" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Saya setuju dengan Ketentuan Layanan dan Kebijakan Privasi"
+                        android:textColor="@color/text_gray_color"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:layout_marginStart="8dp" />
+                </LinearLayout>
+
+                <!-- Tombol Daftar -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnRegister"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:text="Buat Akun"
+                    android:textColor="@color/white"
                     android:textSize="16sp"
-                    android:padding="16dp" />
+                    app:backgroundTint="@color/primary_color"
+                    android:fontFamily="@font/poppins_semibold"
+                    app:cornerRadius="12dp"
+                    android:elevation="4dp"
+                    app:rippleColor="@color/primary_dark_color" />
+            </LinearLayout>
 
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <!-- Terms and Conditions -->
+            <!-- Link Masuk -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginBottom="24dp"
-                android:gravity="center_vertical">
-
-                <CheckBox
-                    android:id="@+id/cbTerms"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:buttonTint="@color/primary_color" />
+                android:gravity="center"
+                android:layout_marginTop="32dp">
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="I agree to the Terms of Service and Privacy Policy"
+                    android:text="Sudah punya akun? "
                     android:textColor="@color/text_gray_color"
-                    android:textSize="14sp"
                     android:fontFamily="@font/poppins_regular"
-                    android:layout_marginStart="8dp" />
+                    android:textSize="14sp" />
 
+                <TextView
+                    android:id="@+id/tvLogin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Masuk"
+                    android:textColor="@color/primary_color"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:padding="8dp" />
             </LinearLayout>
-
-            <!-- Register Button -->
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnRegister"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:text="Create Account"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                app:backgroundTint="@color/primary_color"
-                android:fontFamily="@font/poppins_semibold"
-                app:cornerRadius="12dp"
-                android:elevation="4dp"
-                app:rippleColor="@color/primary_dark_color" />
-
         </LinearLayout>
+    </ScrollView>
 
-        <!-- Login Link -->
+    <!-- Loading -->
+    <FrameLayout
+        android:id="@+id/loadingOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/dark_overlay"
+        android:visibility="gone"
+        android:clickable="true"
+        android:focusable="true">
+
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:orientation="vertical"
             android:gravity="center"
-            android:layout_marginTop="32dp">
+            android:padding="24dp"
+            android:elevation="8dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Already have an account? "
-                android:textColor="@color/text_gray_color"
-                android:fontFamily="@font/poppins_regular"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/tvLogin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/SignIn_u"
-                android:textColor="@color/primary_color"
-                android:textSize="14sp"
-                android:fontFamily="@font/poppins_semibold"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="?android:attr/selectableItemBackground"
-                android:padding="8dp" />
-
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:indeterminateTint="@color/primary_color"
+                android:layout_marginBottom="16dp" />
         </LinearLayout>
-
-    </LinearLayout>
-
-</ScrollView>
-
-<FrameLayout
-android:id="@+id/loadingOverlay"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:background="@color/dark_overlay"
-android:visibility="gone"
-android:clickable="true"
-android:focusable="true">
-
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:padding="24dp"
-    android:elevation="8dp">
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:indeterminateTint="@color/primary_color"
-        android:layout_marginBottom="16dp" />
-
-    <!--            <TextView-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:text="Sending email..."-->
-    <!--                android:fontFamily="@font/poppins_semibold"-->
-    <!--                android:textSize="14sp"-->
-    <!--                android:textColor="@color/text_color" />-->
-
-</LinearLayout>
-
-</FrameLayout>
+    </FrameLayout>
 </RelativeLayout>

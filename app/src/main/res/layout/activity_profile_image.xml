@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_color"
-    tools:context=".ui.activity.ProfileImageActivity">
+    android:background="@color/background_color">
 
-    <!-- Header with Back Button -->
+    <!-- Header -->
     <LinearLayout
         android:id="@+id/headerLayout"
         android:layout_width="match_parent"
@@ -28,17 +26,17 @@
             android:focusable="true"
             android:background="?android:attr/selectableItemBackgroundBorderless"
             android:padding="4dp"
-            app:tint="@color/text_color" />
+            app:tint="@color/text_color"
+            android:contentDescription="Kembali" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Profile Picture"
+            android:text="Foto Profil"
             android:textSize="18sp"
             android:textColor="@color/text_color"
             android:fontFamily="@font/poppins_semibold" />
-
     </LinearLayout>
 
     <ScrollView
@@ -55,7 +53,7 @@
             android:padding="24dp"
             android:gravity="center_horizontal">
 
-            <!-- Profile Image Preview -->
+            <!-- Preview -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="180dp"
                 android:layout_height="180dp"
@@ -80,10 +78,9 @@
                     android:src="@drawable/ic_photo"
                     android:visibility="gone"
                     app:tint="@color/white" />
-
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Photo Options Card -->
+            <!-- Pilihan Foto -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -101,7 +98,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Change Profile Picture"
+                        android:text="Ubah Foto Profil"
                         android:textSize="16sp"
                         android:textColor="@color/text_color"
                         android:fontFamily="@font/poppins_semibold"
@@ -110,7 +107,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Choose a clear photo to help people recognize you"
+                        android:text="Pilih foto yang jelas agar mudah dikenali"
                         android:textSize="14sp"
                         android:textColor="@color/text_gray_color"
                         android:fontFamily="@font/poppins_regular"
@@ -121,14 +118,13 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <!-- Take Photo Button -->
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/btnTakePhoto"
                             android:layout_width="0dp"
                             android:layout_height="56dp"
                             android:layout_weight="1"
                             android:layout_marginEnd="8dp"
-                            android:text="Camera"
+                            android:text="Kamera"
                             android:textColor="@color/text_color"
                             android:textSize="14sp"
                             app:backgroundTint="@color/white"
@@ -140,14 +136,13 @@
                             app:iconGravity="textStart"
                             app:iconPadding="8dp" />
 
-                        <!-- Choose from Gallery Button -->
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/btnGallery"
                             android:layout_width="0dp"
                             android:layout_height="56dp"
                             android:layout_weight="1"
                             android:layout_marginStart="8dp"
-                            android:text="Gallery"
+                            android:text="Galeri"
                             android:textColor="@color/text_color"
                             android:textSize="14sp"
                             app:backgroundTint="@color/white"
@@ -158,20 +153,17 @@
                             app:iconTint="@color/primary_color"
                             app:iconGravity="textStart"
                             app:iconPadding="8dp" />
-
                     </LinearLayout>
-
                 </LinearLayout>
-
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Buttons -->
+            <!-- Tombol -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnRemovePhoto"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginBottom="16dp"
-                android:text="Remove Photo"
+                android:text="Hapus Foto"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 app:backgroundTint="@color/text_gray_color"
@@ -186,7 +178,7 @@
                 android:id="@+id/btnSavePhoto"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:text="Save Photo"
+                android:text="Simpan Foto"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 app:backgroundTint="@color/primary_color"
@@ -196,12 +188,10 @@
                 app:iconTint="@color/white"
                 app:iconGravity="textStart"
                 app:iconPadding="8dp" />
-
         </LinearLayout>
-
     </ScrollView>
 
-    <!-- Loading Overlay -->
+    <!-- Loading -->
     <FrameLayout
         android:id="@+id/loadingOverlay"
         android:layout_width="match_parent"
@@ -227,5 +217,4 @@
                 android:indeterminateTint="@color/primary_color" />
         </com.google.android.material.card.MaterialCardView>
     </FrameLayout>
-
 </RelativeLayout>

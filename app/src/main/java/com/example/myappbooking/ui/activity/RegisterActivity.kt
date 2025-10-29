@@ -16,6 +16,7 @@ import com.example.myappbooking.R
 import com.example.myappbooking.api.ApiClient
 import com.example.myappbooking.data.RegisterRequest
 import com.example.myappbooking.data.RegisterResponse
+import com.example.myappbooking.utility.NetworkUtils
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.coroutines.Dispatchers
@@ -39,9 +40,16 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
+        NetworkUtils.init(this)
+
         initViews()
         setupClickListeners()
         logIn()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        NetworkUtils.cleanup()
     }
 
     override fun onBackPressed() {

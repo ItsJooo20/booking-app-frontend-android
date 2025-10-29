@@ -35,7 +35,7 @@ class EventsAdapter(private val events: List<BookingData>) : RecyclerView.Adapte
 
         fun bind(event: BookingData) {
             tvEventTitle.text = event.item_code
-            tvStatus.text = "Booked"
+            tvStatus.text = "Dipesan"
             tvStartDateTime.text = formatDateTime(event.start_datetime)
             tvFinishDateTime.text = formatDateTime(event.end_datetime)
 

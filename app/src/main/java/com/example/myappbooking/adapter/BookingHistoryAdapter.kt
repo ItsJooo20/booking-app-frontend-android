@@ -177,7 +177,7 @@ class BookingHistoryAdapter(
             // Try to parse with the format from API: "2025-08-30 06:00:00"
             val inputFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
             val date = inputFormat.parse(dateTimeString)
-            val outputFormat = SimpleDateFormat("dd MMM - hh:mm a", Locale.getDefault())
+            val outputFormat = SimpleDateFormat("dd MMM - HH:mm", Locale.getDefault())
             outputFormat.format(date!!)
         } catch (e: Exception) {
             // If that fails, try other formats as fallback
@@ -185,14 +185,14 @@ class BookingHistoryAdapter(
                 // Try format: "16-June-2025, 14:30"
                 val inputFormat = SimpleDateFormat("d-MMMM-yyyy, HH:mm", Locale.ENGLISH)
                 val date = inputFormat.parse(dateTimeString)
-                val outputFormat = SimpleDateFormat("dd MMM - hh:mm a", Locale.getDefault())
+                val outputFormat = SimpleDateFormat("dd MMM - HH:mm", Locale.getDefault())
                 outputFormat.format(date!!)
             } catch (e2: Exception) {
                 try {
                     // Try alternative format without full month name
                     val inputFormat = SimpleDateFormat("dd-MM-yyyy, HH:mm", Locale.getDefault())
                     val date = inputFormat.parse(dateTimeString)
-                    val outputFormat = SimpleDateFormat("dd MMM - hh:mm a", Locale.getDefault())
+                    val outputFormat = SimpleDateFormat("dd MMM - HH:mm", Locale.getDefault())
                     outputFormat.format(date!!)
                 } catch (e3: Exception) {
                     dateTimeString // Final fallback to original string

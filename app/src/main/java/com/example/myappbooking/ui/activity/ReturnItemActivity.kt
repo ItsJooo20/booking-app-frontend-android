@@ -18,6 +18,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.myappbooking.R
 import com.example.myappbooking.utility.SharedPreferencesManager
 import com.example.myappbooking.api.ApiClient
+import com.example.myappbooking.utility.NetworkUtils
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -113,6 +114,8 @@ class ReturnItemActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_return_item)
+
+        NetworkUtils.init(this)
 
         initViews()
         setupToolbar()
@@ -455,6 +458,8 @@ class ReturnItemActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
+
+        NetworkUtils.cleanup()
         // Clean up temporary files
         photoFile?.let { file ->
             if (file.exists() && selectedImageUri == null) {

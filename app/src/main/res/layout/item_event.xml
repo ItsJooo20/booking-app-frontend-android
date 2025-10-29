@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:padding="12dp">
 
-        <!-- Room Image -->
+        <!-- Gambar Ruangan -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/image_container"
             android:layout_width="45dp"
@@ -31,14 +31,13 @@
                 android:id="@+id/ivRoomImage"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:contentDescription="Room image"
+                android:contentDescription="Gambar ruangan"
                 android:scaleType="centerCrop"
                 android:src="@drawable/pic_check"
                 tools:src="@drawable/pic_check" />
-
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- Content Container -->
+        <!-- Konten -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -49,35 +48,34 @@
             app:layout_constraintStart_toEndOf="@id/image_container"
             app:layout_constraintTop_toTopOf="parent">
 
-            <!-- Event Title -->
             <TextView
                 android:id="@+id/tvEventTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
                 android:fontFamily="@font/poppins_semibold"
                 android:textColor="@color/text_color"
                 android:textSize="16sp"
-                android:layout_marginBottom="4dp"
                 tools:text="Meeting Room-001" />
 
-            <!-- Date/Time details -->
+            <!-- Waktu -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <!-- Start Date/Time -->
+                <!-- Mulai -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="2dp">
+                    android:layout_marginBottom="2dp"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_regular"
-                        android:text="Start: "
+                        android:text="Mulai: "
                         android:textColor="@color/text_gray_color"
                         android:textSize="12sp" />
 
@@ -89,10 +87,10 @@
                         android:fontFamily="@font/poppins_medium"
                         android:textColor="@color/text_color"
                         android:textSize="12sp"
-                        tools:text="30 May - 09:00 AM" />
+                        tools:text="30 Mei - 09.00" />
                 </LinearLayout>
 
-                <!-- Finish Date/Time -->
+                <!-- Selesai -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -101,8 +99,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Finish: "
                         android:fontFamily="@font/poppins_regular"
+                        android:text="Selesai: "
                         android:textColor="@color/text_gray_color"
                         android:textSize="12sp" />
 
@@ -114,13 +112,12 @@
                         android:fontFamily="@font/poppins_medium"
                         android:textColor="@color/text_color"
                         android:textSize="12sp"
-                        tools:text="30 May - 12:00 PM" />
+                        tools:text="30 Mei - 12.00" />
                 </LinearLayout>
             </LinearLayout>
-
         </LinearLayout>
 
-        <!-- Status Badge -->
+        <!-- Status -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/status_container"
             android:layout_width="wrap_content"
@@ -138,12 +135,11 @@
                 android:fontFamily="@font/poppins_semibold"
                 android:paddingHorizontal="10dp"
                 android:paddingVertical="4dp"
+                android:text="Dipesan"
                 android:textColor="@color/primary_color"
                 android:textSize="11sp"
-                tools:text="Booked" />
-
+                tools:text="Dipesan" />
         </com.google.android.material.card.MaterialCardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </com.google.android.material.card.MaterialCardView>

@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:background="@color/background_color">
 
-    <!-- Scrollable Content -->
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -22,7 +21,7 @@
             android:orientation="vertical"
             android:padding="24dp">
 
-            <!-- Header Section -->
+            <!-- Header -->
             <LinearLayout
                 android:id="@+id/header_section"
                 android:layout_width="match_parent"
@@ -39,7 +38,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Profile"
+                        android:text="Profil"
                         android:fontFamily="@font/poppins_semibold"
                         android:textColor="@color/text_color"
                         android:textSize="24sp" />
@@ -47,99 +46,69 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Manage your account settings"
+                        android:text="Kelola pengaturan akun Anda"
                         android:fontFamily="@font/poppins_regular"
                         android:textColor="@color/text_gray_color"
                         android:textSize="14sp" />
                 </LinearLayout>
-
-<!--                <com.google.android.material.card.MaterialCardView-->
-<!--                    android:id="@+id/profile_icon_card"-->
-<!--                    android:layout_width="48dp"-->
-<!--                    android:layout_height="48dp"-->
-<!--                    android:backgroundTint="@color/white"-->
-<!--                    app:cardCornerRadius="24dp"-->
-<!--                    app:cardElevation="2dp">-->
-
-<!--                    <ImageView-->
-<!--                        android:layout_width="24dp"-->
-<!--                        android:layout_height="24dp"-->
-<!--                        android:layout_gravity="center"-->
-<!--                        android:src="@drawable/ic_profile"-->
-<!--                        app:tint="@color/primary_color" />-->
-<!--                </com.google.android.material.card.MaterialCardView>-->
             </LinearLayout>
 
-            <!-- Profile Card -->
-<!--            <com.google.android.material.card.MaterialCardView-->
-<!--                android:id="@+id/profileInfoContainer"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginBottom="32dp"-->
-<!--                android:backgroundTint="@color/white"-->
-<!--                app:cardCornerRadius="12dp"-->
-<!--                app:cardElevation="2dp">-->
+            <!-- Info Profil -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="24dp"
+                android:gravity="center_horizontal">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardView_profile"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_marginBottom="16dp"
+                    android:backgroundTint="@color/background_color"
+                    app:cardCornerRadius="60dp"
+                    app:cardElevation="2dp">
+
+                    <ImageView
+                        android:id="@+id/imageView_profile"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_profile" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <TextView
+                    android:id="@+id/textView_name"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="24dp"
-                    android:gravity="center_horizontal">
+                    android:layout_marginBottom="4dp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="Nama"
+                    android:textColor="@color/text_color"
+                    android:textSize="20sp" />
 
-                    <!-- Profile Image -->
-                    <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/cardView_profile"
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"
-                        android:layout_marginBottom="16dp"
-                        android:backgroundTint="@color/background_color"
-                        app:cardCornerRadius="60dp"
-                        app:cardElevation="2dp">
+                <TextView
+                    android:id="@+id/textView_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="email@contoh.com"
+                    android:textColor="@color/text_gray_color"
+                    android:textSize="14sp" />
 
-                        <ImageView
-                            android:id="@+id/imageView_profile"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/ic_profile" />
-                    </com.google.android.material.card.MaterialCardView>
+                <TextView
+                    android:id="@+id/textView_role"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Peran"
+                    android:textColor="@color/primary_color"
+                    android:textSize="12sp" />
+            </LinearLayout>
 
-                    <!-- Name -->
-                    <TextView
-                        android:id="@+id/textView_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="4dp"
-                        android:fontFamily="@font/poppins_semibold"
-                        android:text="Name"
-                        android:textColor="@color/text_color"
-                        android:textSize="20sp" />
-
-                    <!-- Email -->
-                    <TextView
-                        android:id="@+id/textView_email"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="2dp"
-                        android:fontFamily="@font/poppins_regular"
-                        android:text="email@example.com"
-                        android:textColor="@color/text_gray_color"
-                        android:textSize="14sp" />
-
-                    <!-- Role -->
-                    <TextView
-                        android:id="@+id/textView_role"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_medium"
-                        android:text="Role"
-                        android:textColor="@color/primary_color"
-                        android:textSize="12sp" />
-                </LinearLayout>
-<!--            </com.google.android.material.card.MaterialCardView>-->
-
-            <!-- Account Settings Section -->
+            <!-- Section Pengaturan Akun -->
             <LinearLayout
                 android:id="@+id/settingsHeaderContainer"
                 android:layout_width="match_parent"
@@ -160,7 +129,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_semibold"
-                        android:text="Account Settings"
+                        android:text="Pengaturan Akun"
                         android:textColor="@color/text_color"
                         android:textSize="20sp" />
 
@@ -168,13 +137,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_regular"
-                        android:text="Manage your account information"
+                        android:text="Kelola informasi akun Anda"
                         android:textColor="@color/text_gray_color"
                         android:textSize="12sp" />
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- Settings Options Card -->
+            <!-- Opsi Pengaturan -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/settingsContainer"
                 android:layout_width="match_parent"
@@ -190,7 +159,7 @@
                     android:orientation="vertical"
                     android:padding="8dp">
 
-                    <!-- Change Phone Number -->
+                    <!-- Ubah Nomor Telepon -->
                     <LinearLayout
                         android:id="@+id/cardChangePhone"
                         android:layout_width="match_parent"
@@ -225,7 +194,7 @@
                             android:layout_marginStart="16dp"
                             android:layout_weight="1"
                             android:fontFamily="@font/poppins_regular"
-                            android:text="Change phone number"
+                            android:text="Ubah nomor whatsapp"
                             android:textColor="@color/text_color"
                             android:textSize="14sp" />
 
@@ -237,13 +206,12 @@
                             app:tint="@color/text_gray_color" />
                     </LinearLayout>
 
-                    <!-- Divider -->
                     <com.google.android.material.divider.MaterialDivider
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="16dp" />
 
-                    <!-- Change Password -->
+                    <!-- Ubah Kata Sandi -->
                     <LinearLayout
                         android:id="@+id/cardChangePass"
                         android:layout_width="match_parent"
@@ -278,7 +246,7 @@
                             android:layout_marginStart="16dp"
                             android:layout_weight="1"
                             android:fontFamily="@font/poppins_regular"
-                            android:text="Change password"
+                            android:text="Ubah kata sandi"
                             android:textColor="@color/text_color"
                             android:textSize="14sp" />
 
@@ -292,7 +260,7 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Logout Button -->
+            <!-- Keluar -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/outlinedButton"
                 style="@style/Widget.Material3.Button.OutlinedButton"
@@ -300,7 +268,7 @@
                 android:layout_height="56dp"
                 android:layout_marginBottom="24dp"
                 android:fontFamily="@font/poppins_medium"
-                android:text="Logout"
+                android:text="Keluar"
                 android:textColor="@color/primary_dark_color"
                 android:textSize="16sp"
                 app:strokeColor="@color/primary_dark_color"
@@ -310,7 +278,7 @@
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <!-- Loading Overlay -->
+    <!-- Loading -->
     <FrameLayout
         android:id="@+id/loadingOverlay"
         android:layout_width="match_parent"

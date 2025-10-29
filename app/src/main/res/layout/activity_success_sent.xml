@@ -20,27 +20,27 @@
             android:padding="24dp"
             android:gravity="center_horizontal">
 
-            <!-- Success Icon Section -->
+            <!-- Ikon Sukses -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_marginTop="16dp"
-                android:layout_marginBottom="32dp"
+                android:layout_marginBottom="16dp"
                 android:gravity="center">
 
-                <!-- Success Icon -->
-                <View
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/successMailAnimation"
                     android:layout_width="125dp"
                     android:layout_height="125dp"
-                    android:background="@drawable/il_email_confirm"
-                    android:layout_marginBottom="24dp" />
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:lottie_rawRes="@raw/success_email"/>
 
-                <!-- Success Message -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Request Sent Successfully!"
+                    android:text="Permintaan Berhasil Dikirim!"
                     android:textSize="24sp"
                     android:textStyle="bold"
                     android:textColor="@color/text_color"
@@ -51,16 +51,15 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Please wait while our staff reviews your booking request"
+                    android:text="Mohon tunggu staff kami meninjau permintaan peminjaman Anda"
                     android:textSize="14sp"
                     android:textColor="@color/text_gray_color"
                     android:fontFamily="@font/poppins_regular"
                     android:gravity="center"
                     android:layout_marginBottom="16dp" />
-
             </LinearLayout>
 
-            <!-- Booking Info Section -->
+            <!-- Info Pemesanan -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -68,12 +67,12 @@
                 android:background="@drawable/form_background"
                 android:padding="24dp"
                 android:elevation="2dp"
-                android:layout_marginBottom="32dp">
+                android:layout_marginBottom="16dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Booking Reference:"
+                    android:text="Referensi Pemesanan:"
                     android:textSize="14sp"
                     android:textColor="@color/text_gray_color"
                     android:fontFamily="@font/poppins_regular"
@@ -89,107 +88,29 @@
                     android:fontFamily="@font/poppins_bold"
                     android:layout_marginBottom="16dp" />
 
-                <!--                <TextView-->
-                <!--                    android:layout_width="wrap_content"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:text="Status:"-->
-                <!--                    android:textSize="14sp"-->
-                <!--                    android:textColor="@color/text_gray_color"-->
-                <!--                    android:fontFamily="@font/poppins_semibold"-->
-                <!--                    android:layout_marginBottom="4dp" />-->
-
-                <!--                <TextView-->
-                <!--                    android:layout_width="wrap_content"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:text="Pending Approval"-->
-                <!--                    android:textSize="14sp"-->
-                <!--                    android:textColor="@color/primary_color"-->
-                <!--                    android:fontFamily="@font/poppins_semibold"-->
-                <!--                    android:layout_marginBottom="4dp" />-->
-
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Your booking request has been submitted and is currently under review. You will receive a confirmation email once our staff has approved your reservation."
+                    android:text="Permintaan pemesanan Anda telah dikirim dan sedang ditinjau. Anda akan menerima konfirmasi setelah reservasi Anda disetujui. Mohon selalu cek status riwayat peminjaman yang Anda ajukan secara berkala."
                     android:textSize="14sp"
                     android:textColor="@color/text_gray_color"
                     android:fontFamily="@font/poppins_regular"
                     android:lineSpacingExtra="2dp" />
-
             </LinearLayout>
 
-            <!--            &lt;!&ndash; Status Section &ndash;&gt;-->
-            <!--            <LinearLayout-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:orientation="horizontal"-->
-            <!--                android:background="@drawable/form_background"-->
-            <!--                android:padding="20dp"-->
-            <!--                android:elevation="2dp"-->
-            <!--                android:layout_marginBottom="32dp"-->
-            <!--                android:gravity="center_vertical">-->
-
-            <!--                &lt;!&ndash; Status Indicator &ndash;&gt;-->
-            <!--                &lt;!&ndash;                <View&ndash;&gt;-->
-            <!--                &lt;!&ndash;                    android:layout_width="12dp"&ndash;&gt;-->
-            <!--                &lt;!&ndash;                    android:layout_height="12dp"&ndash;&gt;-->
-            <!--                &lt;!&ndash;                    android:background="@drawable/ic_history"&ndash;&gt;-->
-            <!--                &lt;!&ndash;                    android:layout_marginEnd="12dp" />&ndash;&gt;-->
-
-            <!--                <LinearLayout-->
-            <!--                    android:layout_width="0dp"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:layout_weight="1"-->
-            <!--                    android:orientation="vertical">-->
-
-            <!--                    <TextView-->
-            <!--                        android:layout_width="wrap_content"-->
-            <!--                        android:layout_height="wrap_content"-->
-            <!--                        android:text="Status: Pending Approval"-->
-            <!--                        android:textSize="14sp"-->
-            <!--                        android:textColor="@color/text_color"-->
-            <!--                        android:fontFamily="@font/poppins_semibold"-->
-            <!--                        android:layout_marginBottom="4dp" />-->
-
-            <!--                    <TextView-->
-            <!--                        android:layout_width="wrap_content"-->
-            <!--                        android:layout_height="wrap_content"-->
-            <!--                        android:text="Awaiting staff review"-->
-            <!--                        android:textSize="12sp"-->
-            <!--                        android:textColor="@color/text_gray_color"-->
-            <!--                        android:fontFamily="@font/poppins_regular" />-->
-
-            <!--                </LinearLayout>-->
-
-            <!--            </LinearLayout>-->
-
-            <!-- Action Buttons Section -->
+            <!-- Tombol Aksi -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginBottom="24dp">
 
-                <!-- View Booking Details Button -->
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnViewBookingDetails"
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:text="View Booking Details"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"
-                    app:backgroundTint="@color/primary_color"
-                    android:fontFamily="@font/poppins_semibold"
-                    app:cornerRadius="12dp"
-                    android:elevation="4dp"
-                    app:rippleColor="@color/primary_dark_color"
-                    android:layout_marginBottom="12dp" />
-
-                <!-- Check Status Button -->
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnBacktoHome"
-                    android:layout_width="match_parent"
+                    android:layout_width="150dp"
                     android:layout_height="56dp"
-                    android:text="Go to Home"
+                    android:text="Beranda"
                     android:textColor="@color/primary_color"
                     android:textSize="16sp"
                     app:backgroundTint="@color/white"
@@ -199,44 +120,24 @@
                     app:cornerRadius="12dp"
                     android:elevation="2dp"
                     app:rippleColor="@color/accent_color"
-                    android:layout_marginBottom="24dp" />
+                    android:layout_marginEnd="12dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnViewBookingDetails"
+                    android:layout_width="150dp"
+                    android:layout_height="56dp"
+                    android:text="Cek Detail"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    app:backgroundTint="@color/primary_color"
+                    android:fontFamily="@font/poppins_semibold"
+                    app:cornerRadius="12dp"
+                    android:elevation="4dp"
+                    app:rippleColor="@color/primary_dark_color"
+                    android:layout_marginStart="12dp" />
 
             </LinearLayout>
-
-            <!-- Back to Home -->
-            <!--            <LinearLayout-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:orientation="horizontal"-->
-            <!--                android:gravity="center"-->
-            <!--                android:layout_marginTop="16dp">-->
-
-            <!--                <TextView-->
-            <!--                    android:layout_width="wrap_content"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:text="Need to make changes? "-->
-            <!--                    android:textColor="@color/text_gray_color"-->
-            <!--                    android:fontFamily="@font/poppins_regular"-->
-            <!--                    android:textSize="14sp" />-->
-
-            <!--                <TextView-->
-            <!--                    android:id="@+id/tvBackToHome"-->
-            <!--                    android:layout_width="wrap_content"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:text="Go to Home"-->
-            <!--                    android:textColor="@color/primary_color"-->
-            <!--                    android:textSize="14sp"-->
-            <!--                    android:fontFamily="@font/poppins_semibold"-->
-            <!--                    android:clickable="true"-->
-            <!--                    android:focusable="true"-->
-            <!--                    android:background="?android:attr/selectableItemBackground"-->
-            <!--                    android:padding="8dp" />-->
-
-            <!--            </LinearLayout>-->
-
         </LinearLayout>
-
     </ScrollView>
 
 </RelativeLayout>
-

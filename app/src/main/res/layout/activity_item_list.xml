@@ -5,10 +5,9 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_color"
-    tools:context=".ui.activity.ItemListActivity">
+    android:background="@color/background_color">
 
-    <!-- Header Section - Fixed at top -->
+    <!-- Header -->
     <LinearLayout
         android:id="@+id/header_section"
         android:layout_width="match_parent"
@@ -32,7 +31,7 @@
             android:focusable="true"
             android:background="?android:attr/selectableItemBackgroundBorderless"
             android:padding="4dp"
-            android:contentDescription="Back"
+            android:contentDescription="Kembali"
             app:tint="@color/text_color" />
 
         <LinearLayout
@@ -46,23 +45,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_semibold"
-                android:text="Items"
+                android:text="Item"
                 android:textColor="@color/text_color"
-                android:textSize="20sp"
-                tools:text="Items" />
-
+                android:textSize="20sp" />
         </LinearLayout>
     </LinearLayout>
 
-    <!-- Scrollable Content -->
+    <!-- Konten Scroll -->
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header_section"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header_section">
+        app:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -70,7 +67,7 @@
             android:orientation="vertical"
             android:padding="24dp">
 
-            <!-- Search Section Card -->
+            <!-- Pencarian -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/search_container"
                 android:layout_width="match_parent"
@@ -91,7 +88,7 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_marginEnd="12dp"
-                        android:contentDescription="Search"
+                        android:contentDescription="Cari"
                         android:src="@drawable/ic_search"
                         app:tint="@color/text_gray_color" />
 
@@ -101,7 +98,7 @@
                         android:layout_height="50dp"
                         android:layout_weight="1"
                         android:background="@null"
-                        android:hint="Search facility"
+                        android:hint="Cari fasilitas"
                         android:imeOptions="actionSearch"
                         android:fontFamily="@font/poppins_regular"
                         android:inputType="text"
@@ -120,11 +117,10 @@
                         android:src="@drawable/ic_plus"
                         android:visibility="gone"
                         app:tint="@color/text_gray_color" />
-
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Items List Section -->
+            <!-- Header Daftar Item -->
             <LinearLayout
                 android:id="@+id/items_header_container"
                 android:layout_width="match_parent"
@@ -144,7 +140,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_semibold"
-                        android:text="Available Items"
+                        android:text="Item Tersedia"
                         android:textColor="@color/text_color"
                         android:textSize="20sp" />
 
@@ -152,19 +148,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_regular"
-                        android:text="Find the items you need"
+                        android:text="Temukan item yang Anda butuhkan"
                         android:textColor="@color/text_gray_color"
                         android:textSize="12sp" />
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- Items List Container -->
+            <!-- Daftar -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <!-- RecyclerView for items -->
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_facilities"
                     android:layout_width="match_parent"
@@ -173,7 +168,6 @@
                     android:overScrollMode="never"
                     tools:listitem="@layout/item_facility" />
 
-                <!-- Progress bar -->
                 <ProgressBar
                     android:id="@+id/progress_bar"
                     android:layout_width="wrap_content"
@@ -182,7 +176,6 @@
                     android:layout_margin="32dp"
                     android:visibility="gone" />
 
-                <!-- Empty state view -->
                 <LinearLayout
                     android:id="@+id/empty_state"
                     android:layout_width="match_parent"
@@ -196,14 +189,14 @@
                         android:layout_width="120dp"
                         android:layout_height="120dp"
                         android:layout_marginBottom="16dp"
-                        android:contentDescription="No items found"
+                        android:contentDescription="Tidak ada item"
                         android:src="@drawable/il_calendar" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_medium"
-                        android:text="No Items Found"
+                        android:text="Item Tidak Ditemukan"
                         android:textColor="@color/text_color"
                         android:textSize="18sp"
                         android:layout_marginBottom="8dp" />
@@ -212,16 +205,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_regular"
-                        android:text="Try adjusting your search criteria"
+                        android:text="Coba ubah kriteria pencarian Anda"
                         android:textColor="@color/text_gray_color"
                         android:textSize="14sp"
                         android:gravity="center" />
-
                 </LinearLayout>
-
             </LinearLayout>
-
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

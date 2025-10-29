@@ -20,7 +20,9 @@ import com.example.myappbooking.adapter.CategoryAdapter
 import com.example.myappbooking.api.ApiClient
 import com.example.myappbooking.data.FacilityCategory
 import com.example.myappbooking.databinding.FragmentDashboardBinding
+import com.example.myappbooking.ui.activity.MainActivity
 import com.example.myappbooking.utility.ImageUtils
+import com.example.myappbooking.utility.NetworkUtils
 import kotlinx.coroutines.launch
 
 class DashboardFragment : Fragment() {
@@ -66,7 +68,7 @@ class DashboardFragment : Fragment() {
         }
 
         binding.categoriesRecyclerview.apply {
-            layoutManager = GridLayoutManager(requireContext(), 2)
+            layoutManager = GridLayoutManager(requireContext(), 1)
             adapter = categoryAdapter
         }
     }
@@ -75,7 +77,7 @@ class DashboardFragment : Fragment() {
         val prefMan = SharedPreferencesManager.getInstance(requireContext())
         val userName = prefMan.getUserName()
         val imgProfile = prefMan.getUserPhoto()
-        binding.greetingText.text = "Hi, $userName!"
+        binding.greetingText.text = "Hai, $userName!"
 
         ImageUtils.loadImageWithoutURL(
             context = binding.imageViewProfile.context,
@@ -85,10 +87,13 @@ class DashboardFragment : Fragment() {
     }
 
     private fun NavigateToReservationFragment() {
-        val reservationFragment = ReservationFragment()
-        requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, reservationFragment)
-            .commit()
+//        val reservationFragment = ReservationFragment()
+//        requireActivity().supportFragmentManager.beginTransaction()
+//            .replace(R.id.fragment_container, reservationFragment)
+//            .commit()
+
+        (requireActivity() as MainActivity).binding.bottomNav.selectedItemId = R.id.nav_plus
+
     }
 
     private fun setupReserveButton() {
@@ -134,7 +139,7 @@ class DashboardFragment : Fragment() {
                             categoryList.addAll(dataCategory)
                             categoryAdapter.notifyDataSetChanged()
                         } else {
-                            Toast.makeText(requireContext(), "Failed fetch categories", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(requireContext(), "Gagal load fasilitas!", Toast.LENGTH_SHORT).show()
                         }
                     }
                 } catch (e: Exception) {

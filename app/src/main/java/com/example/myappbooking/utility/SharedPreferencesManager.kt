@@ -2,11 +2,18 @@ package com.example.myappbooking.utility
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.google.firebase.messaging.FirebaseMessagingService.MODE_PRIVATE
 
 class SharedPreferencesManager(context: Context) {
 
     private val sharedPreferences: SharedPreferences =
         context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+
+    private fun saveTokenToPreferences(fcmToken: String) {
+        val editor = sharedPreferences.edit()
+        editor.putString(KEY_FCM_TOKEN, fcmToken)
+        editor.apply()
+    }
 
     fun saveAuthToken(remember_token: String) {
         val editor =sharedPreferences.edit()
@@ -18,8 +25,9 @@ class SharedPreferencesManager(context: Context) {
         return sharedPreferences.getString(KEY_AUTH_TOKEN, null)
     }
 
-    fun saveUserData(name: String, email: String, role: String, phone: String?, photo: String?) {
+    fun saveUserData(id: Int, name: String, email: String, role: String, phone: String?, photo: String?) {
         val editor = sharedPreferences.edit()
+        editor.putInt(KEY_USER_ID, id)
         editor.putString(KEY_USER_NAME, name)
         editor.putString(KEY_USER_EMAIL, email)
         editor.putString(KEY_USER_ROLE, role)
@@ -38,6 +46,10 @@ class SharedPreferencesManager(context: Context) {
         val editor = sharedPreferences.edit()
         editor.putString(KEY_USER_PHOTO, photo)
         editor.apply()
+    }
+
+    fun getUserId(): Int {
+        return sharedPreferences.getInt(KEY_USER_ID, 0) ?: 0
     }
 
     fun getUserName(): String {
@@ -76,8 +88,10 @@ class SharedPreferencesManager(context: Context) {
         private const val KEY_USER_EMAIL = "USER_EMAIL"
         private const val KEY_USER_ROLE = "USER_ROLE"
         private const val KEY_USER_NAME = "USER_NAME"
+        private const val KEY_USER_ID = "USER_ID"
         private const val KEY_USER_PHONE = "USER_PHONE"
         private const val KEY_USER_PHOTO = "USER_PHOTO"
+        private const val KEY_FCM_TOKEN = "FCM_TOKEN"
 
         @Volatile
         private var instance: SharedPreferencesManager? = null

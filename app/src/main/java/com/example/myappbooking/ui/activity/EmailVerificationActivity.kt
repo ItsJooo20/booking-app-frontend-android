@@ -13,6 +13,7 @@ import com.example.myappbooking.R
 import com.example.myappbooking.api.ApiClient
 import com.example.myappbooking.data.EmailApp
 import com.example.myappbooking.data.EmailRequest
+import com.example.myappbooking.utility.NetworkUtils
 import com.google.android.material.button.MaterialButton
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -35,6 +36,8 @@ class EmailVerificationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_email_verification)
 
+        NetworkUtils.init(this)
+
         // Get email from intent
         userEmail = intent.getStringExtra("user_email") ?: ""
         userName = intent.getStringExtra("user_name") ?: ""
@@ -52,6 +55,11 @@ class EmailVerificationActivity : AppCompatActivity() {
         tvBackToLogin = findViewById(R.id.tvBackToLogin)
         tvTop = findViewById(R.id.tvSuccessTop)
 //        loadingOverlay = findViewById(R.id.loadingOverlay)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        NetworkUtils.cleanup()
     }
 
     private fun setupClickListeners() {

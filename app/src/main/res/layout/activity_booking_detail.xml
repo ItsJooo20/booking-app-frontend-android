@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_color"
-    tools:context=".ui.activity.BookingDetailActivity">
+    android:background="@color/background_color">
 
-    <!-- Header Section - Fixed at top -->
+    <!-- Header -->
     <LinearLayout
         android:id="@+id/header_section"
         android:layout_width="match_parent"
@@ -31,7 +29,7 @@
             android:focusable="true"
             android:background="?android:attr/selectableItemBackgroundBorderless"
             android:padding="4dp"
-            android:contentDescription="Back"
+            android:contentDescription="Kembali"
             app:tint="@color/primary_color" />
 
         <LinearLayout
@@ -44,10 +42,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_semibold"
-                android:text="Booking Detail"
+                android:text="Detail Pemesanan"
                 android:textColor="@color/text_color"
                 android:textSize="20sp" />
-
         </LinearLayout>
 
         <com.google.android.material.card.MaterialCardView
@@ -66,21 +63,21 @@
                 android:fontFamily="@font/poppins_medium"
                 android:paddingStart="12dp"
                 android:paddingEnd="12dp"
-                android:text="Pending"
+                android:text="Menunggu"
                 android:textColor="@color/white"
                 android:textSize="12sp" />
         </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
 
-    <!-- Scrollable Content -->
+    <!-- Konten Scroll -->
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@id/header_section"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header_section">
+        app:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -88,7 +85,7 @@
             android:orientation="vertical"
             android:padding="24dp">
 
-            <!-- Booking ID Section -->
+            <!-- ID Pemesanan -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/booking_id_card"
                 android:layout_width="match_parent"
@@ -118,7 +115,7 @@
                             android:layout_height="24dp"
                             android:layout_gravity="center"
                             android:src="@drawable/ic_assignment"
-                            app:tint="@color/primary_color"/>
+                            app:tint="@color/primary_color" />
                     </com.google.android.material.card.MaterialCardView>
 
                     <LinearLayout
@@ -130,7 +127,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Booking ID"
+                            android:text="ID Pemesanan"
                             android:fontFamily="@font/poppins_medium"
                             android:textColor="@color/text_gray_color"
                             android:textSize="12sp" />
@@ -139,7 +136,7 @@
                             android:id="@+id/tv_booking_id"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Loading..."
+                            android:text="Memuat..."
                             android:fontFamily="@font/poppins_semibold"
                             android:textColor="@color/text_color"
                             android:textSize="16sp" />
@@ -150,13 +147,13 @@
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:background="?attr/selectableItemBackgroundBorderless"
-                        android:contentDescription="Copy booking ID"
+                        android:contentDescription="Salin ID"
                         android:src="@drawable/ic_copy"
                         app:tint="@color/text_gray_color" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Facility Information Card -->
+            <!-- Informasi Fasilitas -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/facility_info_card"
                 android:layout_width="match_parent"
@@ -175,7 +172,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Facility Information"
+                        android:text="Informasi Fasilitas"
                         android:fontFamily="@font/poppins_semibold"
                         android:textColor="@color/text_color"
                         android:textSize="16sp"
@@ -199,18 +196,17 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Loading..."
+                            android:text="Memuat..."
                             android:fontFamily="@font/poppins_regular"
                             android:textColor="@color/text_color"
                             android:textSize="14sp" />
                     </LinearLayout>
 
-                    <!-- Facility Image -->
                     <com.google.android.material.card.MaterialCardView
                         android:layout_width="match_parent"
                         android:layout_height="180dp"
-                        android:layout_marginBottom="16dp"
                         android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
                         android:backgroundTint="@color/background_color"
                         app:cardCornerRadius="8dp"
                         app:cardElevation="0dp">
@@ -219,14 +215,14 @@
                             android:id="@+id/img_facility"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:contentDescription="Facility image"
+                            android:contentDescription="Gambar fasilitas"
                             android:scaleType="centerCrop"
                             android:src="@drawable/pic_check" />
                     </com.google.android.material.card.MaterialCardView>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Schedule Information Card -->
+            <!-- Informasi Jadwal -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/schedule_info_card"
                 android:layout_width="match_parent"
@@ -245,13 +241,13 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Schedule Information"
+                        android:text="Informasi Jadwal"
                         android:fontFamily="@font/poppins_semibold"
                         android:textColor="@color/text_color"
                         android:textSize="16sp"
                         android:layout_marginBottom="16dp" />
 
-                    <!-- Start Date Time -->
+                    <!-- Mulai -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -283,7 +279,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Start Date and Time"
+                                android:text="Tanggal dan Waktu Mulai"
                                 android:fontFamily="@font/poppins_medium"
                                 android:textColor="@color/text_gray_color"
                                 android:textSize="12sp" />
@@ -292,7 +288,7 @@
                                 android:id="@+id/tv_start_date"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Loading..."
+                                android:text="Memuat..."
                                 android:fontFamily="@font/poppins_medium"
                                 android:textColor="@color/text_color"
                                 android:textSize="14sp" />
@@ -301,14 +297,14 @@
                                 android:id="@+id/tv_start_time"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Loading..."
+                                android:text="Memuat..."
                                 android:fontFamily="@font/poppins_regular"
                                 android:textColor="@color/text_color"
                                 android:textSize="14sp" />
                         </LinearLayout>
                     </LinearLayout>
 
-                    <!-- End Date Time -->
+                    <!-- Selesai -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -339,7 +335,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="End Date and Time"
+                                android:text="Tanggal dan Waktu Selesai"
                                 android:fontFamily="@font/poppins_medium"
                                 android:textColor="@color/text_gray_color"
                                 android:textSize="12sp" />
@@ -348,7 +344,7 @@
                                 android:id="@+id/tv_end_date"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Loading..."
+                                android:text="Memuat..."
                                 android:fontFamily="@font/poppins_medium"
                                 android:textColor="@color/text_color"
                                 android:textSize="14sp" />
@@ -357,7 +353,7 @@
                                 android:id="@+id/tv_end_time"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Loading..."
+                                android:text="Memuat..."
                                 android:fontFamily="@font/poppins_regular"
                                 android:textColor="@color/text_color"
                                 android:textSize="14sp" />
@@ -366,7 +362,7 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Purpose Information Card -->
+            <!-- Informasi Tujuan -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/purpose_info_card"
                 android:layout_width="match_parent"
@@ -385,7 +381,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Purpose Information"
+                        android:text="Informasi Tujuan"
                         android:fontFamily="@font/poppins_semibold"
                         android:textColor="@color/text_color"
                         android:textSize="16sp"
@@ -395,7 +391,7 @@
                         android:id="@+id/tv_purpose"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Loading purpose..."
+                        android:text="Memuat tujuan..."
                         android:fontFamily="@font/poppins_regular"
                         android:textColor="@color/text_color"
                         android:textSize="14sp"
@@ -403,14 +399,13 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Action Buttons -->
+            <!-- Tombol -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginBottom="24dp">
 
-                <!-- Cancel Button -->
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_cancel_booking"
                     style="@style/Widget.Material3.Button.OutlinedButton"
@@ -418,16 +413,13 @@
                     android:layout_height="56dp"
                     android:layout_weight="1"
                     android:layout_marginEnd="8dp"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:text="Cancel"
+                    android:text="Batalkan"
                     android:textColor="@color/primary_color"
                     android:textSize="16sp"
+                    android:fontFamily="@font/poppins_semibold"
                     app:cornerRadius="12dp"
                     app:strokeColor="@color/primary_color"
-                    app:strokeWidth="1dp"
-                    app:iconTint="@color/primary_color"
-                    app:iconGravity="textStart"
-                    app:iconPadding="8dp" />
+                    app:strokeWidth="1dp" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_contact_support"
@@ -435,32 +427,29 @@
                     android:layout_height="56dp"
                     android:layout_weight="1"
                     android:layout_marginStart="8dp"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:text="Home"
+                    android:text="Beranda"
                     android:textColor="@color/white"
                     android:textSize="16sp"
+                    android:fontFamily="@font/poppins_semibold"
                     app:backgroundTint="@color/primary_color"
-                    app:cornerRadius="12dp"
-                    app:iconTint="@color/white"
-                    app:iconGravity="textStart"
-                    app:iconPadding="8dp" />
+                    app:cornerRadius="12dp" />
             </LinearLayout>
-
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
+    <!-- Loading -->
     <FrameLayout
         android:id="@+id/loadingOverlay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/dark_overlay"
+        android:visibility="gone"
         android:clickable="true"
         android:focusable="true"
-        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintEnd_toEndOf="parent">
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="80dp"
@@ -479,4 +468,3 @@
         </com.google.android.material.card.MaterialCardView>
     </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
-

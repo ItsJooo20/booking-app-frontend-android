@@ -13,6 +13,7 @@ import com.example.myappbooking.api.ApiClient
 import com.example.myappbooking.data.Images
 import com.example.myappbooking.databinding.ActivityItemDetailBinding
 import com.example.myappbooking.utility.ImageUtils
+import com.example.myappbooking.utility.NetworkUtils
 import kotlinx.coroutines.launch
 
 class ItemDetailActivity : AppCompatActivity() {
@@ -33,6 +34,8 @@ class ItemDetailActivity : AppCompatActivity() {
         binding = ActivityItemDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        NetworkUtils.init(this)
+
         itemId = intent.getIntExtra("ITEM_ID", 0)
         itemCode = intent.getStringExtra("ITEM_CODE")?: ""
         itemDesc = intent.getStringExtra("ITEM_DESC")?: ""
@@ -43,6 +46,11 @@ class ItemDetailActivity : AppCompatActivity() {
         setupGallery()
         setupReserve()
         fetchItemDetails()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        NetworkUtils.cleanup()
     }
 
     private fun fetchItemDetails() {

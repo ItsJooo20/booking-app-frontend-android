@@ -3,25 +3,25 @@
     <item
         android:id="@+id/nav_home"
         android:icon="@drawable/ic_dash"
-        android:title="Home"/>
+        android:title="Beranda"/>
 
     <item
         android:id="@+id/nav_schedule"
         android:icon="@drawable/ic_calendarbre"
-        android:title="Schedule"/>
+        android:title="Jadwal"/>
 
     <item
         android:id="@+id/nav_plus"
         android:icon="@drawable/ic_plus"
-        android:title="Reserve"/>
+        android:title="Pesan"/>
 
     <item
         android:id="@+id/nav_history"
         android:icon="@drawable/ic_historybre"
-        android:title="History"/>
+        android:title="Riwayat"/>
 
     <item
         android:id="@+id/nav_profile"
         android:icon="@drawable/ic_profile"
-        android:title="Profile"/>
+        android:title="Profil"/>
 </menu>

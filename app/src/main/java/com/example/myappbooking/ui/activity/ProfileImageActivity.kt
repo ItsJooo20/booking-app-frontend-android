@@ -1,11 +1,7 @@
 package com.example.myappbooking.ui.activity
 
-import android.Manifest
 import android.app.Activity
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -17,34 +13,29 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
-import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.myappbooking.R
-import com.example.myappbooking.api.ApiClient
 import com.example.myappbooking.databinding.ActivityProfileImageBinding
 import com.example.myappbooking.utility.ImageUtils
+import com.example.myappbooking.utility.NetworkUtils
 import com.example.myappbooking.utility.SharedPreferencesManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import kotlinx.coroutines.launch
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody
-import okhttp3.RequestBody.Companion.asRequestBody
-import org.json.JSONObject
+import com.google.android.material.button.MaterialButton
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
+import java.util.Locale
 
 class ProfileImageActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityProfileImageBinding
-    private val authApiService = ApiClient.authService
 
     private var selectedImageUri: Uri? = null
     private var photoFile: File? = null
-    private var currentProfileImageUrl: String? = null
     private var hasSelectedNewImage = false
+    private var isImageSavedLocally = false
 
     // Camera result handler
     private val takePictureLauncher = registerForActivityResult(
@@ -96,6 +87,8 @@ class ProfileImageActivity : AppCompatActivity() {
         binding = ActivityProfileImageBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        NetworkUtils.init(this)
+
         setupClickListeners()
         loadCurrentProfileImage()
     }
@@ -119,13 +112,12 @@ class ProfileImageActivity : AppCompatActivity() {
 
         binding.btnSavePhoto.setOnClickListener {
             if (hasSelectedNewImage && photoFile != null) {
-                uploadProfileImage()
+                saveProfileImageLocally()
             } else {
                 Toast.makeText(this, "Please select a new photo first", Toast.LENGTH_SHORT).show()
             }
         }
 
-        // Make profile image clickable
         binding.ivProfileImage.setOnClickListener {
             showImageSourceOptions()
         }
@@ -135,7 +127,7 @@ class ProfileImageActivity : AppCompatActivity() {
         showLoading(true)
 
         val prefman = SharedPreferencesManager.getInstance(this@ProfileImageActivity)
-        val profilePic = prefman.getUserPhoto()
+        val profilePic = prefman.getUserPhoto() // expected to be local file path
 
         ImageUtils.loadImageWithoutURL(
             context = binding.ivProfileImage.context,
@@ -150,30 +142,29 @@ class ProfileImageActivity : AppCompatActivity() {
         when {
             ContextCompat.checkSelfPermission(
                 this,
-                Manifest.permission.CAMERA
-            ) == PackageManager.PERMISSION_GRANTED -> {
+                android.Manifest.permission.CAMERA
+            ) == android.content.pm.PackageManager.PERMISSION_GRANTED -> {
                 takePhoto()
             }
             else -> {
-                cameraPermissionLauncher.launch(Manifest.permission.CAMERA)
+                cameraPermissionLauncher.launch(android.Manifest.permission.CAMERA)
             }
         }
     }
 
     private fun checkStoragePermissionAndPickImage() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            // Android 13+ doesn't need READ_EXTERNAL_STORAGE for picking images
             pickImageFromGallery()
         } else {
             when {
                 ContextCompat.checkSelfPermission(
                     this,
-                    Manifest.permission.READ_EXTERNAL_STORAGE
-                ) == PackageManager.PERMISSION_GRANTED -> {
+                    android.Manifest.permission.READ_EXTERNAL_STORAGE
+                ) == android.content.pm.PackageManager.PERMISSION_GRANTED -> {
                     pickImageFromGallery()
                 }
                 else -> {
-                    storagePermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+                    storagePermissionLauncher.launch(android.Manifest.permission.READ_EXTERNAL_STORAGE)
                 }
             }
         }
@@ -231,11 +222,9 @@ class ProfileImageActivity : AppCompatActivity() {
 
     private fun displaySelectedImage(uri: Uri) {
         try {
-            // Enable save button since we've selected a new image
             binding.btnSavePhoto.isEnabled = true
             binding.btnSavePhoto.alpha = 1.0f
 
-            // Load image with Glide for better memory management
             Glide.with(this)
                 .load(uri)
                 .circleCrop()
@@ -256,7 +245,6 @@ class ProfileImageActivity : AppCompatActivity() {
                 when (which) {
                     0 -> checkCameraPermissionAndTakePhoto()
                     1 -> checkStoragePermissionAndPickImage()
-                    // 2 is Cancel, do nothing
                 }
             }
             .show()
@@ -273,7 +261,8 @@ class ProfileImageActivity : AppCompatActivity() {
             .show()
     }
 
-    private fun uploadProfileImage() {
+    // Save the selected file path into SharedPreferences and finish with RESULT_OK
+    private fun saveProfileImageLocally() {
         photoFile?.let { file ->
             if (!file.exists()) {
                 Toast.makeText(this, "Image file not found. Please select a new image.", Toast.LENGTH_SHORT).show()
@@ -282,63 +271,27 @@ class ProfileImageActivity : AppCompatActivity() {
 
             showLoading(true)
 
-            lifecycleScope.launch {
-                try {
-                    val prefMan = SharedPreferencesManager.getInstance(this@ProfileImageActivity)
-                    val token = prefMan.getAuthToken()
+            try {
+                val prefman = SharedPreferencesManager.getInstance(this)
+                // Save absolute path so ImageUtils.loadImageWithoutURL can use it
+                prefman.saveUpdatedProfile(file.absolutePath)
 
-                    if (token.isNullOrEmpty()) {
-                        showLoading(false)
-                        showError("Authentication token not found. Please login again.")
-                        return@launch
-                    }
+                isImageSavedLocally = true
+                hasSelectedNewImage = false
 
-                    val authHeader = "Bearer $token"
-
-                    // Create multipart request
-                    val requestFile = file.asRequestBody("image/*".toMediaTypeOrNull())
-                    val imagePart = MultipartBody.Part.createFormData("profile_image", file.name, requestFile)
-
-                    val response = authApiService.updateProfileImage(authHeader, imagePart)
-
-                    showLoading(false)
-
-                    if (response.isSuccessful) {
-                        // Save new image URL if returned in response
-                        val responseBody = response.body()
-                        val jsonData = responseBody?.data as? Map<*, *>
-                        val newImageUrl = jsonData?.get("profile_image_url") as? String
-
-                        if (!newImageUrl.isNullOrEmpty()) {
-                            currentProfileImageUrl = newImageUrl
-                        }
-
-                        // Reset state
-                        hasSelectedNewImage = false
-                        binding.btnSavePhoto.isEnabled = false
-                        binding.btnSavePhoto.alpha = 0.5f
-                        binding.btnRemovePhoto.visibility = View.VISIBLE
-
-                        showSuccess("Profile picture updated successfully!")
-
-                        prefMan.saveUpdatedProfile(newImageUrl)
-                    } else {
-                        val errorBody = response.errorBody()?.string()
-                        val errorMessage = if (!errorBody.isNullOrEmpty()) {
-                            try {
-                                JSONObject(errorBody).getString("message")
-                            } catch (e: Exception) {
-                                "Failed to update profile picture"
-                            }
-                        } else {
-                            "Failed to update profile picture"
-                        }
-                        showError(errorMessage)
-                    }
-                } catch (e: Exception) {
-                    showLoading(false)
-                    showError("Network error: ${e.message}")
+                // Return result back to fragment/activity
+                val data = Intent().apply {
+                    putExtra("profile_image_path", file.absolutePath)
                 }
+                setResult(Activity.RESULT_OK, data)
+
+                showLoading(false)
+                Toast.makeText(this, "Foto profil berhasil disimpan!", Toast.LENGTH_SHORT).show()
+                finish()
+            } catch (e: Exception) {
+                showLoading(false)
+                Log.e("ProfileImageActivity", "Error saving profile image locally: ${e.message}")
+                Toast.makeText(this, "Failed to save image", Toast.LENGTH_SHORT).show()
             }
         } ?: run {
             Toast.makeText(this, "No image selected", Toast.LENGTH_SHORT).show()
@@ -348,66 +301,45 @@ class ProfileImageActivity : AppCompatActivity() {
     private fun removeProfileImage() {
         showLoading(true)
 
-        lifecycleScope.launch {
+        try {
+            val prefman = SharedPreferencesManager.getInstance(this)
+            val current = prefman.getUserPhoto()
+
+            // Clear from SharedPreferences
+            prefman.saveUpdatedProfile("") // or null depending on your manager
+
+            // Try delete the file if it exists and is inside app files
             try {
-                val prefMan = SharedPreferencesManager.getInstance(this@ProfileImageActivity)
-                val token = prefMan.getAuthToken()
-
-                if (token.isNullOrEmpty()) {
-                    showLoading(false)
-                    showError("Authentication token not found. Please login again.")
-                    return@launch
-                }
-
-                val authHeader = "Bearer $token"
-                val response = authApiService.removeProfileImage(authHeader)
-
-                showLoading(false)
-
-                if (response.isSuccessful) {
-                    // Reset image to default
-                    binding.ivProfileImage.setImageResource(R.drawable.ic_profile)
-                    currentProfileImageUrl = null
-                    photoFile = null
-                    selectedImageUri = null
-                    hasSelectedNewImage = false
-
-                    // Update button states
-                    binding.btnSavePhoto.isEnabled = false
-                    binding.btnSavePhoto.alpha = 0.5f
-                    binding.btnRemovePhoto.visibility = View.GONE
-
-                    showSuccess("Profile picture removed successfully!")
-                } else {
-                    val errorBody = response.errorBody()?.string()
-                    val errorMessage = if (!errorBody.isNullOrEmpty()) {
-                        try {
-                            JSONObject(errorBody).getString("message")
-                        } catch (e: Exception) {
-                            "Failed to remove profile picture"
-                        }
-                    } else {
-                        "Failed to remove profile picture"
+                if (!current.isNullOrEmpty()) {
+                    val f = File(current)
+                    if (f.exists()) {
+                        f.delete()
                     }
-                    showError(errorMessage)
                 }
             } catch (e: Exception) {
-                showLoading(false)
-                showError("Network error: ${e.message}")
+                Log.e("ProfileImageActivity", "Error deleting old profile file: ${e.message}")
             }
+
+            // Show placeholder
+            binding.ivProfileImage.setImageResource(R.drawable.pic_check)
+
+            // Return result to caller
+            val data = Intent().apply {
+                putExtra("profile_image_path", "")
+            }
+            setResult(Activity.RESULT_OK, data)
+
+            isImageSavedLocally = false
+            hasSelectedNewImage = false
+
+            showLoading(false)
+            Toast.makeText(this, "Foto profil berhasil dihapus!", Toast.LENGTH_SHORT).show()
+            finish()
+        } catch (e: Exception) {
+            showLoading(false)
+            Log.e("ProfileImageActivity", "Error removing profile image: ${e.message}")
+            Toast.makeText(this, "Failed to remove image", Toast.LENGTH_SHORT).show()
         }
-    }
-
-    private fun showSuccess(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-    }
-
-    private fun showError(message: String) {
-        MaterialAlertDialogBuilder(this)
-            .setTitle("Error")
-            .setMessage(message)
-            .setPositiveButton("OK", null)
-            .show()
     }
 
     private fun showLoading(show: Boolean) {
@@ -422,22 +354,29 @@ class ProfileImageActivity : AppCompatActivity() {
                 .setPositiveButton("Discard") { _, _ ->
                     super.onBackPressed()
                     finish()
-                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
                 }
                 .setNegativeButton("Cancel", null)
                 .show()
         } else {
             super.onBackPressed()
             finish()
-            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         }
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        // Clean up temporary files if not used
-        if (!hasSelectedNewImage) {
-            photoFile?.delete()
+        NetworkUtils.cleanup()
+        // Delete temporary file only if user did not save it locally
+        if (!isImageSavedLocally && photoFile != null && !photoFile!!.absolutePath.isNullOrEmpty()) {
+            try {
+                // Only delete if it exists and is in our app files dir
+                val file = photoFile!!
+                if (file.exists()) {
+                    file.delete()
+                }
+            } catch (e: Exception) {
+                Log.e("ProfileImageActivity", "Failed to delete temp photoFile: ${e.message}")
+            }
         }
     }
 }

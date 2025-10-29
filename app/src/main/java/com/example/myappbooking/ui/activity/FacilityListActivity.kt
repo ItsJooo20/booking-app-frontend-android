@@ -20,6 +20,7 @@ import com.example.myappbooking.adapter.FacilityAdapter
 import com.example.myappbooking.api.ApiClient
 import com.example.myappbooking.data.Facility
 import com.example.myappbooking.databinding.ActivityFacilityListBinding
+import com.example.myappbooking.utility.NetworkUtils
 import kotlinx.coroutines.launch
 
 class FacilityListActivity : AppCompatActivity() {
@@ -35,6 +36,8 @@ class FacilityListActivity : AppCompatActivity() {
         binding = ActivityFacilityListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        NetworkUtils.init(this)
+
         // Get data from intent
         categoryId = intent?.getIntExtra("CATEGORY_ID", 0) ?: 0
         categoryName = intent?.getStringExtra("CATEGORY_NAME") ?: ""
@@ -43,6 +46,11 @@ class FacilityListActivity : AppCompatActivity() {
         setupRecyclerView()
         setupSearchView()
         loadFacilitiesByCategory(categoryId)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        NetworkUtils.cleanup()
     }
 
     private fun setupViews() {

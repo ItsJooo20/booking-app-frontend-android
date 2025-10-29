@@ -7,18 +7,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.addCallback
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.whenStarted
-import com.bumptech.glide.Glide
-import com.example.myappbooking.R
 import com.example.myappbooking.utility.SharedPreferencesManager
-import com.example.myappbooking.api.ApiClient
 import com.example.myappbooking.databinding.FragmentProfileBinding
 import com.example.myappbooking.ui.activity.*
 import com.example.myappbooking.utility.ImageUtils
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import kotlinx.coroutines.launch
 
 class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
@@ -135,14 +130,14 @@ class ProfileFragment : Fragment() {
         binding.outlinedButton.isEnabled = !show
 
         // Disable bottom navigation in parent activity
-        (activity as? MainActivity)?.apply {
-            setBottomNavEnabled(!show)
-
-            // Also add this to block clicks on the bottom nav area
-            if (show) {
-                binding.loadingOverlay.bringToFront()
-            }
-        }
+//        (activity as? MainActivity)?.apply {
+//            setBottomNavEnabled(!show)
+//
+//            // Also add this to block clicks on the bottom nav area
+//            if (show) {
+//                binding.loadingOverlay.bringToFront()
+//            }
+//        }
     }
 
     private fun showLogoutConfirmation() {
@@ -172,32 +167,36 @@ class ProfileFragment : Fragment() {
 
     private fun performLogout() {
         showLoading(true)
+        val prefMan = SharedPreferencesManager.getInstance(requireContext())
+//        val token = prefMan.getAuthToken()
+        prefMan.clearUserData()
+        navigateToLoginPage()
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.lifecycle.whenStarted {
-                try {
-                    val prefMan = SharedPreferencesManager.getInstance(requireContext())
-                    val token = prefMan.getAuthToken()
-
-                    if (token != null) {
-                        val authHeader = "Bearer $token"
-                        val response = ApiClient.authService.logout(authHeader)
-
-                        if (response.isSuccessful && response.body() != null) {
-                            prefMan.clearUserData()
-                            navigateToLoginPage()
-                        } else {
-                            prefMan.clearUserData()
-                            navigateToLoginPage()
-                        }
-                    }
-                } catch (e: Exception) {
-                    navigateToLoginPage()
-                } finally {
-                    navigateToLoginPage()
-                }
-            }
-        }
+//        viewLifecycleOwner.lifecycleScope.launch {
+//            viewLifecycleOwner.lifecycle.whenStarted {
+//                try {
+//                    val prefMan = SharedPreferencesManager.getInstance(requireContext())
+//                    val token = prefMan.getAuthToken()
+//
+//                    if (token != null) {
+//                        val authHeader = "Bearer $token"
+//                        val response = ApiClient.authService.logout(authHeader)
+//
+//                        if (response.isSuccessful && response.body() != null) {
+//                            prefMan.clearUserData()
+//                            navigateToLoginPage()
+//                        } else {
+//                            prefMan.clearUserData()
+//                            navigateToLoginPage()
+//                        }
+//                    }
+//                } catch (e: Exception) {
+//                    navigateToLoginPage()
+//                } finally {
+//                    navigateToLoginPage()
+//                }
+//            }
+//        }
     }
 
     private fun navigateToLoginPage() {
@@ -213,6 +212,8 @@ class ProfileFragment : Fragment() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == PROFILE_IMAGE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             // Refresh profile image
+            val path = data?.getStringExtra("profile_image_path")
+//            Toast.makeText(requireContext(), path, Toast.LENGTH_SHORT).show()
             loadProfileImage()
         }
     }

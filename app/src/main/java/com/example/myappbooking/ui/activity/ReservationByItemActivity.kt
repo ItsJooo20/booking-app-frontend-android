@@ -12,6 +12,7 @@ import com.example.myappbooking.api.ApiClient
 import com.example.myappbooking.data.BookingRequest
 import com.example.myappbooking.data.BookingResponse
 import com.example.myappbooking.databinding.ActivityReservationByItemBinding
+import com.example.myappbooking.utility.NetworkUtils
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
@@ -45,10 +46,17 @@ class ReservationByItemActivity : AppCompatActivity() {
         binding = ActivityReservationByItemBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        NetworkUtils.init(this)
+
         setupItem()
         setupViews()
         setupDateTimeSelectors()
         setupSubmitButton()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        NetworkUtils.cleanup()
     }
 
     private fun setupDateTimeSelectors() {

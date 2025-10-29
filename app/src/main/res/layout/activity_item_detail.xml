@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/background_color">
 
-    <!-- Header Section - Fixed at top -->
+    <!-- Header -->
     <LinearLayout
         android:id="@+id/header_section"
         android:layout_width="match_parent"
@@ -30,7 +30,7 @@
             android:focusable="true"
             android:background="?android:attr/selectableItemBackgroundBorderless"
             android:padding="4dp"
-            android:contentDescription="Back"
+            android:contentDescription="Kembali"
             app:tint="@color/text_color" />
 
         <LinearLayout
@@ -44,22 +44,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_semibold"
-                android:text="Item Detail"
+                android:text="Detail Item"
                 android:textColor="@color/text_color"
                 android:textSize="20sp" />
-
         </LinearLayout>
     </LinearLayout>
 
-    <!-- Scrollable Content -->
+    <!-- Konten -->
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header_section"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header_section">
+        app:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -84,14 +83,13 @@
                         android:id="@+id/imgItem"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:contentDescription="Item image"
+                        android:contentDescription="Gambar item"
                         android:scaleType="centerCrop"
                         android:src="@drawable/pic_check"
+                        app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
+                        app:layout_constraintEnd_toEndOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -132,7 +130,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="8dp"
                             android:fontFamily="@font/poppins_medium"
-                            android:text="Description"
+                            android:text="Deskripsi"
                             android:textColor="@color/text_color"
                             android:textSize="16sp" />
 
@@ -144,11 +142,12 @@
                             android:lineSpacingExtra="2dp"
                             android:textColor="@color/text_gray_color"
                             android:textSize="14sp"
-                            tools:text="Provides a professional and quiet setting for church and administrative discussions. Ideal for big event, conference and meeting also with 6 air conditioner, 5th floor" />
+                            tools:text="Contoh deskripsi fasilitas / item..." />
                     </LinearLayout>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
+            <!-- Galeri -->
             <LinearLayout
                 android:id="@+id/previewHeaderContainer"
                 android:layout_width="match_parent"
@@ -168,7 +167,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_semibold"
-                        android:text="Preview Gallery"
+                        android:text="Galeri Pratinjau"
                         android:textColor="@color/text_color"
                         android:textSize="20sp" />
 
@@ -176,7 +175,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_regular"
-                        android:text="Additional images and details"
+                        android:text="Gambar dan detail tambahan"
                         android:textColor="@color/text_gray_color"
                         android:textSize="12sp" />
                 </LinearLayout>
@@ -210,13 +209,14 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
+            <!-- Tombol Aksi -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnReserve"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginBottom="24dp"
                 android:fontFamily="@font/poppins_semibold"
-                android:text="Reserve Now"
+                android:text="Pesan Sekarang"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 app:backgroundTint="@color/primary_color"
@@ -224,5 +224,4 @@
                 app:rippleColor="@color/primary_dark_color" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

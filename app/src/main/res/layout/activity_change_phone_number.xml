@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_color"
-    tools:context=".ui.activity.ChangePhoneNumberActivity">
+    android:background="@color/background_color">
 
+    <!-- Header -->
     <LinearLayout
         android:id="@+id/headerLayout"
         android:layout_width="match_parent"
@@ -27,46 +26,46 @@
             android:focusable="true"
             android:background="?android:attr/selectableItemBackgroundBorderless"
             android:padding="4dp"
-            app:tint="@color/text_color" />
+            app:tint="@color/text_color"
+            android:contentDescription="Kembali" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Change Phone Number"
+            android:text="Ubah Nomor Telepon"
             android:textSize="18sp"
             android:textColor="@color/text_color"
             android:fontFamily="@font/poppins_semibold" />
-
     </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/headerLayout"
-        android:background="@color/background_color"
-        android:fillViewport="true">
+        android:fillViewport="true"
+        android:background="@color/background_color">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="24dp">
+            android:padding="24dp"
+            android:orientation="vertical">
 
-            <!-- Current Phone Section -->
+            <!-- Nomor Saat Ini -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:background="@drawable/form_background"
-                android:padding="24dp"
                 android:elevation="2dp"
+                android:padding="24dp"
                 android:layout_marginBottom="24dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Current Phone Number"
+                    android:text="Nomor Whatsapp Saat Ini"
                     android:textSize="14sp"
                     android:textColor="@color/text_gray_color"
                     android:fontFamily="@font/poppins_regular"
@@ -80,43 +79,41 @@
                     android:textSize="16sp"
                     android:textColor="@color/text_color"
                     android:fontFamily="@font/poppins_semibold" />
-
             </LinearLayout>
 
-            <!-- New Phone Number Form -->
+            <!-- Form Nomor Baru -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:background="@drawable/form_background"
-                android:padding="24dp"
                 android:elevation="2dp"
+                android:padding="24dp"
                 android:layout_marginBottom="32dp">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Enter New Phone Number"
+                    android:text="Masukkan Nomor Whatsapp Baru"
                     android:textSize="16sp"
                     android:textColor="@color/text_color"
                     android:fontFamily="@font/poppins_semibold"
                     android:layout_marginBottom="16dp" />
 
-                <!-- Phone Number Input -->
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilNewPhone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:hint="Nomor Whatsapp"
                     android:layout_marginBottom="16dp"
                     app:boxStrokeColor="@color/primary_color"
                     app:hintTextColor="@color/text_gray_color"
-                    android:hint="Phone Number"
+                    app:startIconDrawable="@drawable/ic_phone"
+                    app:startIconTint="@color/text_gray_color"
                     app:boxCornerRadiusTopStart="12dp"
                     app:boxCornerRadiusTopEnd="12dp"
                     app:boxCornerRadiusBottomStart="12dp"
-                    app:boxCornerRadiusBottomEnd="12dp"
-                    app:startIconDrawable="@drawable/ic_phone"
-                    app:startIconTint="@color/text_gray_color">
+                    app:boxCornerRadiusBottomEnd="12dp">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etNewPhone"
@@ -126,26 +123,24 @@
                         android:textSize="16sp"
                         android:fontFamily="@font/poppins_regular"
                         android:textColor="@color/text_color" />
-
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- Password Confirmation -->
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:hint="Kata Sandi Saat Ini"
                     android:layout_marginBottom="16dp"
                     app:boxStrokeColor="@color/primary_color"
                     app:hintTextColor="@color/text_gray_color"
-                    android:hint="Current Password"
-                    app:boxCornerRadiusTopStart="12dp"
-                    app:boxCornerRadiusTopEnd="12dp"
-                    app:boxCornerRadiusBottomStart="12dp"
-                    app:boxCornerRadiusBottomEnd="12dp"
                     app:startIconDrawable="@drawable/ic_lock"
                     app:startIconTint="@color/text_gray_color"
                     app:endIconMode="password_toggle"
-                    app:endIconTint="@color/text_gray_color">
+                    app:endIconTint="@color/text_gray_color"
+                    app:boxCornerRadiusTopStart="12dp"
+                    app:boxCornerRadiusTopEnd="12dp"
+                    app:boxCornerRadiusBottomStart="12dp"
+                    app:boxCornerRadiusBottomEnd="12dp">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etPassword"
@@ -155,32 +150,29 @@
                         android:textSize="16sp"
                         android:fontFamily="@font/poppins_regular"
                         android:textColor="@color/text_color" />
-
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Please enter your current password to confirm this change. A verification code will be sent to your new phone number."
+                    android:text="Masukkan kata sandi saat ini untuk mengonfirmasi perubahan."
                     android:textSize="12sp"
                     android:textColor="@color/text_gray_color"
                     android:fontFamily="@font/poppins_regular"
                     android:lineSpacingExtra="2dp" />
-
             </LinearLayout>
 
-            <!-- Action Buttons -->
+            <!-- Tombol -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <!-- Update Phone Button -->
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnUpdatePhone"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
-                    android:text="Update Phone Number"
+                    android:text="Perbarui Nomor Whatsapp"
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     app:backgroundTint="@color/primary_color"
@@ -190,12 +182,11 @@
                     app:rippleColor="@color/primary_dark_color"
                     android:layout_marginBottom="12dp" />
 
-                <!-- Cancel Button -->
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnCancel"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
-                    android:text="Cancel"
+                    android:text="Batal"
                     android:textColor="@color/text_gray_color"
                     android:textSize="16sp"
                     app:backgroundTint="@color/white"
@@ -205,21 +196,19 @@
                     app:cornerRadius="12dp"
                     android:elevation="2dp"
                     app:rippleColor="@color/accent_color" />
-
             </LinearLayout>
-
         </LinearLayout>
-
     </ScrollView>
-    <!-- Loading Overlay -->
+
+    <!-- Loading -->
     <FrameLayout
         android:id="@+id/loadingOverlay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/dark_overlay"
+        android:visibility="gone"
         android:clickable="true"
         android:focusable="true"
-        android:visibility="gone"
         android:elevation="10dp">
 
         <com.google.android.material.card.MaterialCardView

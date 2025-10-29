@@ -8,6 +8,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.myappbooking.api.ApiClient
 import com.example.myappbooking.data.ChangePasswordRequest
 import com.example.myappbooking.databinding.ActivityChangePasswordBinding
+import com.example.myappbooking.utility.NetworkUtils
 import com.example.myappbooking.utility.SharedPreferencesManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.launch
@@ -22,6 +23,8 @@ class ChangePasswordActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityChangePasswordBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        NetworkUtils.init(this)
 
         setupClickListeners()
     }
@@ -45,6 +48,11 @@ class ChangePasswordActivity : AppCompatActivity() {
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        NetworkUtils.cleanup()
+    }
+
     private fun validateInputs(): Boolean {
         val currentPassword = binding.etCurrentPassword.text.toString().trim()
         val newPassword = binding.etNewPassword.text.toString().trim()
@@ -57,25 +65,25 @@ class ChangePasswordActivity : AppCompatActivity() {
 
         // Check if current password is empty
         if (currentPassword.isEmpty()) {
-            binding.tilCurrentPassword.error = "Please enter your current password"
+            binding.tilCurrentPassword.error = "Mohon masukkan password Anda"
             return false
         }
 
         // Check if new password is empty
         if (newPassword.isEmpty()) {
-            binding.tilNewPassword.error = "Please enter a new password"
+            binding.tilNewPassword.error = "Mohon masukkan password baru"
             return false
         }
 
         // Validate password strength
         if (!isStrongPassword(newPassword)) {
-            binding.tilNewPassword.error = "Password doesn't meet requirements"
+            binding.tilNewPassword.error = "Password tidak memenuhi persyaratan!"
             return false
         }
 
         // Check if passwords match
         if (newPassword != confirmPassword) {
-            binding.tilConfirmPassword.error = "Passwords don't match"
+            binding.tilConfirmPassword.error = "Konfirmasi Password tidak sama!"
             return false
         }
 
@@ -105,11 +113,11 @@ class ChangePasswordActivity : AppCompatActivity() {
     private fun showConfirmationDialog() {
         MaterialAlertDialogBuilder(this)
             .setTitle("Update Password")
-            .setMessage("Are you sure you want to change your password?")
-            .setPositiveButton("Confirm") { _, _ ->
+            .setMessage("Apakah Anda yakin ingin mengubah password Anda?")
+            .setPositiveButton("Ya") { _, _ ->
                 updatePassword()
             }
-            .setNegativeButton("Cancel", null)
+            .setNegativeButton("Batal", null)
             .setCancelable(false)
             .show()
     }
@@ -127,7 +135,7 @@ class ChangePasswordActivity : AppCompatActivity() {
 
                 if (token.isNullOrEmpty()) {
                     showLoading(false)
-                    showError("Authentication token not found. Please login again.")
+                    showError("Token tidak ditemukan. Dimohon Login kembali.")
                     return@launch
                 }
 
@@ -143,20 +151,20 @@ class ChangePasswordActivity : AppCompatActivity() {
                 showLoading(false)
 
                 if (response.isSuccessful) {
-                    showSuccessDialog("Your password has been updated successfully.")
+                    showSuccessDialog("Password berhasil di update.")
                 } else {
                     val errorBody = response.errorBody()?.string()
                     val errorMessage = if (!errorBody.isNullOrEmpty()) {
                         try {
 //                            JSONObject(errorBody).getString("message")
                         } catch (e: Exception) {
-                            "Failed to update password"
+                            "Gagal memperbarui password"
                         }
                     } else {
                         when (response.code()) {
-                            401 -> "Current password is incorrect"
-                            422 -> "Invalid input provided"
-                            else -> "Failed to update password"
+                            401 -> "Password yang Anda masukkan salah!"
+                            422 -> "Gagal menyimpan password"
+                            else -> "Gagal memperbarui password"
                         }
                     }
 //                    showError(errorMessage)
@@ -170,7 +178,7 @@ class ChangePasswordActivity : AppCompatActivity() {
 
     private fun showSuccessDialog(message: String) {
         MaterialAlertDialogBuilder(this)
-            .setTitle("Success")
+            .setTitle("Sukses!")
             .setMessage(message)
             .setPositiveButton("OK") { _, _ ->
                 setResult(Activity.RESULT_OK)

@@ -7,7 +7,6 @@
     android:background="@color/background_color"
     tools:context=".ui.fragment.DashboardFragment">
 
-    <!-- Scrollable Content -->
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nested_scroll_view"
         android:layout_width="match_parent"
@@ -25,7 +24,7 @@
             android:orientation="vertical"
             android:padding="24dp">
 
-            <!-- User greeting section -->
+            <!-- Sapaan User -->
             <LinearLayout
                 android:id="@+id/greeting_section"
                 android:layout_width="match_parent"
@@ -61,7 +60,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Welcome back,"
+                        android:text="Selamat datang,"
                         android:fontFamily="@font/poppins_regular"
                         android:textColor="@color/text_gray_color"
                         android:textSize="14sp" />
@@ -75,26 +74,9 @@
                         android:textColor="@color/text_color"
                         android:textSize="20sp" />
                 </LinearLayout>
-
-<!--                <com.google.android.material.card.MaterialCardView-->
-<!--                    android:id="@+id/cardNotif"-->
-<!--                    android:layout_width="48dp"-->
-<!--                    android:layout_height="48dp"-->
-<!--                    android:backgroundTint="@color/white"-->
-<!--                    app:cardCornerRadius="24dp"-->
-<!--                    app:cardElevation="2dp">-->
-
-<!--                    <ImageView-->
-<!--                        android:id="@+id/notifiation_icon"-->
-<!--                        android:layout_width="24dp"-->
-<!--                        android:layout_height="24dp"-->
-<!--                        android:layout_gravity="center"-->
-<!--                        android:src="@drawable/ic_bell"-->
-<!--                        app:tint="@color/primary_color" />-->
-<!--                </com.google.android.material.card.MaterialCardView>-->
             </LinearLayout>
 
-            <!-- Search Bar -->
+            <!-- Pencarian -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/search_container"
                 android:layout_width="match_parent"
@@ -115,7 +97,7 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_marginEnd="12dp"
-                        android:contentDescription="Search"
+                        android:contentDescription="Cari"
                         android:src="@drawable/ic_search"
                         app:tint="@color/text_gray_color" />
 
@@ -125,7 +107,7 @@
                         android:layout_height="50dp"
                         android:layout_weight="1"
                         android:background="@null"
-                        android:hint="Search facility"
+                        android:hint="Cari fasilitas"
                         android:imeOptions="actionSearch"
                         android:fontFamily="@font/poppins_regular"
                         android:inputType="text"
@@ -144,22 +126,20 @@
                         android:src="@drawable/ic_plus"
                         android:visibility="gone"
                         app:tint="@color/text_gray_color" />
-
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Category Section -->
+            <!-- Judul Kategori -->
             <TextView
                 android:id="@+id/category_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:text="Categories"
+                android:text="Kategori"
                 android:fontFamily="@font/poppins_semibold"
                 android:textColor="@color/text_color"
                 android:textSize="18sp" />
 
-            <!-- Dynamic Categories using RecyclerView with GridLayoutManager -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/categories_recyclerview"
                 android:layout_width="match_parent"
@@ -167,12 +147,11 @@
                 android:layout_marginBottom="32dp"
                 android:nestedScrollingEnabled="false"
                 android:overScrollMode="never"
-                tools:itemCount="4"
+                tools:itemCount="2"
                 tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 tools:listitem="@layout/item_category"
-                tools:spanCount="2" />
+                tools:spanCount="1" />
 
-            <!-- Divider -->
             <View
                 android:id="@+id/divider"
                 android:layout_width="match_parent"
@@ -180,68 +159,44 @@
                 android:background="@color/text_gray_color"
                 android:alpha="0.3" />
 
-            <!-- Quick Actions Section -->
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginBottom="16dp"-->
-<!--                android:text="Quick Actions"-->
-<!--                android:fontFamily="@font/poppins_semibold"-->
-<!--                android:textColor="@color/text_color"-->
-<!--                android:textSize="18sp" />-->
+            <!-- Info Booking Baru -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="24dp"
+                android:gravity="center">
 
-            <!-- Calendar Booking Section -->
-<!--            <com.google.android.material.card.MaterialCardView-->
-<!--                android:id="@+id/booking_card"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginBottom="100dp"-->
-<!--                app:cardBackgroundColor="@color/white"-->
-<!--                app:cardCornerRadius="12dp"-->
-<!--                app:cardElevation="2dp"-->
-<!--                android:clickable="true"-->
-<!--                android:focusable="true"-->
-<!--                android:foreground="?android:attr/selectableItemBackground">-->
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="75dp"
+                    android:layout_marginBottom="16dp"
+                    android:contentDescription="Kalender"
+                    android:src="@drawable/il_calendar" />
 
-                <LinearLayout
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="Pemesanan Baru"
+                    android:textColor="@color/text_color"
+                    android:textSize="16sp" />
+
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="24dp"
-                    android:gravity="center">
-
-                    <ImageView
-                        android:layout_width="150dp"
-                        android:layout_height="75dp"
-                        android:layout_marginBottom="16dp"
-                        android:contentDescription="Calendar"
-                        android:src="@drawable/il_calendar" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
-                        android:fontFamily="@font/poppins_semibold"
-                        android:text="New Booking"
-                        android:textColor="@color/text_color"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_regular"
-                        android:gravity="center"
-                        android:text="Easily reserve spaces or items for your next meeting, event, or activity. Check availability and submit your request - quick and hassle-free."
-                        android:textColor="@color/text_gray_color"
-                        android:textSize="12sp"
-                        android:lineSpacingExtra="2dp" />
-                </LinearLayout>
-<!--            </com.google.android.material.card.MaterialCardView>-->
+                    android:fontFamily="@font/poppins_regular"
+                    android:gravity="center"
+                    android:text="Pinjam ruang atau item untuk rapat, acara, atau aktivitas lainnya. Cek ketersediaan dan kirim permintaan Anda — cepat dan tanpa ribet."
+                    android:textColor="@color/text_gray_color"
+                    android:textSize="12sp"
+                    android:lineSpacingExtra="2dp" />
+            </LinearLayout>
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <!-- Floating Action Button -->
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/extended_fab"
         android:layout_width="wrap_content"
@@ -249,7 +204,8 @@
         android:layout_marginBottom="24dp"
         android:layout_marginEnd="24dp"
         android:backgroundTint="@color/primary_color"
-        android:contentDescription="New Reservation"
+        android:contentDescription="Pemesanan Baru"
+        android:text=""
         android:fontFamily="@font/poppins_semibold"
         android:textColor="@color/white"
         android:textSize="14sp"

@@ -20,6 +20,7 @@ import com.example.myappbooking.api.AuthApiService
 import com.example.myappbooking.data.BookingHistoryItem
 import com.example.myappbooking.databinding.FragmentHistoryBinding
 import com.example.myappbooking.ui.activity.BookingDetailActivity
+import com.example.myappbooking.utility.NetworkUtils
 import com.google.android.material.chip.Chip
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.isActive
@@ -65,7 +66,15 @@ class HistoryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+//        NetworkUtils.attach(requireActivity())
+//        NetworkUtils.init(requireActivity())
+//        MyApp.networkMonitor.observe(viewLifecycleOwner) { connected ->
+//            if (!connected) {
+//                NetworkUtils.showNoInternetDialog()
+//            } else {
+//                NetworkUtils.dismissDialog()
+//            }
+//        }
         authApiService = ApiClient.authService
         setupRecyclerView()
         setupChips()
@@ -333,14 +342,13 @@ class HistoryFragment : Fragment() {
         binding.rvEvents.visibility = View.GONE
         binding.notFoundCard.visibility = View.VISIBLE
 
-        // Update empty state message based on active filters
         val hasFilters = currentStatusFilter != null || currentTimeFilter != null
         if (hasFilters) {
-            binding.tvError.text = "No Results Found"
-            binding.tvErrorLoad.text = "No events match your current filter criteria. Try adjusting your filters to see more results."
+            binding.tvError.text = "Tidak Ada Hasil"
+            binding.tvErrorLoad.text = "Tidak ada event yang cocok dengan kriteria filter Anda. Coba ubah filter untuk melihat lebih banyak hasil."
         } else {
-            binding.tvError.text = "No History Found"
-            binding.tvErrorLoad.text = "You haven't made any bookings yet. Start booking facilities to see your history here."
+            binding.tvError.text = "Belum Ada Riwayat"
+            binding.tvErrorLoad.text = "Anda belum melakukan pemesanan apa pun. Mulailah memesan fasilitas untuk melihat riwayat di sini."
         }
     }
 

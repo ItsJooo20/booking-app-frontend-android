@@ -1,6 +1,15 @@
+import java.util.Properties
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.google.services)
+}
+
+val localProperties = Properties().apply {
+    val localPropertiesFile = rootProject.file("local.properties")
+    if (localPropertiesFile.exists()) {
+        load(localPropertiesFile.inputStream())
+    }
 }
 
 android {
@@ -12,7 +21,7 @@ android {
         minSdk = 26
         targetSdk = 35
         versionCode = 1
-        versionName = "1.0"
+        versionName = "2.4.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -22,16 +31,25 @@ android {
         buildConfig = true  // Enable BuildConfig generation
     }
 
+    signingConfigs {
+        create("release") {
+            storeFile = file("myKeyStore.jks")
+            storePassword = localProperties.getProperty("RELEASE_KEYSTORE_PASSWORD", "")
+            keyAlias = "myKey"
+            keyPassword = localProperties.getProperty("RELEASE_KEY_PASSWORD", "")
+        }
+    }
+
     buildTypes {
         debug {
-            // Development build
-            buildConfigField("String", "BASE_URL", "\"https://testapijo.my.id/api/\"")
-            applicationIdSuffix = ".dev" // Allows installing both versions on same device
+            buildConfigField("String", "BASE_URL", "\"${localProperties.getProperty("BASE_URL_DEBUG", "")}\"")
+            buildConfigField("String", "IMG_BASE_URL", "\"${localProperties.getProperty("BASE_URL_IMG_DEBUG", "")}\"")
+            applicationIdSuffix = ".dev"
         }
 
         release {
-            // Production build
-            buildConfigField("String", "BASE_URL", "\"https://testapijo.my.id/api/\"")
+            buildConfigField("String", "BASE_URL", "\"${localProperties.getProperty("BASE_URL_RELEASE", "")}\"")
+            buildConfigField("String", "IMG_BASE_URL", "\"${localProperties.getProperty("BASE_URL_IMG_RELEASE", "")}\"")
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
@@ -66,6 +84,10 @@ dependencies {
     implementation("com.google.code.gson:gson:2.8.9")
     implementation("com.kizitonwose.calendar:view:2.6.0")
     implementation("com.github.skydoves:powerspinner:1.2.7")
+    implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
+    implementation("com.google.firebase:firebase-messaging-ktx")
+    implementation("com.airbnb.android:lottie:6.1.0")
+
 //    implementation("com.kizitonwose.calendar:compose:<latest-version>")
 
     implementation(libs.androidx.core.ktx)

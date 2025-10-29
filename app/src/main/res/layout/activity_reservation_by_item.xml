@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_color"
-    tools:context=".ui.activity.ReservationByItemActivity">
+    android:background="@color/background_color">
 
+    <!-- Header -->
     <LinearLayout
         android:id="@+id/header_section"
         android:layout_width="match_parent"
@@ -17,9 +16,9 @@
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:padding="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintEnd_toEndOf="parent">
 
         <ImageView
             android:id="@+id/btn_back"
@@ -28,7 +27,7 @@
             android:layout_marginEnd="16dp"
             android:background="?android:attr/selectableItemBackgroundBorderless"
             android:clickable="true"
-            android:contentDescription="Back"
+            android:contentDescription="Kembali"
             android:focusable="true"
             android:padding="4dp"
             android:src="@drawable/ic_arrow_back"
@@ -45,23 +44,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_semibold"
-                android:text="Items"
+                android:text="Item"
                 android:textColor="@color/text_color"
-                android:textSize="20sp"
-                tools:text="Items" />
-
+                android:textSize="20sp" />
         </LinearLayout>
     </LinearLayout>
 
+    <!-- Scroll Konten -->
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@id/header_section"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header_section">
+        app:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -69,6 +67,7 @@
             android:orientation="vertical"
             android:padding="24dp">
 
+            <!-- Informasi Jadwal -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/dateTimeCard"
                 android:layout_width="match_parent"
@@ -84,17 +83,16 @@
                     android:orientation="vertical"
                     android:padding="20dp">
 
-                    <!-- Date & Time Section Title -->
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="16dp"
                         android:fontFamily="@font/poppins_semibold"
-                        android:text="Schedule Information"
+                        android:text="Informasi Jadwal"
                         android:textColor="@color/text_color"
                         android:textSize="16sp" />
 
-                    <!-- Start Date Time -->
+                    <!-- Mulai -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -107,7 +105,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="8dp"
                             android:fontFamily="@font/poppins_medium"
-                            android:text="Start Date Time"
+                            android:text="Tanggal dan Waktu Mulai"
                             android:textColor="@color/text_color"
                             android:textSize="14sp" />
 
@@ -117,7 +115,7 @@
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
 
-                            <!-- Start Date Selector -->
+                            <!-- Tanggal Mulai -->
                             <com.google.android.material.card.MaterialCardView
                                 android:layout_width="0dp"
                                 android:layout_height="56dp"
@@ -152,14 +150,14 @@
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:fontFamily="@font/poppins_regular"
-                                        android:hint="Select date"
+                                        android:hint="Pilih tanggal"
                                         android:textColor="@color/text_color"
                                         android:textColorHint="@color/text_gray_color"
                                         android:textSize="14sp" />
                                 </LinearLayout>
                             </com.google.android.material.card.MaterialCardView>
 
-                            <!-- Start Time Selector -->
+                            <!-- Waktu Mulai -->
                             <com.google.android.material.card.MaterialCardView
                                 android:layout_width="0dp"
                                 android:layout_height="56dp"
@@ -194,7 +192,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:fontFamily="@font/poppins_regular"
-                                        android:hint="Select time"
+                                        android:hint="Pilih waktu"
                                         android:textColor="@color/text_color"
                                         android:textColorHint="@color/text_gray_color"
                                         android:textSize="14sp" />
@@ -203,7 +201,7 @@
                         </LinearLayout>
                     </LinearLayout>
 
-                    <!-- End Date Time -->
+                    <!-- Selesai -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -215,7 +213,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="8dp"
                             android:fontFamily="@font/poppins_medium"
-                            android:text="Finish Date Time"
+                            android:text="Tanggal dan Waktu Selesai"
                             android:textColor="@color/text_color"
                             android:textSize="14sp" />
 
@@ -225,7 +223,7 @@
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
 
-                            <!-- End Date Selector -->
+                            <!-- Tanggal Selesai -->
                             <com.google.android.material.card.MaterialCardView
                                 android:layout_width="0dp"
                                 android:layout_height="56dp"
@@ -260,14 +258,14 @@
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:fontFamily="@font/poppins_regular"
-                                        android:hint="Select date"
+                                        android:hint="Pilih tanggal"
                                         android:textColor="@color/text_color"
                                         android:textColorHint="@color/text_gray_color"
                                         android:textSize="14sp" />
                                 </LinearLayout>
                             </com.google.android.material.card.MaterialCardView>
 
-                            <!-- End Time Selector -->
+                            <!-- Waktu Selesai -->
                             <com.google.android.material.card.MaterialCardView
                                 android:layout_width="0dp"
                                 android:layout_height="56dp"
@@ -302,7 +300,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:fontFamily="@font/poppins_regular"
-                                        android:hint="Select time"
+                                        android:hint="Pilih waktu"
                                         android:textColor="@color/text_color"
                                         android:textColorHint="@color/text_gray_color"
                                         android:textSize="14sp" />
@@ -313,7 +311,7 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Purpose Section -->
+            <!-- Informasi Tambahan -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/purposeCard"
                 android:layout_width="match_parent"
@@ -329,17 +327,15 @@
                     android:orientation="vertical"
                     android:padding="20dp">
 
-                    <!-- Purpose Section Title -->
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="16dp"
                         android:fontFamily="@font/poppins_semibold"
-                        android:text="Additional Information"
+                        android:text="Informasi Tambahan"
                         android:textColor="@color/text_color"
                         android:textSize="16sp" />
 
-                    <!-- Purpose Input -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -351,7 +347,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="8dp"
                             android:fontFamily="@font/poppins_medium"
-                            android:text="Purpose"
+                            android:text="Tujuan"
                             android:textColor="@color/text_color"
                             android:textSize="14sp" />
 
@@ -369,7 +365,7 @@
                                 android:background="@android:color/transparent"
                                 android:fontFamily="@font/poppins_regular"
                                 android:gravity="top|start"
-                                android:hint="Enter purpose of booking"
+                                android:hint="Masukkan tujuan pemesanan"
                                 android:importantForAutofill="no"
                                 android:inputType="textMultiLine"
                                 android:maxHeight="150dp"
@@ -384,11 +380,10 @@
                                 android:windowSoftInputMode="adjustResize" />
                         </com.google.android.material.card.MaterialCardView>
                     </LinearLayout>
-
                 </LinearLayout>
-
             </com.google.android.material.card.MaterialCardView>
 
+            <!-- Tombol Kirim -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/request_button"
                 android:layout_width="match_parent"
@@ -396,7 +391,7 @@
                 android:layout_marginBottom="24dp"
                 android:backgroundTint="@color/primary_color"
                 android:fontFamily="@font/poppins_semibold"
-                android:text="Submit Request"
+                android:text="Kirim Permintaan"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 app:cornerRadius="12dp"
@@ -405,11 +400,10 @@
                 app:iconGravity="textStart"
                 app:iconPadding="8dp"
                 app:iconTint="@color/white" />
-
         </LinearLayout>
-
     </androidx.core.widget.NestedScrollView>
 
+    <!-- Loading -->
     <FrameLayout
         android:id="@+id/loadingOverlay"
         android:layout_width="match_parent"
@@ -448,7 +442,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Processing request..."
+                    android:text="Memproses permintaan..."
                     android:fontFamily="@font/poppins_medium"
                     android:textColor="@color/text_color"
                     android:textSize="14sp" />

@@ -16,6 +16,9 @@ local.properties
 # Built application files
 *.apk
 *.ap_
+*.aab
+*.dm
+output-metadata.json
 
 # Files for the ART/Dalvik VM
 *.dex
@@ -63,6 +66,7 @@ fabric.properties
 
 # Google Services (API keys, etc.)
 google-services.json
+google-services_old.json
 google-services.xml
 
 # Fastlane metadata, screenshots, etc.

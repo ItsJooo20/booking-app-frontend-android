@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <paths>
     <!-- Internal app storage -->
-    <files-path name="my_images" path="returns/" />
-    <cache-path name="my_cache_images" path="/" />
+<!--    <files-path name="my_images" path="returns/" />-->
+<!--    <cache-path name="my_cache_images" path="/" />-->
+
+    <files-path
+        name="app_files"
+        path="." />
+
+    <!-- optional, restrict to profile_images subfolder only -->
+    <files-path
+        name="profile_images"
+        path="profile_images/" />
 
     <!-- External storage (optional) -->
     <external-files-path name="external_files" path="Pictures/" />

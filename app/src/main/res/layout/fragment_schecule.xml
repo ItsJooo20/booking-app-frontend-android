@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:background="@color/background_color">
 
-    <!-- Scrollable Content -->
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
@@ -27,7 +26,7 @@
                 android:orientation="vertical"
                 android:padding="24dp">
 
-                <!-- Header Section -->
+                <!-- Header -->
                 <LinearLayout
                     android:id="@+id/header_section"
                     android:layout_width="match_parent"
@@ -45,7 +44,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Scheduling"
+                            android:text="Jadwal"
                             android:fontFamily="@font/poppins_semibold"
                             android:textColor="@color/text_color"
                             android:textSize="24sp" />
@@ -53,30 +52,14 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="View and manage bookings"
+                            android:text="Lihat dan kelola pemesanan"
                             android:fontFamily="@font/poppins_regular"
                             android:textColor="@color/text_gray_color"
                             android:textSize="14sp" />
                     </LinearLayout>
-
-<!--                    <com.google.android.material.card.MaterialCardView-->
-<!--                        android:id="@+id/calendar_icon_card"-->
-<!--                        android:layout_width="48dp"-->
-<!--                        android:layout_height="48dp"-->
-<!--                        android:backgroundTint="@color/white"-->
-<!--                        app:cardCornerRadius="24dp"-->
-<!--                        app:cardElevation="2dp">-->
-
-<!--                        <ImageView-->
-<!--                            android:layout_width="24dp"-->
-<!--                            android:layout_height="24dp"-->
-<!--                            android:layout_gravity="center"-->
-<!--                            android:src="@drawable/ic_calendar"-->
-<!--                            app:tint="@color/primary_color" />-->
-<!--                    </com.google.android.material.card.MaterialCardView>-->
                 </LinearLayout>
 
-                <!-- Calendar Container -->
+                <!-- Kalender -->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/calendarContainer"
                     android:layout_width="match_parent"
@@ -92,14 +75,12 @@
                         android:orientation="vertical"
                         android:padding="16dp">
 
-                        <!-- Month/Year Header -->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="16dp"
                             android:gravity="center_vertical">
 
-                            <!-- Previous Month Button -->
                             <com.google.android.material.card.MaterialCardView
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
@@ -112,13 +93,12 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:background="?attr/selectableItemBackgroundBorderless"
-                                    android:contentDescription="Previous Month"
+                                    android:contentDescription="Bulan Sebelumnya"
                                     android:src="@drawable/chevron_left"
                                     android:paddingLeft="7dp"
                                     app:tint="@color/text_gray_color" />
                             </com.google.android.material.card.MaterialCardView>
 
-                            <!-- Month and Year Text -->
                             <TextView
                                 android:id="@+id/tvMonthYear"
                                 android:layout_width="0dp"
@@ -128,9 +108,8 @@
                                 android:gravity="center"
                                 android:textColor="@color/text_color"
                                 android:textSize="18sp"
-                                tools:text="July 2025" />
+                                tools:text="Juli 2025" />
 
-                            <!-- Next Month Button -->
                             <com.google.android.material.card.MaterialCardView
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
@@ -143,13 +122,13 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:background="?attr/selectableItemBackgroundBorderless"
-                                    android:contentDescription="Next Month"
+                                    android:contentDescription="Bulan Berikutnya"
                                     android:src="@drawable/chevron_right"
                                     app:tint="@color/text_gray_color" />
                             </com.google.android.material.card.MaterialCardView>
                         </LinearLayout>
 
-                        <!-- Days of Week Header -->
+                        <!-- Hari -->
                         <LinearLayout
                             android:id="@+id/daysOfWeekContainer"
                             android:layout_width="match_parent"
@@ -157,78 +136,15 @@
                             android:orientation="horizontal"
                             android:paddingBottom="12dp">
 
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:fontFamily="@font/poppins_medium"
-                                android:gravity="center"
-                                android:text="MON"
-                                android:textColor="@color/text_gray_color"
-                                android:textSize="12sp" />
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:fontFamily="@font/poppins_medium"
-                                android:gravity="center"
-                                android:text="TUE"
-                                android:textColor="@color/text_gray_color"
-                                android:textSize="12sp" />
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:fontFamily="@font/poppins_medium"
-                                android:gravity="center"
-                                android:text="WED"
-                                android:textColor="@color/text_gray_color"
-                                android:textSize="12sp" />
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:fontFamily="@font/poppins_medium"
-                                android:gravity="center"
-                                android:text="THU"
-                                android:textColor="@color/text_gray_color"
-                                android:textSize="12sp" />
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:fontFamily="@font/poppins_medium"
-                                android:gravity="center"
-                                android:text="FRI"
-                                android:textColor="@color/text_gray_color"
-                                android:textSize="12sp" />
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:fontFamily="@font/poppins_medium"
-                                android:gravity="center"
-                                android:text="SAT"
-                                android:textColor="@color/text_gray_color"
-                                android:textSize="12sp" />
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:fontFamily="@font/poppins_medium"
-                                android:gravity="center"
-                                android:text="SUN"
-                                android:textColor="@color/text_gray_color"
-                                android:textSize="12sp" />
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="MIN" android:fontFamily="@font/poppins_medium" android:textColor="@color/text_gray_color" android:textSize="12sp"/>
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="SEN" android:fontFamily="@font/poppins_medium" android:textColor="@color/text_gray_color" android:textSize="12sp"/>
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="SEL" android:fontFamily="@font/poppins_medium" android:textColor="@color/text_gray_color" android:textSize="12sp"/>
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="RAB" android:fontFamily="@font/poppins_medium" android:textColor="@color/text_gray_color" android:textSize="12sp"/>
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="KAM" android:fontFamily="@font/poppins_medium" android:textColor="@color/text_gray_color" android:textSize="12sp"/>
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="JUM" android:fontFamily="@font/poppins_medium" android:textColor="@color/text_gray_color" android:textSize="12sp"/>
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="SAB" android:fontFamily="@font/poppins_medium" android:textColor="@color/text_gray_color" android:textSize="12sp"/>
                         </LinearLayout>
 
-                        <!-- Calendar View -->
                         <com.kizitonwose.calendar.view.CalendarView
                             android:id="@+id/calendarView"
                             android:layout_width="match_parent"
@@ -240,7 +156,7 @@
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- Upcoming Events Section -->
+                <!-- Agenda Mendatang -->
                 <LinearLayout
                     android:id="@+id/eventsHeaderContainer"
                     android:layout_width="match_parent"
@@ -260,7 +176,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_semibold"
-                            android:text="Upcoming Events"
+                            android:text="Agenda Mendatang"
                             android:textColor="@color/text_color"
                             android:textSize="20sp" />
 
@@ -268,7 +184,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_regular"
-                            android:text="All scheduled activities"
+                            android:text="Semua aktivitas terjadwal"
                             android:textColor="@color/text_gray_color"
                             android:textSize="12sp" />
                     </LinearLayout>
@@ -286,13 +202,12 @@
                             android:layout_width="20dp"
                             android:layout_height="20dp"
                             android:layout_gravity="center"
-                            android:contentDescription="Sort Events"
+                            android:contentDescription="Urutkan Agenda"
                             android:src="@drawable/ic_plus"
                             app:tint="@color/primary_color" />
                     </com.google.android.material.card.MaterialCardView>
                 </LinearLayout>
 
-                <!-- Events RecyclerView -->
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvEvents"
                     android:layout_width="match_parent"
@@ -301,42 +216,42 @@
                     android:nestedScrollingEnabled="false"
                     tools:listitem="@layout/item_event" />
 
-                    <LinearLayout
-                        android:id="@+id/notFoundCard"
+                <LinearLayout
+                    android:id="@+id/notFoundCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="150dp"
+                        android:layout_height="75dp"
+                        android:layout_marginBottom="24dp"
+                        android:contentDescription="Kalender"
+                        android:src="@drawable/il_calendar" />
+
+                    <TextView
+                        android:id="@+id/tvError"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="Tidak Ada Agenda"
+                        android:textColor="@color/text_color"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/tvErrorLoad"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
+                        android:fontFamily="@font/poppins_regular"
                         android:gravity="center"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="150dp"
-                            android:layout_height="75dp"
-                            android:layout_marginBottom="24dp"
-                            android:contentDescription="Calendar"
-                            android:src="@drawable/il_calendar" />
-
-                        <TextView
-                            android:id="@+id/tvError"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="8dp"
-                            android:fontFamily="@font/poppins_semibold"
-                            android:text="No Events Found"
-                            android:textColor="@color/text_color"
-                            android:textSize="18sp" />
-
-                        <TextView
-                            android:id="@+id/tvErrorLoad"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppins_regular"
-                            android:gravity="center"
-                            android:lineSpacingExtra="2dp"
-                            android:text="No events are scheduled for this date. You can reserve this slot for your event or activity!"
-                            android:textColor="@color/text_gray_color"
-                            android:textSize="14sp" />
-                    </LinearLayout>
+                        android:lineSpacingExtra="2dp"
+                        android:text="Tidak ada agenda terjadwal pada tanggal ini. Anda dapat memesan slot ini untuk acara atau aktivitas Anda!"
+                        android:textColor="@color/text_gray_color"
+                        android:textSize="14sp" />
+                </LinearLayout>
 
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
