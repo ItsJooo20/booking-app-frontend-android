@@ -65,3 +65,10 @@ The system replaces manual booking methods, providing real-time facility availab
 > [Download (PDF)](UserGuide.pdf)
 
 ---
+
+
+### BACKEND REPOSITORY
+The backend for this Android app is developed using **Laravel 11**.  
+You can check it here: [BookingApp Backend (Laravel)](https://github.com/ItsJooo20/v2-booking-app-beta.git)
+
+---
